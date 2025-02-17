@@ -21,6 +21,7 @@ builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(5000); // Escucha en IPv4 (0.0.0.0) and IPv6 (::) en el puesto 5000
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
