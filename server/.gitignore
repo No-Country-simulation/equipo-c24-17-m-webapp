@@ -1,0 +1,65 @@
+*.suo
+*.backup
+*.user
+*.dbmdl
+*.pptx
+*.psess
+*.orig
+*.xml
+*.~vsd
+*.zip
+*.sublime-project
+*.sublime-workspace
+*.exe
+*.avi
+*.mp4
+*.mov
+*.rar
+*.mdf
+*.ldf
+**/nuspec.list
+**/packages/
+**/.sass-cache/
+**/node_modules/
+**/bower_components/
+*/Performance/*TestResults.txt
+**/bin
+**/obj
+**/*.log.1
+**/*.log.*
+*.log
+*.db
+.vs/
+Publish/
+
+# Archivos de sistema
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Archivos de compilación
+bin/
+obj/
+*.exe
+*.dll
+
+# Archivos de configuración de usuario
+.vscode/
+.idea/
+*.suo
+*.user
+*.vs
+
+# Paquetes y dependencias
+node_modules/
+packages/
+*.nupkg
+
+# Configuración de entorno
+.env
+appsettings*.json
+secrets.json
+
+# Archivos generados automáticamente
+*.generated.cs
