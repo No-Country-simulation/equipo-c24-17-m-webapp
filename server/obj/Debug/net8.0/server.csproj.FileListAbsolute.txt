@@ -32,3 +32,14 @@ C:\Users\matia\OneDrive\Escritorio\projects\no-country\prod\equipo-c24-17-m-weba
 C:\Users\matia\OneDrive\Escritorio\projects\no-country\prod\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.pdb
 C:\Users\matia\OneDrive\Escritorio\projects\no-country\prod\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.genruntimeconfig.cache
 C:\Users\matia\OneDrive\Escritorio\projects\no-country\prod\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\ref\server.dll
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.csproj.AssemblyReference.cache
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.AssemblyInfoInputs.cache
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.AssemblyInfo.cs
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.csproj.CoreCompileInputs.cache
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.sourcelink.json
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.dll
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\refint\server.dll
+C:\Users\gabri\source\repos\equipo-c24-17-m-webapp\server\obj\Debug\net8.0\server.pdb
