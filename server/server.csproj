@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Models\" />
     <Folder Include="Data\Repositorios\" />
     <Folder Include="Logica\" />
   </ItemGroup>
