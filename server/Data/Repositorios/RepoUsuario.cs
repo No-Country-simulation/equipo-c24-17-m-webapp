@@ -1,4 +1,5 @@
 ﻿using server.Data.Models;
+using System.Xml;
 
 namespace server.Data.Repositorios
 {
@@ -24,6 +25,23 @@ namespace server.Data.Repositorios
             }
             catch (Exception ex)
             {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void CreateUser(Usuario obj_usuario)
+        {
+            try
+            {
+                _context.Add(obj_usuario);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
                 throw new Exception(ex.Message);
             }
         }

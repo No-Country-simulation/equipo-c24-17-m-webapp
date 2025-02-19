@@ -30,5 +30,13 @@ namespace server.Logica
                 throw new Exception(ex.Message);
             }
         }
+
+        public void CrearUsuario(Usuario obj_usuario)
+        {
+            RepoUsuario repo_usuario = new RepoUsuario(_context);
+
+            obj_usuario.CreatedAt = DateTime.SpecifyKind(obj_usuario.CreatedAt, DateTimeKind.Unspecified);
+            repo_usuario.CreateUser(obj_usuario);
+        }
     }
 }

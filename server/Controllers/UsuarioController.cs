@@ -38,8 +38,11 @@ namespace server.Controllers
         }
         // POST api/<UsuarioController>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult Post([FromBody]Usuario obj_usuario)
         {
+            LogicaUsuario logica_usuario = new LogicaUsuario(_context);
+            logica_usuario.CrearUsuario(obj_usuario);
+            return Ok();
         }
 
         // PUT api/<UsuarioController>/5
