@@ -31,6 +31,23 @@ namespace server.Logica
             }
         }
 
+        public Usuario ObtenerUsuarioPorId(int id)
+        {
+            RepoUsuario repo_usuario = new RepoUsuario(_context);
+            Usuario usuario_encontrado = new();
+            try
+            {
+                usuario_encontrado = repo_usuario.GetById(id);
+
+                if(usuario_encontrado == null) throw new KeyNotFoundException("El usuario no existe.");
+                return usuario_encontrado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void CrearUsuario(Usuario obj_usuario)
         {
             RepoUsuario repo_usuario = new RepoUsuario(_context);

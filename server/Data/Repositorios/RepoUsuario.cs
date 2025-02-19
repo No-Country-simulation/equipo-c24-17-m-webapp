@@ -30,6 +30,19 @@ namespace server.Data.Repositorios
             }
         }
 
+        public Usuario GetById(int id)
+        {
+            Usuario usuario_obtenido = new();
+            try
+            {
+                return usuario_obtenido = _context.Usuarios.Find(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void CreateUser(Usuario obj_usuario)
         {
             try

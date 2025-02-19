@@ -36,6 +36,23 @@ namespace server.Controllers
                 return StatusCode(404, $"Error al obtener los usuarios: {ex.Message}");
             }
         }
+        // GET api/<TurnoController>/5
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+            LogicaUsuario logica_usuario = new LogicaUsuario(_context);
+            try
+            {
+                Usuario usuario_encontrado = new Usuario();
+                usuario_encontrado = logica_usuario.ObtenerUsuarioPorId(id);
+                return Ok(usuario_encontrado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener el usuario: {ex.Message}");
+            }
+        }
+
         // POST api/<UsuarioController>
         [HttpPost]
         public ActionResult Post([FromBody]Usuario obj_usuario)
