@@ -34,9 +34,33 @@ namespace server.Logica
         public void CrearUsuario(Usuario obj_usuario)
         {
             RepoUsuario repo_usuario = new RepoUsuario(_context);
+            try
+            {
+                obj_usuario.CreatedAt = DateTime.SpecifyKind(obj_usuario.CreatedAt, DateTimeKind.Unspecified);
+                repo_usuario.CreateUser(obj_usuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }        
+        
+        public void ActualizarUsuario(int id, Usuario obj_usuario)
+        {
+            RepoUsuario repo_usuario = new RepoUsuario(_context);
+            try
+            {
+                var usuario_existente = _context.Usuarios.Find(id) ?? throw new KeyNotFoundException("El usuario no existe.");
+                usuario_existente.Nombre = obj_usuario.Nombre;
+                usuario_existente.Correo = obj_usuario.Correo;
+                usuario_existente.IdRol = obj_usuario.IdRol;
 
-            obj_usuario.CreatedAt = DateTime.SpecifyKind(obj_usuario.CreatedAt, DateTimeKind.Unspecified);
-            repo_usuario.CreateUser(obj_usuario);
+                repo_usuario.UpdateUser(usuario_existente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

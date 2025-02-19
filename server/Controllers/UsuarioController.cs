@@ -33,7 +33,7 @@ namespace server.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error al obtener los usuarios: {ex.Message}");
+                return StatusCode(404, $"Error al obtener los usuarios: {ex.Message}");
             }
         }
         // POST api/<UsuarioController>
@@ -42,13 +42,24 @@ namespace server.Controllers
         {
             LogicaUsuario logica_usuario = new LogicaUsuario(_context);
             logica_usuario.CrearUsuario(obj_usuario);
-            return Ok();
+            return Created();
         }
 
         // PUT api/<UsuarioController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put(int id, [FromBody]Usuario obj_usuario)
         {
+            LogicaUsuario logica_usuario = new LogicaUsuario(_context);
+
+            try
+            {
+                logica_usuario.ActualizarUsuario(id, obj_usuario);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al actualizar los datos del usuario: {ex.Message}");
+            }
         }
 
         // DELETE api/<UsuarioController>/5

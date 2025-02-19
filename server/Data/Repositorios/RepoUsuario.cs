@@ -1,4 +1,5 @@
-﻿using server.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using server.Data.Models;
 using System.Xml;
 
 namespace server.Data.Repositorios
@@ -43,6 +44,23 @@ namespace server.Data.Repositorios
                     Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
                 }
                 throw new Exception(ex.Message);
+            }
+        }
+
+        public void UpdateUser(Usuario obj_usuario)
+        {
+            try
+            {
+                _context.Usuarios.Update(obj_usuario);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException dbEx)
+            {
+                throw new Exception("Error al actualizar el usuario en la base de datos.", dbEx);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error general al actualizar el usuario.", ex);
             }
         }
     }
