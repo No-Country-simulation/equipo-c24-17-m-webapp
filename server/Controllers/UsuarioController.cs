@@ -81,8 +81,19 @@ namespace server.Controllers
 
         // DELETE api/<UsuarioController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            LogicaUsuario logica_usuario = new LogicaUsuario(_context);
+
+            try
+            {
+                logica_usuario.EliminarUsuario(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al eliminar el usuario: {ex.Message}");
+            }
         }
     }
 }

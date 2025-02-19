@@ -78,6 +78,20 @@ namespace server.Logica
             {
                 throw new Exception(ex.Message);
             }
+        }        
+        
+        public void EliminarUsuario(int id)
+        {
+            RepoUsuario repo_usuario = new RepoUsuario(_context);
+            try
+            {
+                var usuario_existente = _context.Usuarios.Find(id) ?? throw new KeyNotFoundException("El usuario no existe.");
+                repo_usuario.DeleteUser(usuario_existente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

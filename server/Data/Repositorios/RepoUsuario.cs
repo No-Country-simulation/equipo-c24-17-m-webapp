@@ -75,6 +75,19 @@ namespace server.Data.Repositorios
             {
                 throw new Exception("Error general al actualizar el usuario.", ex);
             }
+        }        
+        
+        public void DeleteUser(Usuario obj_usuario)
+        {
+            try
+            {
+                _context.Usuarios.Remove(obj_usuario);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error general al eliminar el usuario.", ex);
+            }
         }
     }
 }
