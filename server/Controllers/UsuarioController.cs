@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using server.Data.Models;
 using server.Data;
+using server.Data.Repositorios;
+using server.Logica;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,12 +23,18 @@ namespace server.Controllers
 
         // GET: api/<UsuarioController>
         [HttpGet]
-        public List<Usuario> Get()
+        public ActionResult<IEnumerable<Usuario>> Get()
         {
-            List<Usuario> lista_usuarios = new List<Usuario>();
-            lista_usuarios = _context.Usuarios.ToList();
-
-            return lista_usuarios;
+            LogicaUsuario logica_usuario = new LogicaUsuario(_context);
+            try
+            {
+                var lista_usuarios = logica_usuario.ObtenerTodosLosUsuarios();
+                return Ok(lista_usuarios);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al obtener los usuarios: {ex.Message}");
+            }
         }
         // POST api/<UsuarioController>
         [HttpPost]
