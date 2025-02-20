@@ -5,9 +5,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
 
-builder.Services.AddDbContext<BdTeacompanioContext>(options =>
-    options.UseNpgsql(config.GetConnectionString("PostgreSQL")));
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
 
+if (string.IsNullOrEmpty(connectionString))
+{
+    connectionString = builder.Configuration.GetConnectionString("PostgreSQL");
+}
+
+builder.Services.AddDbContext<BdTeacompanioContext>(options =>
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
