@@ -101,5 +101,17 @@ namespace server.Controllers
                 return StatusCode(404, $"Error al eliminar el usuario: {ex.Message}");
             }
         }
+
+        [HttpGet("get-dummy")]
+        public IActionResult GetDummy()
+        {
+            var response = new
+            {
+                mensaje = "Json de prueba, funciona la api?",
+                timestamp = DateTime.UtcNow
+            };
+
+            return Ok(response);
+        }
     }
 }
