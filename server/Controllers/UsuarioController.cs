@@ -58,10 +58,16 @@ namespace server.Controllers
         public ActionResult Post([FromBody]Usuario obj_usuario)
         {
             LogicaUsuario logica_usuario = new LogicaUsuario(_context);
-            logica_usuario.CrearUsuario(obj_usuario);
-            return Created();
+            try
+            {
+                logica_usuario.CrearUsuario(obj_usuario);
+                return Created();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al crear el usuario: {ex.Message}");
+            }
         }
-
         // PUT api/<UsuarioController>/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody]Usuario obj_usuario)
