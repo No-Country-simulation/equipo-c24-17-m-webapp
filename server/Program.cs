@@ -1,12 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using server.Data;
+using server.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
 
+builder.Services.AddSingleton<DatabaseHelper>();
+
+// Obtener la cadena de conexión usando DatabaseHelper
+var serviceProvider = builder.Services.BuildServiceProvider();
+var databaseHelper = serviceProvider.GetRequiredService<DatabaseHelper>();
+
+string connectionString = databaseHelper.GetConnectionString();
+
+// Configurar DbContext con la cadena de conexión
 builder.Services.AddDbContext<BdTeacompanioContext>(options =>
-    options.UseNpgsql(config.GetConnectionString("PostgreSQL")));
+    options.UseNpgsql(connectionString));
 
 
 builder.Services.AddControllers();
