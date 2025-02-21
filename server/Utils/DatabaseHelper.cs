@@ -12,11 +12,8 @@ namespace server.Utils
             _configuration = configuration;
         }
 
-        public string GetConnectionString()
+        public string GetConnectionString(string databaseUrl)
         {
-            // Obtener DATABASE_URL desde appsettings.json
-            string databaseUrl = _configuration.GetConnectionString("DATABASE_URL");
-
             if (string.IsNullOrEmpty(databaseUrl))
             {
                 throw new InvalidOperationException("DATABASE_URL is not set in appsettings.json.");
@@ -47,7 +44,9 @@ namespace server.Utils
 
             var database = databaseUrl.Substring(hostPortEnd + 1);
 
-            return $"Host={host};Port={port};Database={database};Username={username};Password={password}";
+            var prueba = $"Host={host};Port={port};Database={database};Username={username};Password={password}";
+            Console.WriteLine(prueba);
+            return prueba;
         }
     }
 }
