@@ -74,7 +74,6 @@ namespace server.Logica
                 var usuario_existente = _context.Usuarios.Find(id) ?? throw new KeyNotFoundException("El usuario no existe.");
                 usuario_existente.Nombre = obj_usuario.Nombre;
                 usuario_existente.Correo = obj_usuario.Correo;
-                usuario_existente.IdRol = obj_usuario.IdRol;
 
                 repo_usuario.UpdateUser(usuario_existente);
             }
