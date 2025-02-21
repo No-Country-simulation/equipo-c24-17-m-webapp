@@ -22,13 +22,13 @@ namespace server.Utils
                 throw new InvalidOperationException("DATABASE_URL is not set in appsettings.json.");
             }
 
-            if (!databaseUrl.StartsWith("postgres://"))
+            if (!databaseUrl.StartsWith("postgresql://"))
             {
                 throw new InvalidOperationException("DATABASE_URL must start with 'postgres://'.");
             }
 
             // Parsear la URL para extraer los datos de conexión
-            databaseUrl = databaseUrl.Substring("postgres://".Length);
+            databaseUrl = databaseUrl.Substring("postgresql://".Length);
             var userInfoEnd = databaseUrl.IndexOf('@');
             var hostPortEnd = databaseUrl.IndexOf('/');
 
