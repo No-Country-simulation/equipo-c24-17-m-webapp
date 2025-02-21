@@ -47,7 +47,7 @@ namespace server.Utils
 
             var database = databaseUrl.Substring(hostPortEnd + 1);
 
-            return $"Host={host};Port={port};Username={username};Password={password};Database={database};";
+            return $"Host={host};Port={port};Database={database};Username={username};Password={password}";
         }
     }
 }
