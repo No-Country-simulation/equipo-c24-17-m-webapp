@@ -6,13 +6,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
 
-builder.Services.AddSingleton<DatabaseHelper>();
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-// Obtener la cadena de conexión usando DatabaseHelper
-var serviceProvider = builder.Services.BuildServiceProvider();
-var databaseHelper = serviceProvider.GetRequiredService<DatabaseHelper>();
-
-string connectionString = databaseHelper.GetConnectionString();
+if (string.IsNullOrEmpty(connectionString))
+{
+    connectionString = builder.Configuration.GetConnectionString("PostgreSQL");
+}
+else
+{
+    string conexion_url = connectionString;
+    DatabaseHelper dataBaseHelper = new DatabaseHelper(config);
+    connectionString = dataBaseHelper.GetConnectionString(conexion_url);
+}
 
 // Configurar DbContext con la cadena de conexión
 builder.Services.AddDbContext<BdTeacompanioContext>(options =>
