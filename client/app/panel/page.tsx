@@ -2,6 +2,7 @@ import { CerrarSesion } from "@/components/cerrar-sesion";
 import { Button } from "@/components/ui/button";
 import { getSession } from "@/lib/database";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default async function page() {
@@ -35,7 +36,9 @@ export default async function page() {
 				</div>
 			</header>
 			<main className="grid content-center min-h-screen justify-center">
-				<Button>Agregar hijo</Button>
+				<Button>
+					<Link href="/panel/pariente">Agregar paciente</Link>
+				</Button>
 			</main>
 		</div>
 	);
