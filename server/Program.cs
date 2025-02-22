@@ -3,6 +3,7 @@ using server.Data;
 using server.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 var config = builder.Configuration;
 
@@ -23,8 +24,8 @@ else
 builder.Services.AddDbContext<BdTeacompanioContext>(options =>
     options.UseNpgsql(connectionString));
 
-
 builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

@@ -53,6 +53,9 @@ namespace server.Logica
             RepoUsuario repo_usuario = new RepoUsuario(_context);
             try
             {
+                var usuario_existe = _context.Usuarios.Any(u => u.Correo.Equals(obj_usuario.Correo));
+                if(usuario_existe == true) throw new KeyNotFoundException("Ya existe una cuenta con este correo electrónico");
+
                 obj_usuario.CreatedAt = DateTime.SpecifyKind(obj_usuario.CreatedAt, DateTimeKind.Unspecified);
                 repo_usuario.CreateUser(obj_usuario);
             }
@@ -74,6 +77,7 @@ namespace server.Logica
                 var usuario_existente = _context.Usuarios.Find(id) ?? throw new KeyNotFoundException("El usuario no existe.");
                 usuario_existente.Nombre = obj_usuario.Nombre;
                 usuario_existente.Correo = obj_usuario.Correo;
+                usuario_existente.Imagen = obj_usuario.Imagen;
 
                 repo_usuario.UpdateUser(usuario_existente);
             }
