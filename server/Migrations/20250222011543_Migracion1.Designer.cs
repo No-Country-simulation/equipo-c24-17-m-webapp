@@ -12,8 +12,8 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    [Migration("20250221221456_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250222011543_Migracion1")]
+    partial class Migracion1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,9 @@ namespace server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_hijo");
 
+                    b.Property<int>("IdHijoNavigationId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("IdTipoestudio")
                         .HasColumnType("integer")
                         .HasColumnName("id_tipoestudio");
@@ -59,7 +62,7 @@ namespace server.Migrations
                     b.HasKey("Id")
                         .HasName("estudiosmedicos_pkey");
 
-                    b.HasIndex("IdHijo");
+                    b.HasIndex("IdHijoNavigationId");
 
                     b.HasIndex("IdTipoestudio");
 
@@ -71,8 +74,9 @@ namespace server.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('pariente_id_seq'::regclass)");
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -98,6 +102,9 @@ namespace server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_usuario");
 
+                    b.Property<int?>("IdUsuarioNavigationId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -113,7 +120,7 @@ namespace server.Migrations
                     b.HasKey("Id")
                         .HasName("pariente_pkey");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("IdUsuarioNavigationId");
 
                     b.ToTable("hijo", (string)null);
                 });
@@ -195,10 +202,9 @@ namespace server.Migrations
                 {
                     b.HasOne("server.Data.Models.Hijo", "IdHijoNavigation")
                         .WithMany("Estudiosmedicos")
-                        .HasForeignKey("IdHijo")
+                        .HasForeignKey("IdHijoNavigationId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_hijo_estudiosmedicos");
+                        .IsRequired();
 
                     b.HasOne("server.Data.Models.Tipoestudio", "IdTipoestudioNavigation")
                         .WithMany("Estudiosmedicos")
@@ -216,10 +222,7 @@ namespace server.Migrations
                 {
                     b.HasOne("server.Data.Models.Usuario", "IdUsuarioNavigation")
                         .WithMany("Hijos")
-                        .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_usuarios_hijo");
+                        .HasForeignKey("IdUsuarioNavigationId");
 
                     b.Navigation("IdUsuarioNavigation");
                 });
