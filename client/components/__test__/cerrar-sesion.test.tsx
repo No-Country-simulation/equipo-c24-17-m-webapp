@@ -14,7 +14,7 @@ describe("CerrarSesion", () => {
 		expect(screen.getByText("Cerrar Sesión")).toBeInTheDocument();
 	});
 
-	it("ejecurar signout fn on click", async () => {
+	it("ejecutar signout fn on click", async () => {
 		render(<CerrarSesion />);
 		const button = screen.getByText("Cerrar Sesión");
 		await userEvent.click(button);
