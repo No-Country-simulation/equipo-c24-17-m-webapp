@@ -33,14 +33,6 @@ pnpm dev
 Por defecto, la aplicación estará disponible en:  
 🔗 **URL del Cliente (Local):** `http://localhost:3000`
 
-### **4️⃣ Variables de Entorno (Opcional)**
-
-Si la aplicación necesita comunicarse con una API, crea un archivo **.env.local** en el directorio `/client` y agrega las variables necesarias. Por ejemplo:
-
-```ini
-NEXT_PUBLIC_API_URL=http://localhost:5000
-```
-
 📌 **Recuerda:** Si el backend está en Railway, usa el **dominio interno** de la API en lugar de `localhost`.
 
 ### **5️⃣ Construcción y Despliegue**
