@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using server.Data;
@@ -11,9 +12,11 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    partial class BdTeacompanioContextModelSnapshot : ModelSnapshot
+    [Migration("20250221221456_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,10 +52,6 @@ namespace server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_hijo");
 
-
-                    b.Property<int>("IdHijoNavigationId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("IdTipoestudio")
                         .HasColumnType("integer")
                         .HasColumnName("id_tipoestudio");
@@ -60,8 +59,7 @@ namespace server.Migrations
                     b.HasKey("Id")
                         .HasName("estudiosmedicos_pkey");
 
-
-                    b.HasIndex("IdHijoNavigationId");
+                    b.HasIndex("IdHijo");
 
                     b.HasIndex("IdTipoestudio");
 
@@ -73,10 +71,8 @@ namespace server.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("nextval('pariente_id_seq'::regclass)");
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -102,9 +98,6 @@ namespace server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_usuario");
 
-                    b.Property<int?>("IdUsuarioNavigationId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -120,7 +113,7 @@ namespace server.Migrations
                     b.HasKey("Id")
                         .HasName("pariente_pkey");
 
-                    b.HasIndex("IdUsuarioNavigationId");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("hijo", (string)null);
                 });
@@ -202,10 +195,10 @@ namespace server.Migrations
                 {
                     b.HasOne("server.Data.Models.Hijo", "IdHijoNavigation")
                         .WithMany("Estudiosmedicos")
-
-                        .HasForeignKey("IdHijoNavigationId")
+                        .HasForeignKey("IdHijo")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_hijo_estudiosmedicos");
 
                     b.HasOne("server.Data.Models.Tipoestudio", "IdTipoestudioNavigation")
                         .WithMany("Estudiosmedicos")
@@ -223,8 +216,10 @@ namespace server.Migrations
                 {
                     b.HasOne("server.Data.Models.Usuario", "IdUsuarioNavigation")
                         .WithMany("Hijos")
-
-                        .HasForeignKey("IdUsuarioNavigationId");
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_usuarios_hijo");
 
                     b.Navigation("IdUsuarioNavigation");
                 });

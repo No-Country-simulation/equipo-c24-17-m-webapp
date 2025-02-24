@@ -21,5 +21,6 @@ public partial class Estudiosmedico
     public virtual Hijo IdHijoNavigation { get; set; } = null!;
 
     [JsonIgnore]
+
     public virtual Tipoestudio? IdTipoestudioNavigation { get; set; } = null!;
 }

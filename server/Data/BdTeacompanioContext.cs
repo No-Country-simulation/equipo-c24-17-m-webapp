@@ -42,6 +42,7 @@ public partial class BdTeacompanioContext : DbContext
             entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
             entity.Property(e => e.IdTipoestudio).HasColumnName("id_tipoestudio");
 
+
             //entity.HasOne(d => d.IdHijoNavigation).WithMany(p => p.Estudiosmedicos)
             //    .HasForeignKey(d => d.IdHijo)
             //    .HasConstraintName("fk_hijo_estudiosmedicos");
@@ -58,6 +59,8 @@ public partial class BdTeacompanioContext : DbContext
             entity.ToTable("hijo");
 
             entity.Property(e => e.Id)
+
+
                 .HasColumnName("id");
             entity.Property(e => e.Apellido)
                 .HasMaxLength(50)
@@ -76,6 +79,7 @@ public partial class BdTeacompanioContext : DbContext
                 .HasMaxLength(150)
                 .IsFixedLength()
                 .HasColumnName("nombre_diagnostico");
+
 
             //entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Hijos)
             //    .HasForeignKey(d => d.IdUsuario)
