@@ -26,5 +26,6 @@ public partial class Hijo
     public virtual ICollection<Estudiosmedico> Estudiosmedicos { get; set; } = new List<Estudiosmedico>();
 
     [JsonIgnore]
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+
+    public virtual Usuario? IdUsuarioNavigation { get; set; } = null!;
 }

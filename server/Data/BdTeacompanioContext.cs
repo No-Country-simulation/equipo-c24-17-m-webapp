@@ -42,9 +42,10 @@ public partial class BdTeacompanioContext : DbContext
             entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
             entity.Property(e => e.IdTipoestudio).HasColumnName("id_tipoestudio");
 
-            entity.HasOne(d => d.IdHijoNavigation).WithMany(p => p.Estudiosmedicos)
-                .HasForeignKey(d => d.IdHijo)
-                .HasConstraintName("fk_hijo_estudiosmedicos");
+
+            //entity.HasOne(d => d.IdHijoNavigation).WithMany(p => p.Estudiosmedicos)
+            //    .HasForeignKey(d => d.IdHijo)
+            //    .HasConstraintName("fk_hijo_estudiosmedicos");
 
             entity.HasOne(d => d.IdTipoestudioNavigation).WithMany(p => p.Estudiosmedicos)
                 .HasForeignKey(d => d.IdTipoestudio)
@@ -58,7 +59,8 @@ public partial class BdTeacompanioContext : DbContext
             entity.ToTable("hijo");
 
             entity.Property(e => e.Id)
-                .HasDefaultValueSql("nextval('pariente_id_seq'::regclass)")
+
+
                 .HasColumnName("id");
             entity.Property(e => e.Apellido)
                 .HasMaxLength(50)
@@ -78,9 +80,10 @@ public partial class BdTeacompanioContext : DbContext
                 .IsFixedLength()
                 .HasColumnName("nombre_diagnostico");
 
-            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Hijos)
-                .HasForeignKey(d => d.IdUsuario)
-                .HasConstraintName("fk_usuarios_hijo");
+
+            //entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Hijos)
+            //    .HasForeignKey(d => d.IdUsuario)
+            //    .HasConstraintName("fk_usuarios_hijo");
         });
 
         modelBuilder.Entity<Tipoestudio>(entity =>

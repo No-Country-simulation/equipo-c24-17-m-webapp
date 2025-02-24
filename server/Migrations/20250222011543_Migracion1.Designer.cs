@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using server.Data;
@@ -11,9 +12,11 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    partial class BdTeacompanioContextModelSnapshot : ModelSnapshot
+    [Migration("20250222011543_Migracion1")]
+    partial class Migracion1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,6 @@ namespace server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_hijo");
 
-
                     b.Property<int>("IdHijoNavigationId")
                         .HasColumnType("integer");
 
@@ -59,7 +61,6 @@ namespace server.Migrations
 
                     b.HasKey("Id")
                         .HasName("estudiosmedicos_pkey");
-
 
                     b.HasIndex("IdHijoNavigationId");
 
@@ -73,7 +74,6 @@ namespace server.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-
                         .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
@@ -202,7 +202,6 @@ namespace server.Migrations
                 {
                     b.HasOne("server.Data.Models.Hijo", "IdHijoNavigation")
                         .WithMany("Estudiosmedicos")
-
                         .HasForeignKey("IdHijoNavigationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -223,7 +222,6 @@ namespace server.Migrations
                 {
                     b.HasOne("server.Data.Models.Usuario", "IdUsuarioNavigation")
                         .WithMany("Hijos")
-
                         .HasForeignKey("IdUsuarioNavigationId");
 
                     b.Navigation("IdUsuarioNavigation");
