@@ -48,5 +48,3 @@ Esto generará una versión optimizada en `/client/.next`. Para ejecutarla:
 ```bash
 pnpm start
 ```
-
-✅ **Ahora tu Next.js app está configurada y lista para ejecutarse!** 🚀
