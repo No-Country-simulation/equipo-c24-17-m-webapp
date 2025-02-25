@@ -16,7 +16,7 @@ public partial class BdTeacompanioContext : DbContext
     {
     }
 
-    public virtual DbSet<Estudiosmedico> Estudiosmedicos { get; set; }
+    public virtual DbSet<EstudioMedico> EstudioMedico { get; set; }
 
     public virtual DbSet<Hijo> Hijos { get; set; }
 
@@ -26,7 +26,7 @@ public partial class BdTeacompanioContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Estudiosmedico>(entity =>
+        modelBuilder.Entity<EstudioMedico>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("estudiosmedicos_pkey");
 
