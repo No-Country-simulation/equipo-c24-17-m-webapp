@@ -49,7 +49,7 @@ namespace server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_hijo");
 
-                    b.Property<int>("IdHijoNavigationId")
+                    b.Property<int?>("IdHijoNavigationId")
                         .HasColumnType("integer");
 
                     b.Property<int>("IdTipoestudio")
@@ -111,16 +111,93 @@ namespace server.Migrations
 
                     b.Property<string>("NombreDiagnostico")
                         .HasMaxLength(150)
-                        .HasColumnType("character(150)")
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("nombre_diagnostico")
                         .IsFixedLength();
 
                     b.HasKey("Id")
-                        .HasName("pariente_pkey");
+                        .HasName("hijos_pkey");
 
                     b.HasIndex("IdUsuario");
 
                     b.ToTable("hijo", (string)null);
+                });
+
+            modelBuilder.Entity("server.Data.Models.Incidencia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("descripcion");
+
+                    b.Property<DateOnly>("Fecha")
+                        .HasColumnType("date")
+                        .HasColumnName("fecha");
+
+                    b.Property<TimeOnly>("Hora")
+                        .HasColumnType("time without time zone")
+                        .HasColumnName("hora");
+
+                    b.Property<int>("IdHijo")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_hijo");
+
+                    b.Property<int>("IdTipoIncidencia")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_tipoincidencia");
+
+                    b.HasKey("Id")
+                        .HasName("incidencias_pkey");
+
+                    b.HasIndex("IdHijo");
+
+                    b.HasIndex("IdTipoIncidencia");
+
+                    b.ToTable("incidencia", (string)null);
+                });
+
+            modelBuilder.Entity("server.Data.Models.TipoIncidencia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("text")
+                        .HasColumnName("descripcion");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("nombre");
+
+                    b.HasKey("Id")
+                        .HasName("tipoincidencia_pkey");
+
+                    b.ToTable("tipoincidencia", (string)null);
                 });
 
             modelBuilder.Entity("server.Data.Models.Tipoestudio", b =>
@@ -177,7 +254,7 @@ namespace server.Migrations
 
                     b.Property<string>("Imagen")
                         .HasMaxLength(150)
-                        .HasColumnType("character(150)")
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("imagen")
                         .IsFixedLength();
 
@@ -200,9 +277,7 @@ namespace server.Migrations
                 {
                     b.HasOne("server.Data.Models.Hijo", "IdHijoNavigation")
                         .WithMany("Estudiosmedicos")
-                        .HasForeignKey("IdHijoNavigationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdHijoNavigationId");
 
                     b.HasOne("server.Data.Models.Tipoestudio", "IdTipoestudioNavigation")
                         .WithMany("Estudiosmedicos")
@@ -228,9 +303,37 @@ namespace server.Migrations
                     b.Navigation("IdUsuarioNavigation");
                 });
 
+            modelBuilder.Entity("server.Data.Models.Incidencia", b =>
+                {
+                    b.HasOne("server.Data.Models.Hijo", "IdHijoNavigation")
+                        .WithMany("Incidencias")
+                        .HasForeignKey("IdHijo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_hijos_incidencias");
+
+                    b.HasOne("server.Data.Models.TipoIncidencia", "IdTipoIncidenciaNavigation")
+                        .WithMany("Incidencias")
+                        .HasForeignKey("IdTipoIncidencia")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_tipoincidencias_incidencias");
+
+                    b.Navigation("IdHijoNavigation");
+
+                    b.Navigation("IdTipoIncidenciaNavigation");
+                });
+
             modelBuilder.Entity("server.Data.Models.Hijo", b =>
                 {
                     b.Navigation("Estudiosmedicos");
+
+                    b.Navigation("Incidencias");
+                });
+
+            modelBuilder.Entity("server.Data.Models.TipoIncidencia", b =>
+                {
+                    b.Navigation("Incidencias");
                 });
 
             modelBuilder.Entity("server.Data.Models.Tipoestudio", b =>

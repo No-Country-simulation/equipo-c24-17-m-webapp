@@ -16,6 +16,8 @@ public partial class BdTeacompanioContext : DbContext
     {
     }
 
+    public virtual DbSet<TipoIncidencia> TipoIncidencias { get; set; }
+    public virtual DbSet<Incidencia> Incidencias { get; set; }
     public virtual DbSet<EstudioMedico> EstudioMedico { get; set; }
 
     public virtual DbSet<Hijo> Hijos { get; set; }
@@ -26,6 +28,54 @@ public partial class BdTeacompanioContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //------------------------------------------------------------------------------------
+        modelBuilder.Entity<Incidencia>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("incidencias_pkey");
+
+            entity.ToTable("incidencia");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Descripcion).HasColumnName("descripcion");
+            entity.Property(e => e.Fecha).HasColumnName("fecha");
+            entity.Property(e => e.Hora).HasColumnName("hora");
+            entity.Property(e => e.IdTipoIncidencia).HasColumnName("id_tipoincidencia");
+            entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
+
+            entity.HasOne(d => d.IdTipoIncidenciaNavigation)
+                .WithMany(p => p.Incidencias)
+                .HasForeignKey(d => d.IdTipoIncidencia)
+                .HasConstraintName("fk_tipoincidencias_incidencias");
+
+            entity.HasOne(d => d.IdHijoNavigation)
+                .WithMany(h => h.Incidencias)
+                .HasForeignKey(d => d.IdHijo)
+                .HasConstraintName("fk_hijos_incidencias")
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+        //------------------------------------------------------------------------------------
+
+        modelBuilder.Entity<TipoIncidencia>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("tipoincidencia_pkey");
+
+            entity.ToTable("tipoincidencia");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Descripcion).HasColumnName("descripcion");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(150)
+                .HasColumnName("nombre");
+        });
+        //------------------------------------------------------------------------------------
         modelBuilder.Entity<EstudioMedico>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("estudiosmedicos_pkey");
@@ -55,7 +105,7 @@ public partial class BdTeacompanioContext : DbContext
 
         modelBuilder.Entity<Hijo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("pariente_pkey");
+            entity.HasKey(e => e.Id).HasName("hijos_pkey");
 
             entity.ToTable("hijo");
 
