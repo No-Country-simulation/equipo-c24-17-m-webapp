@@ -60,7 +60,7 @@ namespace server.Controllers
             try
             {
                 logica_usuario.CrearUsuario(obj_usuario);
-                return Created();
+                return Ok();
             }
             catch (Exception ex)
             {
