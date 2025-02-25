@@ -44,10 +44,18 @@ public partial class BdTeacompanioContext : DbContext
             entity.Property(e => e.Fecha).HasColumnName("fecha");
             entity.Property(e => e.Hora).HasColumnName("hora");
             entity.Property(e => e.IdTipoIncidencia).HasColumnName("id_tipoincidencia");
+            entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
 
-            entity.HasOne(d => d.IdTipoIncidenciaNavigation).WithMany(p => p.Incidencias)
+            entity.HasOne(d => d.IdTipoIncidenciaNavigation)
+                .WithMany(p => p.Incidencias)
                 .HasForeignKey(d => d.IdTipoIncidencia)
                 .HasConstraintName("fk_tipoincidencias_incidencias");
+
+            entity.HasOne(d => d.IdHijoNavigation)
+                .WithMany(h => h.Incidencias)
+                .HasForeignKey(d => d.IdHijo)
+                .HasConstraintName("fk_hijos_incidencias")
+                .OnDelete(DeleteBehavior.Cascade);
         });
         //------------------------------------------------------------------------------------
 
@@ -97,7 +105,7 @@ public partial class BdTeacompanioContext : DbContext
 
         modelBuilder.Entity<Hijo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("pariente_pkey");
+            entity.HasKey(e => e.Id).HasName("hijos_pkey");
 
             entity.ToTable("hijo");
 

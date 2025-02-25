@@ -116,7 +116,7 @@ namespace server.Migrations
                         .IsFixedLength();
 
                     b.HasKey("Id")
-                        .HasName("pariente_pkey");
+                        .HasName("hijos_pkey");
 
                     b.HasIndex("IdUsuario");
 
@@ -151,12 +151,18 @@ namespace server.Migrations
                         .HasColumnType("time without time zone")
                         .HasColumnName("hora");
 
+                    b.Property<int>("IdHijo")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_hijo");
+
                     b.Property<int>("IdTipoIncidencia")
                         .HasColumnType("integer")
                         .HasColumnName("id_tipoincidencia");
 
                     b.HasKey("Id")
                         .HasName("incidencias_pkey");
+
+                    b.HasIndex("IdHijo");
 
                     b.HasIndex("IdTipoIncidencia");
 
@@ -299,6 +305,13 @@ namespace server.Migrations
 
             modelBuilder.Entity("server.Data.Models.Incidencia", b =>
                 {
+                    b.HasOne("server.Data.Models.Hijo", "IdHijoNavigation")
+                        .WithMany("Incidencias")
+                        .HasForeignKey("IdHijo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_hijos_incidencias");
+
                     b.HasOne("server.Data.Models.TipoIncidencia", "IdTipoIncidenciaNavigation")
                         .WithMany("Incidencias")
                         .HasForeignKey("IdTipoIncidencia")
@@ -306,12 +319,16 @@ namespace server.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_tipoincidencias_incidencias");
 
+                    b.Navigation("IdHijoNavigation");
+
                     b.Navigation("IdTipoIncidenciaNavigation");
                 });
 
             modelBuilder.Entity("server.Data.Models.Hijo", b =>
                 {
                     b.Navigation("Estudiosmedicos");
+
+                    b.Navigation("Incidencias");
                 });
 
             modelBuilder.Entity("server.Data.Models.TipoIncidencia", b =>
