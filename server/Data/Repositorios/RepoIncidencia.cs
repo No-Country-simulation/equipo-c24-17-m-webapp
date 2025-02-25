@@ -15,7 +15,7 @@ namespace server.Data.Repositorios
         #endregion
 
 
-        public List<Incidencia> GetAll(int id)
+        public List<Incidencia> GetAllById(int id)
         {
             List<Incidencia> lista_incidencias = [];
 
