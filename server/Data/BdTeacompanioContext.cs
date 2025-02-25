@@ -16,7 +16,7 @@ public partial class BdTeacompanioContext : DbContext
     {
     }
 
-    public virtual DbSet<Estudiosmedico> Estudiosmedicos { get; set; }
+    public virtual DbSet<EstudioMedico> EstudioMedico { get; set; }
 
     public virtual DbSet<Hijo> Hijos { get; set; }
 
@@ -26,7 +26,7 @@ public partial class BdTeacompanioContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Estudiosmedico>(entity =>
+        modelBuilder.Entity<EstudioMedico>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("estudiosmedicos_pkey");
 
@@ -38,7 +38,8 @@ public partial class BdTeacompanioContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
             entity.Property(e => e.Descripcion).HasColumnName("descripcion");
-            entity.Property(e => e.Fecha).HasColumnName("fecha");
+            entity.Property(e => e.ResultadoEstudio).HasColumnName("resultado_estudio");
+            entity.Property(e => e.FechaRealizacion).HasColumnName("fecha_realizacion");
             entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
             entity.Property(e => e.IdTipoestudio).HasColumnName("id_tipoestudio");
 

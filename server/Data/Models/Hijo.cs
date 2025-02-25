@@ -23,7 +23,7 @@ public partial class Hijo
     public string? DescripcionDiagnostico { get; set; }
 
     [JsonIgnore]
-    public virtual ICollection<Estudiosmedico> Estudiosmedicos { get; set; } = new List<Estudiosmedico>();
+    public virtual ICollection<EstudioMedico> Estudiosmedicos { get; set; } = new List<EstudioMedico>();
 
     [JsonIgnore]
 
