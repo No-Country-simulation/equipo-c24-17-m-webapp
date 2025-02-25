@@ -40,5 +40,21 @@ namespace server.Data.Repositorios
                 throw new Exception(ex.Message);
             }
         }
+        public void CreateTipoEstudio(Tipoestudio obj_tipo_estudio)
+        {
+            try
+            {
+                _context.Add(obj_tipo_estudio);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

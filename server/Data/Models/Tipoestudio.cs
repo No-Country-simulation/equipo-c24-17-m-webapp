@@ -12,6 +12,6 @@ public partial class Tipoestudio
 
     public string? Descripcion { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
     public virtual ICollection<Estudiosmedico> Estudiosmedicos { get; set; } = new List<Estudiosmedico>();
 }

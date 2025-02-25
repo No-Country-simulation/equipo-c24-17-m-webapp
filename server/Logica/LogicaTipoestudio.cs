@@ -46,5 +46,25 @@ namespace server.Logica
                 throw new Exception(ex.Message);
             }
         }
+        public void CrearTipoEstudio(Tipoestudio obj_tipo_estudio)
+        {
+            RepoTipoestudio repo_tipo_estudio = new RepoTipoestudio(_context);
+            try
+            {
+                var tipo_estudio_existente = _context.Tipoestudios.Any(u => u.Id == obj_tipo_estudio.Id);
+                if (tipo_estudio_existente == true) throw new KeyNotFoundException("Ya hay un tipo de estudio cargado con ese id");
+
+                obj_tipo_estudio.CreatedAt = DateTime.SpecifyKind(obj_tipo_estudio.CreatedAt, DateTimeKind.Unspecified);
+                repo_tipo_estudio.CreateTipoEstudio(obj_tipo_estudio);
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

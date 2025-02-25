@@ -50,5 +50,21 @@ namespace server.Controllers
                 return StatusCode(404, $"Error al obtener el hijo: {ex.Message}");
             }
         }
+        
+        // POST api/<TipoEstudioController>
+        [HttpPost]
+        public ActionResult Post([FromBody] Tipoestudio obj_tipo_estudio)
+        {
+            LogicaTipoestudio logica_tipo_estudio = new LogicaTipoestudio(_context);
+            try
+            {
+                logica_tipo_estudio.CrearTipoEstudio(obj_tipo_estudio);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al crear el hijo: {ex.Message}");
+            }
+        }
     }
 }
