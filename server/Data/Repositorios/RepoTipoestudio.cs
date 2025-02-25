@@ -65,11 +65,11 @@ namespace server.Data.Repositorios
             }
             catch (DbUpdateException dbEx)
             {
-                throw new Exception("Error al actualizar el hijo en la base de datos.", dbEx);
+                throw new Exception("Error al actualizar el tipo de estudio en la base de datos.", dbEx);
             }
             catch (Exception ex)
             {
-                throw new Exception("Error general al actualizar el hijo.", ex);
+                throw new Exception("Error general al actualizar el tipo de estudio.", ex);
             }
         }
         public void DeleteTipoEstudio(Tipoestudio obj_tipo_estudio)
@@ -81,7 +81,7 @@ namespace server.Data.Repositorios
             }
             catch (Exception ex)
             {
-                throw new Exception("Error general al eliminar el hijo.", ex);
+                throw new Exception("Error general al eliminar el tipo de estudio.", ex);
             }
         }
     }

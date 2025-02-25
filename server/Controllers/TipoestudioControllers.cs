@@ -30,7 +30,7 @@ namespace server.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(404, $"Error al obtener los hijos: {ex.Message}");
+                return StatusCode(404, $"Error al obtener el tipo de estudio solicitado: {ex.Message}");
             }
         }
 
@@ -47,7 +47,7 @@ namespace server.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(404, $"Error al obtener el hijo: {ex.Message}");
+                return StatusCode(404, $"Error al obtener el tipo de estudio solicitado: {ex.Message}");
             }
         }
         
@@ -63,7 +63,7 @@ namespace server.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(404, $"Error al crear el hijo: {ex.Message}");
+                return StatusCode(404, $"Error al crear el tipo de estudio: {ex.Message}");
             }
         }
         
@@ -80,7 +80,7 @@ namespace server.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(404, $"Error al actualizar los datos del hijo: {ex.Message}");
+                return StatusCode(404, $"Error al actualizar el tipo de estudio: {ex.Message}");
             }
         }
 
@@ -97,7 +97,7 @@ namespace server.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(404, $"Error al eliminar el hijo: {ex.Message}");
+                return StatusCode(404, $"Error al eliminar el tipo de estudio: {ex.Message}");
             }
         }
     }
