@@ -55,8 +55,18 @@ namespace server.Controllers
 
         // POST api/<IncidenciaController>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult Post([FromBody] Incidencia obj_incidencia)
         {
+            LogicaIncidencia logica_incidencia = new LogicaIncidencia(_context);
+            try
+            {
+                logica_incidencia.CrearIncidencia(obj_incidencia);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al crear la incidencia: {ex.Message}");
+            }
         }
 
         // PUT api/<IncidenciaController>/5
