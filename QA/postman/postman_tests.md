@@ -31,6 +31,6 @@ Las pruebas verifican los siguientes aspectos de la API:
   "nombre": "Persona1",
   "correo": "string@email.com",
   "createdAt": "2025-02-25T22:13:24.562327",
-  "imagen": "urlimagen                                                                                                                                             "
+  "imagen": "urlimagen"
 }
 ```
