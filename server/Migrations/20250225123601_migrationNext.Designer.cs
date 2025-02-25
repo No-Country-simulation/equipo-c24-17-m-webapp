@@ -12,8 +12,8 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    [Migration("20250221221456_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250225123601_migrationNext")]
+    partial class migrationNext
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace server.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("server.Data.Models.Estudiosmedico", b =>
+            modelBuilder.Entity("server.Data.Models.EstudioMedico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,7 +34,7 @@ namespace server.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at")
@@ -44,22 +44,29 @@ namespace server.Migrations
                         .HasColumnType("text")
                         .HasColumnName("descripcion");
 
-                    b.Property<DateOnly>("Fecha")
+                    b.Property<DateOnly>("FechaRealizacion")
                         .HasColumnType("date")
-                        .HasColumnName("fecha");
+                        .HasColumnName("fecha_realizacion");
 
                     b.Property<int>("IdHijo")
                         .HasColumnType("integer")
                         .HasColumnName("id_hijo");
 
+                    b.Property<int>("IdHijoNavigationId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("IdTipoestudio")
                         .HasColumnType("integer")
                         .HasColumnName("id_tipoestudio");
 
+                    b.Property<string>("ResultadoEstudio")
+                        .HasColumnType("text")
+                        .HasColumnName("resultado_estudio");
+
                     b.HasKey("Id")
                         .HasName("estudiosmedicos_pkey");
 
-                    b.HasIndex("IdHijo");
+                    b.HasIndex("IdHijoNavigationId");
 
                     b.HasIndex("IdTipoestudio");
 
@@ -71,8 +78,9 @@ namespace server.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('pariente_id_seq'::regclass)");
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -191,14 +199,13 @@ namespace server.Migrations
                     b.ToTable("usuario", (string)null);
                 });
 
-            modelBuilder.Entity("server.Data.Models.Estudiosmedico", b =>
+            modelBuilder.Entity("server.Data.Models.EstudioMedico", b =>
                 {
                     b.HasOne("server.Data.Models.Hijo", "IdHijoNavigation")
                         .WithMany("Estudiosmedicos")
-                        .HasForeignKey("IdHijo")
+                        .HasForeignKey("IdHijoNavigationId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_hijo_estudiosmedicos");
+                        .IsRequired();
 
                     b.HasOne("server.Data.Models.Tipoestudio", "IdTipoestudioNavigation")
                         .WithMany("Estudiosmedicos")
