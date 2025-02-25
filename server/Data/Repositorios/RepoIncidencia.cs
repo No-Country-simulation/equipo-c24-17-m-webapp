@@ -15,13 +15,15 @@ namespace server.Data.Repositorios
         #endregion
 
 
-        public List<Incidencia> GetAll()
+        public List<Incidencia> GetAll(int id)
         {
             List<Incidencia> lista_incidencias = [];
 
             try
             {
-                return lista_incidencias = _context.Incidencias.ToList();
+                return lista_incidencias = _context.Incidencias
+                    .Where( x => x.IdHijo == id)
+                    .ToList();
             }
             catch (Exception ex)
             {
