@@ -111,7 +111,7 @@ namespace server.Migrations
 
                     b.Property<string>("NombreDiagnostico")
                         .HasMaxLength(150)
-                        .HasColumnType("character(150)")
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("nombre_diagnostico")
                         .IsFixedLength();
 
@@ -254,7 +254,7 @@ namespace server.Migrations
 
                     b.Property<string>("Imagen")
                         .HasMaxLength(150)
-                        .HasColumnType("character(150)")
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("imagen")
                         .IsFixedLength();
 
