@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
+import { createUsuario } from "./lib/database";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [Google],
@@ -9,7 +10,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				throw new Error("Perfil de google no encontrado.");
 			}
 
-			//TODO : guardar usuario en la base de datos, si es que no existe
+			const name = profile.name || "";
+			const picture = profile.picture || "";
+			await createUsuario(name, profile.email, picture);
 
 			return true;
 		},
