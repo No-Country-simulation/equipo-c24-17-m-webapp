@@ -70,8 +70,18 @@ namespace server.Controllers
 
         // PUT api/<EstudioMedicoController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put(int id, [FromBody] EstudioMedico obj_estudioMedico)
         {
+            LogicaEstudioMedico logica_estudio = new LogicaEstudioMedico(_context);
+            try
+            {
+                logica_estudio.ActualizarEstudioMedico(id, obj_estudioMedico);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al actualizar los datos del estudio medico solicitado: {ex.Message}");
+            }
         }
 
         // DELETE api/<EstudioMedicoController>/5
