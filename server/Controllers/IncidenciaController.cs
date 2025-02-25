@@ -87,8 +87,18 @@ namespace server.Controllers
 
         // DELETE api/<IncidenciaController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            LogicaIncidencia logica_incidencia = new LogicaIncidencia(_context);
+            try
+            {
+                logica_incidencia.EliminarIncidencia(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al eliminar la incidencia: {ex.Message}");
+            }
         }
     }
 }
