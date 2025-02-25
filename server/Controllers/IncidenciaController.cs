@@ -71,8 +71,18 @@ namespace server.Controllers
 
         // PUT api/<IncidenciaController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put(int id, [FromBody] Incidencia obj_incidencia)
         {
+            LogicaIncidencia logica_incidencia = new LogicaIncidencia(_context);
+            try
+            {
+                logica_incidencia.ActualizarIncidencia(id, obj_incidencia);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al actualizar los datos de la incidencia: {ex.Message}");
+            }
         }
 
         // DELETE api/<IncidenciaController>/5
