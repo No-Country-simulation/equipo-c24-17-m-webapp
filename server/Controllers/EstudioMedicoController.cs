@@ -86,8 +86,18 @@ namespace server.Controllers
 
         // DELETE api/<EstudioMedicoController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            LogicaEstudioMedico logica_estudio = new LogicaEstudioMedico(_context);
+            try
+            {
+                logica_estudio.EliminarEstudioMedico(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al eliminar el estudio médico: {ex.Message}");
+            }
         }
     }
 }
