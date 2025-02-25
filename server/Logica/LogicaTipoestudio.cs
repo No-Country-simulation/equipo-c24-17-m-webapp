@@ -66,5 +66,22 @@ namespace server.Logica
                 throw new Exception(ex.Message);
             }
         }
+        public void ActualizarTipoEstudio(int id, Tipoestudio obj_tipo_estudio)
+        {
+            RepoTipoestudio repo_tipo_estudio = new RepoTipoestudio(_context);
+            try
+            {
+                var tipo_estudio_existente = _context.Tipoestudios.Find(id) ?? throw new KeyNotFoundException("El tipo de estudio no existe.");
+                tipo_estudio_existente.Nombre = obj_tipo_estudio.Nombre;
+                tipo_estudio_existente.Descripcion = obj_tipo_estudio.Descripcion;
+
+
+                repo_tipo_estudio.UpdateTipoEstudio(tipo_estudio_existente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

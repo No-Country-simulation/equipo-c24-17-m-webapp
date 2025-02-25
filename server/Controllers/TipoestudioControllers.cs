@@ -66,5 +66,22 @@ namespace server.Controllers
                 return StatusCode(404, $"Error al crear el hijo: {ex.Message}");
             }
         }
+        
+        // PUT api/<TipoEstudioController>/5
+        [HttpPut("{id}")]
+        public ActionResult Put(int id, [FromBody] Tipoestudio obj_tipo_estudio)
+        {
+            LogicaTipoestudio logica_tipo_estudio = new LogicaTipoestudio(_context);
+
+            try
+            {
+                logica_tipo_estudio.ActualizarTipoEstudio(id, obj_tipo_estudio);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al actualizar los datos del hijo: {ex.Message}");
+            }
+        }
     }
 }

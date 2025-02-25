@@ -56,5 +56,21 @@ namespace server.Data.Repositorios
                 throw new Exception(ex.Message);
             }
         }
+        public void UpdateTipoEstudio(Tipoestudio obj_tipo_estudio)
+        {
+            try
+            {
+                _context.Tipoestudios.Update(obj_tipo_estudio);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException dbEx)
+            {
+                throw new Exception("Error al actualizar el hijo en la base de datos.", dbEx);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error general al actualizar el hijo.", ex);
+            }
+        }
     }
 }
