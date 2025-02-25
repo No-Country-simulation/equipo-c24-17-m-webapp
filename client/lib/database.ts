@@ -14,6 +14,7 @@ export async function getSession() {
 	};
 }
 
+
 export async function createUsuario(
 	nombre: string,
 	correo: string,
@@ -36,3 +37,4 @@ export async function createUsuario(
 		throw new Error("Error en el servidor.");
 	}
 }
+
