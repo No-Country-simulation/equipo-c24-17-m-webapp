@@ -83,5 +83,22 @@ namespace server.Controllers
                 return StatusCode(404, $"Error al actualizar los datos del hijo: {ex.Message}");
             }
         }
+
+        // DELETE api/<HijoController>/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            LogicaTipoestudio logica_tipo_estudio = new LogicaTipoestudio(_context);
+
+            try
+            {
+                logica_tipo_estudio.EliminarTipoEstudio(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al eliminar el hijo: {ex.Message}");
+            }
+        }
     }
 }

@@ -83,5 +83,18 @@ namespace server.Logica
                 throw new Exception(ex.Message);
             }
         }
+        public void EliminarTipoEstudio(int id)
+        {
+            RepoTipoestudio repo_tipo_estudio = new RepoTipoestudio(_context);
+            try
+            {
+                var tipo_estudio_existente = _context.Tipoestudios.Find(id) ?? throw new KeyNotFoundException("El tipo de estudio no existe.");
+                repo_tipo_estudio.DeleteTipoEstudio(tipo_estudio_existente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

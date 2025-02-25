@@ -72,5 +72,17 @@ namespace server.Data.Repositorios
                 throw new Exception("Error general al actualizar el hijo.", ex);
             }
         }
+        public void DeleteTipoEstudio(Tipoestudio obj_tipo_estudio)
+        {
+            try
+            {
+                _context.Tipoestudios.Remove(obj_tipo_estudio);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error general al eliminar el hijo.", ex);
+            }
+        }
     }
 }
