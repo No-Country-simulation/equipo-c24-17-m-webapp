@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-
-namespace server.Data.Models;
+﻿namespace server.Data.Models;
 
 public partial class Tipoestudio
 {
