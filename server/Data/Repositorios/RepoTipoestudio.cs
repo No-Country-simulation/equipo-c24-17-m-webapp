@@ -27,5 +27,18 @@ namespace server.Data.Repositorios
                 throw new Exception(ex.Message);
             }
         }
+
+        public Tipoestudio GetById(int id)
+        {
+            Tipoestudio tipo_estudio_obtenido = new();
+            try
+            {
+                return tipo_estudio_obtenido = _context.Tipoestudios.Find(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

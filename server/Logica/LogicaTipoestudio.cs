@@ -30,5 +30,21 @@ namespace server.Logica
                 throw new Exception(ex.Message);
             }
         }
+        public Tipoestudio ObtenerTipoEstudioPorId(int id)
+        {
+            RepoTipoestudio repo_tipo_estudio = new RepoTipoestudio(_context);
+            Tipoestudio tipo_estudio_encontrado = new();
+            try
+            {
+                tipo_estudio_encontrado = repo_tipo_estudio.GetById(id);
+
+                if (tipo_estudio_encontrado == null) throw new KeyNotFoundException("El tipo de estudio solicitado no existe.");
+                return tipo_estudio_encontrado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

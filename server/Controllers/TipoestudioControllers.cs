@@ -33,5 +33,22 @@ namespace server.Controllers
                 return StatusCode(404, $"Error al obtener los hijos: {ex.Message}");
             }
         }
+
+        // GET api/<TurnoController>/5
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+            LogicaTipoestudio logica_tipo_estudio = new LogicaTipoestudio(_context);
+            try
+            {
+                Tipoestudio tipo_estudio_encontrado = new Tipoestudio();
+                tipo_estudio_encontrado = logica_tipo_estudio.ObtenerTipoEstudioPorId(id);
+                return Ok(tipo_estudio_encontrado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener el hijo: {ex.Message}");
+            }
+        }
     }
 }
