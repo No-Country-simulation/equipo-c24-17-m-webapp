@@ -13,7 +13,7 @@ public partial class EstudioMedico
     public string? Descripcion { get; set; }
     public string? ResultadoEstudio { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     public int IdTipoestudio { get; set; }
 
