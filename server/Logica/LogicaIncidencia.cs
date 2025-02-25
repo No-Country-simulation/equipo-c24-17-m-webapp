@@ -23,6 +23,7 @@ namespace server.Logica
 
             try
             {
+                var hijo_encontrado = _context.Hijos.Find(id) ?? throw new KeyNotFoundException("No se encuentra el hijo o no existe en el registro");
                 return lista_incidencias = repo_incidencia.GetAllById(id);
             }
             catch (Exception ex)
