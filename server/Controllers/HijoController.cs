@@ -58,7 +58,7 @@ namespace server.Controllers
             try
             {
                 logica_hijo.CrearHijo(obj_hijo);
-                return Created();
+                return Ok();
             }
             catch (Exception ex)
             {

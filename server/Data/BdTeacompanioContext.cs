@@ -81,9 +81,9 @@ public partial class BdTeacompanioContext : DbContext
                 .HasColumnName("nombre_diagnostico");
 
 
-            //entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Hijos)
-            //    .HasForeignKey(d => d.IdUsuario)
-            //    .HasConstraintName("fk_usuarios_hijo");
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Hijos)
+                .HasForeignKey(d => d.IdUsuario)
+                .HasConstraintName("fk_usuarios_hijo");
         });
 
         modelBuilder.Entity<Tipoestudio>(entity =>
