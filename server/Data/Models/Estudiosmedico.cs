@@ -8,9 +8,10 @@ public partial class Estudiosmedico
 {
     public int Id { get; set; }
 
-    public DateOnly Fecha { get; set; }
+    public DateOnly FechaRealizacion { get; set; }
 
     public string? Descripcion { get; set; }
+    public string? ResultadoEstudio { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 
