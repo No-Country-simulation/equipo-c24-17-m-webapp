@@ -40,9 +40,17 @@ namespace server.Controllers
 
         // GET api/<IncidenciaController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            LogicaIncidencia logica_incidencia = new LogicaIncidencia(_context);
+            try
+            {
+                return Ok(logica_incidencia.ObtenerIncidenciaPorId(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener la incidencia solicitada: {ex.Message}");
+            }
         }
 
         // POST api/<IncidenciaController>
