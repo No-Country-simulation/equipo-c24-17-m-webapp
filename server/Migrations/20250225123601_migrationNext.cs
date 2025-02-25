@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace server.Migrations
 {
     /// <inheritdoc />
-    public partial class Migracion1 : Migration
+    public partial class migrationNext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,17 +55,17 @@ namespace server.Migrations
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
                     id_usuario = table.Column<int>(type: "integer", nullable: false),
                     nombre_diagnostico = table.Column<string>(type: "character(150)", fixedLength: true, maxLength: 150, nullable: true),
-                    descripcion_diagnostico = table.Column<string>(type: "text", nullable: true),
-                    IdUsuarioNavigationId = table.Column<int>(type: "integer", nullable: true)
+                    descripcion_diagnostico = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pariente_pkey", x => x.id);
                     table.ForeignKey(
-                        name: "FK_hijo_usuario_IdUsuarioNavigationId",
-                        column: x => x.IdUsuarioNavigationId,
+                        name: "fk_usuarios_hijo",
+                        column: x => x.id_usuario,
                         principalTable: "usuario",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,9 +74,10 @@ namespace server.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    fecha = table.Column<DateOnly>(type: "date", nullable: false),
+                    fecha_realizacion = table.Column<DateOnly>(type: "date", nullable: false),
                     descripcion = table.Column<string>(type: "text", nullable: true),
-                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true, defaultValueSql: "now()"),
+                    resultado_estudio = table.Column<string>(type: "text", nullable: true),
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
                     id_tipoestudio = table.Column<int>(type: "integer", nullable: false),
                     id_hijo = table.Column<int>(type: "integer", nullable: false),
                     IdHijoNavigationId = table.Column<int>(type: "integer", nullable: false)
@@ -109,9 +110,9 @@ namespace server.Migrations
                 column: "IdHijoNavigationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_hijo_IdUsuarioNavigationId",
+                name: "IX_hijo_id_usuario",
                 table: "hijo",
-                column: "IdUsuarioNavigationId");
+                column: "id_usuario");
 
             migrationBuilder.CreateIndex(
                 name: "usuario_correo_key",
