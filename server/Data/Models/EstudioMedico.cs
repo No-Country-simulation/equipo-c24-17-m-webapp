@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace server.Data.Models;
 
-public partial class Estudiosmedico
+public partial class EstudioMedico
 {
     public int Id { get; set; }
 
