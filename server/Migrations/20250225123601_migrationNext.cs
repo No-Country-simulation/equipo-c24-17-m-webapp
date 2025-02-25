@@ -36,7 +36,7 @@ namespace server.Migrations
                     nombre = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     correo = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
-                    imagen = table.Column<string>(type: "character(150)", fixedLength: true, maxLength: 150, nullable: true)
+                    imagen = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,7 +54,7 @@ namespace server.Migrations
                     fecha_nacimiento = table.Column<DateOnly>(type: "date", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
                     id_usuario = table.Column<int>(type: "integer", nullable: false),
-                    nombre_diagnostico = table.Column<string>(type: "character(150)", fixedLength: true, maxLength: 150, nullable: true),
+                    nombre_diagnostico = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: true),
                     descripcion_diagnostico = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>

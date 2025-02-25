@@ -54,8 +54,18 @@ namespace server.Controllers
 
         // POST api/<EstudioMedicoController>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult Post([FromBody] EstudioMedico obj_estudioMedico)
         {
+            LogicaEstudioMedico logica_estudio = new LogicaEstudioMedico(_context);
+            try
+            {
+                logica_estudio.CrearEstudioMedico(obj_estudioMedico);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al crear el estudio médico: {ex.Message}");
+            }
         }
 
         // PUT api/<EstudioMedicoController>/5
