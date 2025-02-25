@@ -15,13 +15,15 @@ namespace server.Data.Repositorios
         #endregion
 
 
-        public List<EstudioMedico> GetAll()
+        public List<EstudioMedico> GetAllById(int id)
         {
             List<EstudioMedico> lista_estudiosMedicos = [];
 
             try
             {
-                return lista_estudiosMedicos = _context.EstudioMedico.ToList();
+                return lista_estudiosMedicos = _context.EstudioMedico
+                                                .Where(x => x.IdHijo == id)
+                                                .ToList();
             }
             catch (Exception ex)
             {
@@ -31,10 +33,9 @@ namespace server.Data.Repositorios
 
         public EstudioMedico GetById(int id)
         {
-            EstudioMedico estudioMedico_obtenido = new();
             try
             {
-                return estudioMedico_obtenido = _context.EstudioMedico.Find(id);
+                return _context.EstudioMedico.Find(id);
             }
             catch (Exception ex)
             {

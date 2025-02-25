@@ -16,14 +16,14 @@ namespace server.Logica
         }
         #endregion
 
-        public List<EstudioMedico> ObtenerTodosLosEstudioMedico()
+        public List<EstudioMedico> ObtenerTodosLosEstudioMedico(int id)
         {
             RepoEstudioMedico repo_estudioMedico = new RepoEstudioMedico(_context);
             List<EstudioMedico> lista_estudios_medicos = [];
 
             try
             {
-                return lista_estudios_medicos = repo_estudioMedico.GetAll();
+                return lista_estudios_medicos = repo_estudioMedico.GetAllById(id);
             }
             catch (Exception ex)
             {
