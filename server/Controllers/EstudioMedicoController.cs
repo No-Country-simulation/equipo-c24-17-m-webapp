@@ -39,9 +39,17 @@ namespace server.Controllers
 
         // GET api/<EstudioMedicoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            LogicaEstudioMedico logica_estudio = new LogicaEstudioMedico(_context);
+            try
+            {
+                return Ok(logica_estudio.ObtenerEstudioMedicoPorId(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener el estudio médico solicitado: {ex.Message}");
+            }
         }
 
         // POST api/<EstudioMedicoController>
