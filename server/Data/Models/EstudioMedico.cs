@@ -4,15 +4,16 @@ using System.Text.Json.Serialization;
 
 namespace server.Data.Models;
 
-public partial class Estudiosmedico
+public partial class EstudioMedico
 {
     public int Id { get; set; }
 
-    public DateOnly Fecha { get; set; }
+    public DateOnly FechaRealizacion { get; set; }
 
     public string? Descripcion { get; set; }
+    public string? ResultadoEstudio { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     public int IdTipoestudio { get; set; }
 
