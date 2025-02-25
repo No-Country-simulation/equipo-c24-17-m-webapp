@@ -13,72 +13,51 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { parienteSchema } from "@/lib/schemas";
 
+type UserType = z.infer<typeof parienteSchema>;
 
-const userSchema = z.object({
-    nombre: z
-      .string()
-      .min(3, { message: "El nombre debe tener al menos 3 caracteres." })
-      .max(50, { message: "El nombre no puede exceder los 50 caracteres." })
-      .regex(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/, {
-        message: "El nombre solo puede contener letras y espacios.",
-      }),
-  
-    apellido: z
-      .string()
-      .min(2, { message: "El apellido debe tener al menos 3 caracteres." })
-      .max(50, { message: "El apellido no puede exceder los 50 caracteres." })
-      .regex(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/, {
-        message: "El apellido solo puede contener letras y espacios.",
-      }),
-  
-    fecha_nacimiento: z
-      .string()
-      .refine(
-        (val) => {
-          const fecha = new Date(val);
-          return !isNaN(fecha.getTime()) && fecha <= new Date(); 
-        },
-        { message: "Debe ser una fecha válida" }
-      ),
-  });
-
-type UserType = z.infer<typeof userSchema>;
-
-export default function FormPariente() {
+export default function FormPariente({ email }: { email: string }) {
   const form = useForm<UserType>({
-    resolver: zodResolver(userSchema),
+    resolver: zodResolver(parienteSchema),
     defaultValues: {
       nombre: "",
       apellido: "",
       fecha_nacimiento: "",
+      nombreDiagnostico: "",
+      descripcionDiagnostico: "",
     },
   });
 
   const onSubmit = form.handleSubmit(async (data: UserType) => {
-    const fechaISO = new Date(data.fecha_nacimiento).toISOString().split("T")[0];
-  
+    const fechaISO = new Date(data.fecha_nacimiento)
+      .toISOString()
+      .split("T")[0];
+
     const formattedData = {
+      // email,
       nombre: data.nombre,
       apellido: data.apellido,
       fecha_nacimiento: fechaISO,
+      nombreDiagnostico: data.nombreDiagnostico,
+      descripcionDiagnostico: data.descripcionDiagnostico,
     };
-  
+
     try {
-    //   const response = await fetch("/api/Pariente", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(formattedData),
-    //   });
-  
-    //   if (!response.ok) {
-    //     throw new Error("Error al enviar los datos");
-    //   }
-  
-    //   const result = await response.json();
-    //   console.log(result);
+      //   const response = await fetch("/api/Pariente", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(formattedData),
+      //   });
+
+      //   if (!response.ok) {
+      //     throw new Error("Error al enviar los datos");
+      //   }
+
+      //   const result = await response.json();
+      //   console.log(result);
       console.log(formattedData);
       form.reset();
     } catch (error) {
@@ -90,7 +69,7 @@ export default function FormPariente() {
     <Form {...form}>
       <form
         onSubmit={onSubmit}
-        className="space-y-4 p-6 border rounded-lg shadow-md mt-10 w-[310px]  " 
+        className="space-y-4 p-6 border rounded-lg shadow-md mt-10 w-[310px]  "
       >
         <FormField
           control={form.control}
@@ -105,7 +84,7 @@ export default function FormPariente() {
             </FormItem>
           )}
         />
-  
+
         <FormField
           control={form.control}
           name="apellido"
@@ -119,7 +98,43 @@ export default function FormPariente() {
             </FormItem>
           )}
         />
-  
+
+        <FormField
+          control={form.control}
+          name="nombreDiagnostico"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Diagnóstico</FormLabel>
+              <FormControl>
+                <Input
+                  type="text"
+                  placeholder="Nombre del diagnóstico"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="descripcionDiagnostico"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Descripción</FormLabel>
+              <FormControl>
+                <Input
+                  type="text"
+                  placeholder="Descripción del diagnóstico"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="fecha_nacimiento"
@@ -133,8 +148,8 @@ export default function FormPariente() {
             </FormItem>
           )}
         />
-  
-        <div className="flex justify-center"> 
+
+        <div className="flex justify-center">
           <Button type="submit">Agregar</Button>
         </div>
       </form>
