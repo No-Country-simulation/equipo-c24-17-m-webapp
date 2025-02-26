@@ -53,8 +53,18 @@ namespace server.Controllers
 
         // POST api/<TerapiaController>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult Post([FromBody] Terapia obj_terapia)
         {
+            LogicaTerapia logica_terapia = new LogicaTerapia(_context);
+            try
+            {
+                logica_terapia.CrearTerapia(obj_terapia);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al crear la terapia: {ex.Message}");
+            }
         }
 
         // PUT api/<TerapiaController>/5
