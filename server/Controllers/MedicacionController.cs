@@ -87,8 +87,18 @@ namespace server.Controllers
 
         // DELETE api/<MedicacionController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            LogicaMedicacion logica_medicacion = new LogicaMedicacion(_context);
+            try
+            {
+                logica_medicacion.EliminarMedicacion(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al eliminar la medicación: {ex.Message}");
+            }
         }
     }
 }
