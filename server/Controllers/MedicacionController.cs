@@ -71,8 +71,18 @@ namespace server.Controllers
 
         // PUT api/<MedicacionController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put(int id, [FromBody] Medicacion obj_medicacion)
         {
+            LogicaMedicacion logica_medicacion = new LogicaMedicacion(_context);
+            try
+            {
+                logica_medicacion.ActualizarMedicacion(id, obj_medicacion);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al actualizar los datos de la medicación: {ex.Message}");
+            }
         }
 
         // DELETE api/<MedicacionController>/5
