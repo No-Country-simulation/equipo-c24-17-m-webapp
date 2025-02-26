@@ -16,6 +16,7 @@ public partial class BdTeacompanioContext : DbContext
     {
     }
 
+    public virtual DbSet<Medicacion> Medicaciones { get; set; }
     public virtual DbSet<Terapia> Terapias { get; set; }
     public virtual DbSet<TipoEspecialidad> TipoEspecialidades { get; set; }
     public virtual DbSet<TipoIncidencia> TipoIncidencias { get; set; }
@@ -60,6 +61,32 @@ public partial class BdTeacompanioContext : DbContext
         });
         //-------------------------------------------------------------------------------------
 
+        modelBuilder.Entity<Medicacion>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("medicacion_pkey");
+
+            entity.ToTable("medicacion");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Horario).HasColumnName("horario");
+            entity.Property(e => e.Descripcion).HasColumnName("descripcion");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(150)
+                .HasColumnName("nombre");
+            entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
+
+            entity.HasOne(d => d.IdHijoNavigation)
+                .WithMany(h => h.Medicaciones)
+                .HasForeignKey(d => d.IdHijo)
+                .HasConstraintName("fk_hijos_medicaciones")
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        //-------------------------------------------------------------------------------------
         modelBuilder.Entity<Terapia>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("terapias_pkey");
@@ -88,7 +115,7 @@ public partial class BdTeacompanioContext : DbContext
                 .HasConstraintName("fk_hijos_terapias")
                 .OnDelete(DeleteBehavior.Cascade);
         });
-            //-------------------------------------------------------------------------------------
+
             modelBuilder.Entity<TipoEspecialidad>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("tipoespecialidad_pkey");
@@ -105,7 +132,7 @@ public partial class BdTeacompanioContext : DbContext
                 .HasMaxLength(150)
                 .HasColumnName("nombre");
         });
-        //-------------------------------------------------------------------------------------
+
         modelBuilder.Entity<TipoIncidencia>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("tipoincidencia_pkey");

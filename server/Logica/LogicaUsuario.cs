@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.Data.Models;
 using server.Data.Repositorios;
@@ -48,16 +49,17 @@ namespace server.Logica
             }
         }
 
-        public void CrearUsuario(Usuario obj_usuario)
+        public bool CrearUsuario(Usuario obj_usuario)
         {
             RepoUsuario repo_usuario = new RepoUsuario(_context);
             try
             {
                 var usuario_existe = _context.Usuarios.Any(u => u.Correo.Equals(obj_usuario.Correo));
-                if(usuario_existe == true) throw new KeyNotFoundException("Ya existe una cuenta con este correo electrónico");
+                if (usuario_existe == true) return true;
 
                 obj_usuario.CreatedAt = DateTime.SpecifyKind(obj_usuario.CreatedAt, DateTimeKind.Unspecified);
                 repo_usuario.CreateUser(obj_usuario);
+                return false;
             }
             catch (Exception ex)
             {

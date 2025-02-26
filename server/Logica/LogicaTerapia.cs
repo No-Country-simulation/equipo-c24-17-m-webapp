@@ -93,8 +93,8 @@ namespace server.Logica
             RepoTerapia repo_terapia = new RepoTerapia(_context);
             try
             {
-                var estudio_existente = _context.Terapias.Find(id) ?? throw new KeyNotFoundException("La terapia no existe.");
-                repo_terapia.DeleteTerapia(estudio_existente);
+                var terapia_existente = _context.Terapias.Find(id) ?? throw new KeyNotFoundException("La terapia no existe.");
+                repo_terapia.DeleteTerapia(terapia_existente);
             }
             catch (Exception ex)
             {
