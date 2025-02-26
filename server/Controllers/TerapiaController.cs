@@ -69,8 +69,19 @@ namespace server.Controllers
 
         // PUT api/<TerapiaController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put(int id, [FromBody] Terapia obj_terapia)
         {
+            LogicaTerapia logica_terapia = new LogicaTerapia(_context);
+
+            try
+            {
+                logica_terapia.ActualizarTerapia(id, obj_terapia);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al actualizar los datos de la terapia: {ex.Message}");
+            }
         }
 
         // DELETE api/<TerapiaController>/5
