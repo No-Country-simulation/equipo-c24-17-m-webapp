@@ -38,9 +38,17 @@ namespace server.Controllers
 
         // GET api/<TerapiaController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            LogicaTerapia logica_terapia = new LogicaTerapia(_context);
+            try
+            {
+                return Ok(logica_terapia.ObtenerTerapiaPorId(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener la terapia solicitada: {ex.Message}");
+            }
         }
 
         // POST api/<TerapiaController>
