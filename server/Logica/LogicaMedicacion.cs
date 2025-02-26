@@ -16,7 +16,7 @@ namespace server.Logica
         }
         #endregion
 
-        public List<Medicacion> ObtenerTodosLasMedicaciones(int id)
+        public List<Medicacion> ObtenerTodasLasMedicaciones(int id)
         {
             RepoMedicacion repo_medicacion = new RepoMedicacion(_context);
             List<Medicacion> lista_medicaciones = [];
