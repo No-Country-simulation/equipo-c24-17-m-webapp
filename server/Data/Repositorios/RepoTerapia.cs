@@ -15,12 +15,14 @@ namespace server.Data.Repositorios
         #endregion
 
 
-        public List<Terapia> GetAll()
+        public List<Terapia> GetAllById(int id)
         {
 
             try
             {
-                return _context.Terapias.ToList();
+                return _context.Terapias
+                       .Where(x=> x.IdHijo == id)
+                       .ToList();
             }
             catch (Exception ex)
             {
