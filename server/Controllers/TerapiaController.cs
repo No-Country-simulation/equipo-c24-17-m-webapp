@@ -86,8 +86,19 @@ namespace server.Controllers
 
         // DELETE api/<TerapiaController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            LogicaTerapia logica_terapia = new LogicaTerapia(_context);
+
+            try
+            {
+                logica_terapia.EliminarTerapia(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al eliminar la terapia: {ex.Message}");
+            }
         }
     }
 }
