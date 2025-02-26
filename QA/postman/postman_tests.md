@@ -7,8 +7,8 @@ Este documento describe las pruebas realizadas en la API utilizando **Postman**.
 ## 🛠️ Configuración
 
 1. Descargar e instalar [Postman](https://www.postman.com/downloads/).
-2. Importar la colección de pruebas desde `/postman/coleccion_pruebas.json`.
-3. Importar el archivo de variables de entorno desde `/postman/variables.json`.
+2. Importar la colección de pruebas desde `/postman`.
+3. Las variables y colección de pruebas están en sus respectivas carpetas de pruebas.
 
 ## 🔄 Flujo de Pruebas
 
