@@ -19,8 +19,8 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        TDA: "bg-[#ED6966] hover:bg-[#e04846] shadow text-primary-foreground",
-        TDAMobile: "bg-[#44D3B5] text-primary-foreground text-black"
+        TDA: "bg-[transparent] text-primary-foreground text-black border-none",
+        TDAMobile: "bg-[transparent] text-primary-foreground text-white border-none text-2xl"
       },
       size: {
         default: "h-9 px-4 py-2",
