@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 📦 **Configuración del Cliente (Next.js App)**
 
-## Getting Started
+### **1️⃣ Requisitos Previos**
 
-First, run the development server:
+Antes de ejecutar el cliente, asegúrate de tener instalado lo siguiente en tu sistema:
+
+- **Node.js** (versión recomendada: 18 o superior) → [Descargar Node.js](https://nodejs.org/)
+- **npm** (incluido con Node.js)
+- **pnpm** (gestor de paquetes optimizado para Node.js)
+
+Si aún no tienes `pnpm`, instálalo ejecutando:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install -g pnpm
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **2️⃣ Instalación del Cliente**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Ejecuta los siguientes comandos para instalar las dependencias del proyecto:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm install  # Instalar dependencias con pnpm
+```
 
-## Learn More
+### **3️⃣ Iniciar el Servidor de Desarrollo**
 
-To learn more about Next.js, take a look at the following resources:
+Para correr el cliente en modo desarrollo, usa:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Por defecto, la aplicación estará disponible en:  
+🔗 **URL del Cliente (Local):** `http://localhost:3000`
 
-## Deploy on Vercel
+📌 **Recuerda:** Si el backend está en Railway, usa el **dominio interno** de la API en lugar de `localhost`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **5️⃣ Construcción y Despliegue**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Si deseas construir la aplicación para producción:
+
+```bash
+pnpm build
+```
+
+Esto generará una versión optimizada en `/client/.next`. Para ejecutarla:
+
+```bash
+pnpm start
+```

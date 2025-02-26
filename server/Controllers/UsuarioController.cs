@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using server.Data.Models;
 using server.Data;
-using server.Data.Repositorios;
 using server.Logica;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -61,7 +60,7 @@ namespace server.Controllers
             try
             {
                 logica_usuario.CrearUsuario(obj_usuario);
-                return Created();
+                return Ok();
             }
             catch (Exception ex)
             {
