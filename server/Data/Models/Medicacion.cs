@@ -6,7 +6,7 @@ namespace server.Data.Models
     public class Medicacion
     {
         public int Id { get; set; }
-        public int Nombre { get; set; }
+        public string Nombre { get; set; }
         public string Descripcion { get; set; }
 
         [JsonConverter(typeof(TimeOnlyConverter))]

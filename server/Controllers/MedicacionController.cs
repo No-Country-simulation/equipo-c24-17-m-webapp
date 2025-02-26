@@ -55,8 +55,18 @@ namespace server.Controllers
 
         // POST api/<MedicacionController>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult Post([FromBody] Medicacion obj_medicacion)
         {
+            LogicaMedicacion logica_medicacion = new LogicaMedicacion(_context);
+            try
+            {
+                logica_medicacion.CrearMedicacion(obj_medicacion);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al crear la medicación: {ex.Message}");
+            }
         }
 
         // PUT api/<MedicacionController>/5

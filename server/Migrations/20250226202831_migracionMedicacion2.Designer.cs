@@ -12,8 +12,8 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    [Migration("20250226163750_migracionMedicacion")]
-    partial class migracionMedicacion
+    [Migration("20250226202831_migracionMedicacion2")]
+    partial class migracionMedicacion2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,11 +199,6 @@ namespace server.Migrations
                     b.Property<int>("IdHijo")
                         .HasColumnType("integer")
                         .HasColumnName("id_hijo");
-
-                    b.Property<int>("Nombre")
-                        .HasMaxLength(150)
-                        .HasColumnType("integer")
-                        .HasColumnName("nombre");
 
                     b.HasKey("Id")
                         .HasName("medicacion_pkey");
