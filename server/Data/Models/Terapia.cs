@@ -10,6 +10,11 @@ namespace server.Data.Models
         public TimeOnly Horario { get; set; }
         public bool Esta_activo { get; set; }
         public int IdTipoEspecialidad { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public int IdHijo { get; set; }
+
+        [JsonIgnore]
+        public virtual Hijo? IdHijoNavigation { get; set; } = null!;
 
         [JsonIgnore]
         public virtual TipoEspecialidad? IdTipoEspecialidadNavigation { get; set; } = null!;

@@ -9,6 +9,6 @@
         public string? Descripcion { get; set; }
 
         public DateTime? CreatedAt { get; set; }
-        public virtual ICollection<Terapia> Terapias { get; set; } = new List<EstudioMedico>();
+        public virtual ICollection<Terapia> Terapias { get; set; } = new List<Terapia>();
     }
 }
