@@ -3,25 +3,24 @@ using server.Data.Models;
 
 namespace server.Data.Repositorios
 {
-    public class RepoUsuario
+    public class RepoTerapia
     {
         #region ContextDataBase
         private readonly BdTeacompanioContext _context;
 
-        public RepoUsuario(BdTeacompanioContext context)
+        public RepoTerapia(BdTeacompanioContext context)
         {
             _context = context;
         }
         #endregion
 
 
-        public List<Usuario> GetAll()
+        public List<Terapia> GetAll()
         {
-            List<Usuario> lista_usuarios = [];
 
             try
             {
-                return lista_usuarios = _context.Usuarios.ToList();                
+                return _context.Terapias.ToList();
             }
             catch (Exception ex)
             {
@@ -29,12 +28,11 @@ namespace server.Data.Repositorios
             }
         }
 
-        public Usuario GetById(int id)
+        public Terapia GetById(int id)
         {
-            Usuario usuario_obtenido = new();
             try
             {
-                return usuario_obtenido = _context.Usuarios.Find(id);
+                return _context.Terapias.Find(id);
             }
             catch (Exception ex)
             {
@@ -42,11 +40,11 @@ namespace server.Data.Repositorios
             }
         }
 
-        public void CreateUser(Usuario obj_usuario)
+        public void CreateTerapia(Terapia obj_terapia)
         {
             try
             {
-                _context.Add(obj_usuario);
+                _context.Add(obj_terapia);
                 _context.SaveChanges();
             }
             catch (Exception ex)
@@ -59,33 +57,33 @@ namespace server.Data.Repositorios
             }
         }
 
-        public void UpdateUser(Usuario obj_usuario)
+        public void UpdateTerapia(Terapia obj_terapia)
         {
             try
             {
-                _context.Usuarios.Update(obj_usuario);
+                _context.Terapias.Update(obj_terapia);
                 _context.SaveChanges();
             }
             catch (DbUpdateException dbEx)
             {
-                throw new Exception("Error al actualizar el usuario en la base de datos.", dbEx);
+                throw new Exception("Error al actualizar la terapia en la base de datos.", dbEx);
             }
             catch (Exception ex)
             {
-                throw new Exception("Error general al actualizar el usuario.", ex);
+                throw new Exception("Error general al actualizar la terapia.", ex);
             }
-        }        
-        
-        public void DeleteUser(Usuario obj_usuario)
+        }
+
+        public void DeleteTerapia(Terapia obj_terapia)
         {
             try
             {
-                _context.Usuarios.Remove(obj_usuario);
+                _context.Terapias.Remove(obj_terapia);
                 _context.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception("Error general al eliminar el usuario.", ex);
+                throw new Exception("Error general al eliminar la terapia.", ex);
             }
         }
     }
