@@ -11,6 +11,11 @@ namespace server.Data.Models
 
         [JsonConverter(typeof(TimeOnlyConverter))]
         public TimeOnly Horario { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public int IdHijo { get; set; }
+
+        [JsonIgnore]
+        public virtual Hijo? IdHijoNavigation { get; set; } = null!;
 
     }
 }

@@ -32,4 +32,5 @@ public partial class Hijo
     public virtual ICollection<Incidencia> Incidencias { get; set; } = new List<Incidencia>();    
     [JsonIgnore]
     public virtual ICollection<Terapia> Terapias { get; set; } = new List<Terapia>();
+    public virtual ICollection<Medicacion> Medicaciones { get; set; } = new List<Medicacion>();
 }
