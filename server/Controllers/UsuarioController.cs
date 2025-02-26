@@ -59,8 +59,15 @@ namespace server.Controllers
             LogicaUsuario logica_usuario = new LogicaUsuario(_context);
             try
             {
-                logica_usuario.CrearUsuario(obj_usuario);
-                return Ok();
+                var result = logica_usuario.CrearUsuario(obj_usuario);
+                if(result == true)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return Created();
+                }
             }
             catch (Exception ex)
             {
