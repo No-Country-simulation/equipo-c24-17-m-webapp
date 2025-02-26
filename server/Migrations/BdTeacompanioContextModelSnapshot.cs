@@ -111,9 +111,8 @@ namespace server.Migrations
 
                     b.Property<string>("NombreDiagnostico")
                         .HasMaxLength(150)
-                        .HasColumnType("character(150)")
-                        .HasColumnName("nombre_diagnostico")
-                        .IsFixedLength();
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nombre_diagnostico");
 
                     b.HasKey("Id")
                         .HasName("hijos_pkey");
@@ -333,9 +332,8 @@ namespace server.Migrations
 
                     b.Property<string>("Imagen")
                         .HasMaxLength(150)
-                        .HasColumnType("character(150)")
-                        .HasColumnName("imagen")
-                        .IsFixedLength();
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("imagen");
 
                     b.Property<string>("Nombre")
                         .IsRequired()

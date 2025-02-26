@@ -12,8 +12,8 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    [Migration("20250226003355_migracionTerapias")]
-    partial class migracionTerapias
+    [Migration("20250226012215_migrationTerapia")]
+    partial class migrationTerapia
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
