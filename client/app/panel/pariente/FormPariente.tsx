@@ -13,14 +13,19 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useServerAction } from "zsa-react";
 import { parienteSchemaNoID } from "@/lib/schemas";
 import { crearParienteAction } from "./action";
 import { parienteDefaultValues } from "@/lib/defaultValues";
 import { toast } from "sonner";
+import Loader from "@/components/Loader";
+import { useRouter } from "next/navigation";
 
 type KeyofPariente = keyof z.infer<typeof parienteSchemaNoID>;
 
 export default function FormPariente({ email }: { email: string }) {
+	const { isPending, execute } = useServerAction(crearParienteAction);
+	const router = useRouter();
 	const form = useForm<z.infer<typeof parienteSchemaNoID>>({
 		resolver: zodResolver(parienteSchemaNoID),
 		defaultValues: {
@@ -37,28 +42,29 @@ export default function FormPariente({ email }: { email: string }) {
 
 			const newData = { ...values, fecha: fechaISO };
 
-			const [data, err] = await crearParienteAction(newData);
+			const [data, err] = await execute(newData);
 
 			if (err) {
 				if (err.fieldErrors) {
 					Object.entries(err.fieldErrors).map(([field, error]) => {
 						form.setError(field as KeyofPariente, {
-							message: error[0],
+							message: (error as string[])[0],
 						});
 					});
 				} else {
 					toast.error(err.message);
 				}
-				console.log(err);
 			}
 			if (data) {
-				console.log(data);
+				toast.success("Hijo cargado con exito.");
+				router.push("/panel");
 			}
 		}
 	);
 
 	return (
 		<Form {...form}>
+			<Loader loading={isPending} />
 			<form
 				onSubmit={onSubmit}
 				className="space-y-4 p-6 border rounded-lg shadow-md mt-10 w-[310px]  bg-white"
@@ -70,7 +76,12 @@ export default function FormPariente({ email }: { email: string }) {
 						<FormItem>
 							<FormLabel>Nombre</FormLabel>
 							<FormControl>
-								<Input type="text" placeholder="Nombre" {...field} />
+								<Input
+									type="text"
+									placeholder="Nombre"
+									{...field}
+									disabled={isPending}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -84,7 +95,12 @@ export default function FormPariente({ email }: { email: string }) {
 						<FormItem>
 							<FormLabel>Apellido</FormLabel>
 							<FormControl>
-								<Input type="text" placeholder="Apellido" {...field} />
+								<Input
+									type="text"
+									placeholder="Apellido"
+									{...field}
+									disabled={isPending}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -102,6 +118,7 @@ export default function FormPariente({ email }: { email: string }) {
 									type="text"
 									placeholder="Nombre del diagnóstico"
 									{...field}
+									disabled={isPending}
 								/>
 							</FormControl>
 							<FormMessage />
@@ -120,6 +137,7 @@ export default function FormPariente({ email }: { email: string }) {
 									type="text"
 									placeholder="Descripción del diagnóstico"
 									{...field}
+									disabled={isPending}
 								/>
 							</FormControl>
 							<FormMessage />
@@ -134,7 +152,7 @@ export default function FormPariente({ email }: { email: string }) {
 						<FormItem>
 							<FormLabel>Fecha de Nacimiento</FormLabel>
 							<FormControl>
-								<Input type="date" {...field} />
+								<Input type="date" {...field} disabled={isPending} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -142,7 +160,9 @@ export default function FormPariente({ email }: { email: string }) {
 				/>
 
 				<div className="flex justify-center">
-					<Button type="submit">Agregar</Button>
+					<Button type="submit" disabled={isPending}>
+						Agregar
+					</Button>
 				</div>
 			</form>
 		</Form>
