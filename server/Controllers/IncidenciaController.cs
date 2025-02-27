@@ -92,7 +92,7 @@ namespace server.Controllers
             }
         }
 
-        [HttpGet("get-incidencia-hijo")]
+        [HttpGet("get-incidencia-hijo/{id}")]
         public IActionResult ObtenerIncidenciasDeUnHijoEspecifico(int id)
         {
             LogicaIncidencia logica_incidencia = new LogicaIncidencia(_context);
