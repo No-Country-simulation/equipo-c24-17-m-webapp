@@ -5,7 +5,8 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { EllipsisVerticalIcon, TrashIcon, UserPenIcon } from "lucide-react";
+import { EllipsisVerticalIcon, UserPenIcon } from "lucide-react";
+import { EliminarDialog } from "./eliminar-dialog";
 
 export default function PopParienteOpciones() {
 	return (
@@ -20,9 +21,7 @@ export default function PopParienteOpciones() {
 					<Button variant="outline">
 						<UserPenIcon /> <p>Actualizar</p>
 					</Button>
-					<Button variant="destructive">
-						<TrashIcon /> <p>Eliminar</p>
-					</Button>
+					<EliminarDialog />
 				</div>
 			</PopoverContent>
 		</Popover>
