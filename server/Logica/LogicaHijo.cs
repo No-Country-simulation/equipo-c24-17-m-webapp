@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using server.Clases;
 using server.Data;
 using server.Data.Models;
 using server.Data.Repositorios;
@@ -48,15 +49,24 @@ namespace server.Logica
             }
         }
 
-        public void CrearHijo(Hijo obj_hijo)
+        public void CrearHijo(HijoRequest obj_request)
         {
             RepoHijo repo_hijo = new RepoHijo(_context);
             try
             {
-                var hijo_existe = _context.Hijos.Any(u => u.Id ==  obj_hijo.Id);
-                if (hijo_existe == true) throw new KeyNotFoundException("Ya hay un hijo cargado con ese id");
+                var obtener_id_usuario = _context.Usuarios.Where(x => x.Correo.Equals(obj_request.CorreoUsuario)).FirstOrDefault();
+                if(obtener_id_usuario == null) throw new KeyNotFoundException("No existe un usuario asociado a ese correo electrónico");
 
-                obj_hijo.CreatedAt = DateTime.SpecifyKind(obj_hijo.CreatedAt, DateTimeKind.Unspecified);
+                Hijo obj_hijo = new Hijo
+                {
+                    Nombre = obj_request.Nombre,
+                    Apellido = obj_request.Apellido,
+                    FechaNacimiento = obj_request.FechaNacimiento,
+                    NombreDiagnostico = obj_request.NombreDiagnostico,
+                    DescripcionDiagnostico = obj_request.DescripcionDiagnostico,
+                    IdUsuario = obtener_id_usuario.Id,
+                };
+
                 repo_hijo.CreateHijo(obj_hijo);
             }
             catch (Exception ex)
