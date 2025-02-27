@@ -36,7 +36,7 @@ export default function Homepage() {
 					</div>
 				</div>
 			</div>
-			<div className="absolute bottom-0 xl:-bottom-32">
+			<div className="absolute bottom-0 xl:-bottom-32 2xl:-bottom-56">
 				<Image
 					src={"/nube.svg"}
 					alt="nene abrazandose"
