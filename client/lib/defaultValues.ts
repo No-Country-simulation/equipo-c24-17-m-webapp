@@ -1,7 +1,7 @@
 export const parienteDefaultValues = {
 	nombre: "",
 	apellido: "",
-	fecha_nacimiento: "",
+	fechaNacimiento: "",
 	nombreDiagnostico: "",
 	descripcionDiagnostico: "",
 	email: "",
