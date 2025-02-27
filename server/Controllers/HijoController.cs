@@ -2,6 +2,7 @@
 using server.Data.Models;
 using server.Data;
 using server.Logica;
+using server.Clases;
 
 namespace server.Controllers
 {
@@ -52,7 +53,7 @@ namespace server.Controllers
 
         // POST api/<HijoController>
         [HttpPost]
-        public ActionResult Post([FromBody] Hijo obj_hijo)
+        public ActionResult Post([FromBody] HijoRequest obj_hijo)
         {
             LogicaHijo logica_hijo = new LogicaHijo(_context);
             try
