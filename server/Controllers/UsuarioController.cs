@@ -2,6 +2,7 @@
 using server.Data.Models;
 using server.Data;
 using server.Logica;
+using server.Data.Repositorios;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -119,5 +120,6 @@ namespace server.Controllers
 
             return Ok(response);
         }
+
     }
 }
