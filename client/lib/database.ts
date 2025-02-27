@@ -1,5 +1,7 @@
 "use server";
 import { auth } from "@/auth";
+import { parienteSchemaNoID } from "./schemas";
+import { z } from "zod";
 
 export async function getSession() {
 	const session = await auth();
@@ -13,7 +15,6 @@ export async function getSession() {
 		imagen: session.user.image || "/google-icon.svg",
 	};
 }
-
 
 export async function createUsuario(
 	nombre: string,
@@ -38,3 +39,21 @@ export async function createUsuario(
 	}
 }
 
+export async function createPariente(hijo: z.infer<typeof parienteSchemaNoID>) {
+	try {
+		const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}api/hijo`, {
+			method: "POST",
+			body: JSON.stringify(hijo),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+	} catch (error) {
+		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}
