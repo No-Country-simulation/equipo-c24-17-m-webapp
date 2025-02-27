@@ -54,22 +54,17 @@ namespace server.Logica
             RepoHijo repo_hijo = new RepoHijo(_context);
             try
             {
-                var hijo_existe = _context.Hijos.Any(u => u.Id == obj_request.Hijo.Id);
-                if (hijo_existe == true) throw new KeyNotFoundException("Ya hay un hijo cargado con ese id");
-
-
                 var obtener_id_usuario = _context.Usuarios.Where(x => x.Correo.Equals(obj_request.CorreoUsuario)).FirstOrDefault();
                 if(obtener_id_usuario == null) throw new KeyNotFoundException("No existe un usuario asociado a ese correo electrónico");
 
                 Hijo obj_hijo = new Hijo
                 {
-                    Nombre = obj_request.Hijo.Nombre,
-                    Apellido = obj_request.Hijo.Apellido,
-                    FechaNacimiento = obj_request.Hijo.FechaNacimiento,
-                    NombreDiagnostico = obj_request.Hijo.NombreDiagnostico,
-                    DescripcionDiagnostico = obj_request.Hijo.DescripcionDiagnostico,
+                    Nombre = obj_request.Nombre,
+                    Apellido = obj_request.Apellido,
+                    FechaNacimiento = obj_request.FechaNacimiento,
+                    NombreDiagnostico = obj_request.NombreDiagnostico,
+                    DescripcionDiagnostico = obj_request.DescripcionDiagnostico,
                     IdUsuario = obtener_id_usuario.Id,
-                    CreatedAt = DateTime.SpecifyKind(obj_request.Hijo.CreatedAt, DateTimeKind.Unspecified)
                 };
 
                 repo_hijo.CreateHijo(obj_hijo);
