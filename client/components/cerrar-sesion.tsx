@@ -9,7 +9,7 @@ export function CerrarSesion() {
 				await signOut({ redirectTo: "/" });
 			}}
 		>
-			<Button variant={"outline"} type="submit">
+			<Button variant={"outline"} type="submit" className="w-full">
 				Cerrar Sesión
 			</Button>
 		</form>

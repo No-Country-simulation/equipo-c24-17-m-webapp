@@ -4,6 +4,7 @@ import { createUsuario } from "./lib/database";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [Google],
+	secret: process.env.AUTH_SECRET,
 	callbacks: {
 		async signIn({ profile }) {
 			if (!profile?.email) {
@@ -14,7 +15,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			const picture = profile.picture || "";
 			await createUsuario(name, profile.email, picture);
 
-			return true;
+			return true
 		},
 	},
 });

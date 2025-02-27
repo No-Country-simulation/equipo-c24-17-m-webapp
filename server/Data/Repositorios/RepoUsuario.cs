@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using server.Data.Models;
-using System.Xml;
 
 namespace server.Data.Repositorios
 {
