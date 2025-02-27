@@ -20,8 +20,7 @@ import { parienteDefaultValues } from "@/lib/defaultValues";
 import { toast } from "sonner";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
-
-type KeyofPariente = keyof z.infer<typeof parienteSchemaNoID>;
+import { KeyofPariente } from "@/lib/definitions";
 
 export default function FormPariente({ email }: { email: string }) {
 	const { isPending, execute } = useServerAction(crearParienteAction);
