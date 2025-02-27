@@ -88,5 +88,24 @@ namespace server.Data.Repositorios
                 throw new Exception("Error general al eliminar el hijo.", ex);
             }
         }
+
+        public List<Hijo> ObtenerHijosDelUsuario(int id_padre)
+        {
+            List<Usuario> lista_hijos_usuario = [];
+
+            try
+            {
+                // Filtrar directamente en la consulta
+                var hijos = _context.Hijos
+                    .Where(h => h.IdUsuario == id_padre) // Filtramos los hijos
+                    .ToList();
+
+                return hijos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -112,5 +112,27 @@ namespace server.Logica
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Hijo> ObtenerHijosDelUsuarioEspecifico(string correo)
+        {
+            RepoHijo repo_Hijo = new RepoHijo(_context);
+            List<Usuario> lista_hijos_usuario = [];
+
+            try
+            {
+
+                var usuarioPadre = _context.Usuarios
+                    .Where(x => x.Correo == correo)
+                    .FirstOrDefault();
+
+                if (usuarioPadre == null) throw new Exception("No existe ese usuario");
+
+                return repo_Hijo.ObtenerHijosDelUsuario(usuarioPadre.Id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
