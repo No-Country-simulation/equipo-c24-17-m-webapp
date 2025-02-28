@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-export default function Homepage() {
+export default function Showcase() {
 	return (
 		<main className="bg-bgSoftCl pt-20 pb-4  lg:pb-10 relative ">
 			<div className="container max-w-[90%] mx-auto lg:max-w-[1000px] ">
@@ -14,7 +14,7 @@ export default function Homepage() {
 						<h1 className="hidden sm:block text-4xl md:text-5xl  xl:text-7xl text-blueCl  font-bold text-start mb-4 font-rowdies relative z-30">
 							Junto a vos en cada paso
 						</h1>
-						<p className="text-darkCl font-semibold text-start text-sm sm:py-4 md:text-base">
+						<p className="text-darkCl font-semibold text-start text-sm sm:py-4 md:text-base relative z-30">
 							Estamos aquí para acompañarte en este camino, conectando familias
 							y profesionales con un mismo objetivo: mejorar la calidad de vida
 							de quienes viven con TEA.

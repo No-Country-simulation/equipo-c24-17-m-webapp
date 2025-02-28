@@ -7,7 +7,7 @@ import NavMobile from "./nav-mobile";
 
 export default function Header() {
 	return (
-		<header className="bg-bgSoftCl py-4 gap-4 ">
+		<header className="bg-bgSoftCl py-4 gap-4 relative z-50">
 			<div className="container mx-auto max-w-[90%] xl:max-w-[1100px] flex justify-between items-center">
 				<div className="flex gap-2 justify-center items-center">
 					<Link href={"/#"}>
