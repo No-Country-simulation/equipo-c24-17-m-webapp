@@ -20,8 +20,8 @@ export default function Showcase() {
 							de quienes viven con TEA.
 						</p>
 
-						<Button className=" bg-gradient-to-b  from-fucCl from-[40%] to-yellowCl rounded-3xl hover:from-yellowCl hover:from-[5%] hover:to-fucCl hover:to-[60%] transition-colors py-5 px-4 my-2 hover:opacity-80 font-bold">
-							Contenido de apoyo
+						<Button className=" bg-gradient-to-r  from-fucCl  to-yellowCl rounded-3xl  transition-colors py-5 px-4 my-2 hover:opacity-80 font-semibold text-white tracking-wide">
+							CONOCÉ NUESTRAS GUÍAS
 						</Button>
 					</div>
 

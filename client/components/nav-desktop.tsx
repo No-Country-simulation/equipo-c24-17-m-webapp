@@ -26,9 +26,15 @@ export function NavDesktot() {
 			</div>
 
 			<div>
-				<Button className="bg-[#3662C1] hover:bg-[#294a91] justify-center items-center hidden md:flex">
-					<LogIn size={16} />
-					<Link href={"/login"}>Iniciar Sesión</Link>
+				<Button className="bg-[#3662C1] hover:bg-[#294a91] hidden md:flex ">
+					<Link
+						href={"/login"}
+						className=" md:flex gap-2 justify-between items-center "
+					>
+						{" "}
+						<LogIn size={16} />
+						Iniciar Sesión
+					</Link>
 				</Button>
 			</div>
 		</nav>
