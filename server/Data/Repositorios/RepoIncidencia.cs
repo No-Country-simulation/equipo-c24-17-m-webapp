@@ -23,6 +23,7 @@ namespace server.Data.Repositorios
             {
                 return lista_incidencias = _context.Incidencias
                     .Where( x => x.IdHijo == id)
+                    .Include(x => x.IdTipoIncidenciaNavigation)
                     .ToList();
             }
             catch (Exception ex)
