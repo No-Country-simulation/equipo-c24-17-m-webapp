@@ -3,12 +3,30 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { User2Icon } from "lucide-react";
 import PopParienteOpciones from "./pop-pariente-opciones";
+import { ParienteT } from "@/lib/definitions";
 
-export default function CardPariente() {
+export default function CardPariente({
+	pariente,
+	correoUsuario,
+}: {
+	pariente: ParienteT;
+	correoUsuario: string;
+}) {
+	const {
+		apellido,
+
+		fechaNacimiento,
+		nombre,
+		nombreDiagnostico,
+		descripcionDiagnostico,
+	} = pariente;
 	return (
 		<Card className="relative">
 			<div className="absolute right-2 top-2">
-				<PopParienteOpciones />
+				<PopParienteOpciones
+					pariente={pariente}
+					correoUsuario={correoUsuario}
+				/>
 			</div>
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
@@ -16,21 +34,22 @@ export default function CardPariente() {
 						<User2Icon />
 					</div>
 					<span className="text-2xl text-[#6D89CF] font-normal">
-						Federico Gonzalez
+						{nombre} {apellido}
 					</span>
 				</CardTitle>
 			</CardHeader>
 			<CardContent>
 				<div className="flex items-center gap-1">
-					<p className="text-red-500">DNI:</p> <p className="">58.325.025</p>
-				</div>
-				<div className="flex items-center gap-1">
 					<p className="text-red-500">Fecha nacimiento:</p>{" "}
-					<p className="">23/10/14</p>
+					<p className="">{fechaNacimiento}</p>
 				</div>
 				<div className="flex items-center gap-1">
 					<p className="text-red-500">Diagnóstico:</p>{" "}
-					<p className="">TEA (Trastorno espectro autista)</p>
+					<p className="">{nombreDiagnostico}</p>
+				</div>
+				<div className="flex items-center gap-1">
+					<p className="text-red-500">Descripcion de Diagnostico:</p>{" "}
+					<p className="">{descripcionDiagnostico}</p>
 				</div>
 				<div className="flex items-center">
 					<div className="flex items-center gap-1">

@@ -92,6 +92,7 @@ namespace server.Controllers
             }
         }
 
+
         [HttpGet("get-incidencia-hijo/{id}")]
         public IActionResult ObtenerIncidenciasDeUnHijoEspecifico(int id)
         {

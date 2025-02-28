@@ -21,17 +21,17 @@ namespace server.Controllers
 
         // GET: api/<HijoController>
         [HttpGet]
-        public ActionResult<IEnumerable<Hijo>> Get()
+        public ActionResult<IEnumerable<Hijo>> Get(string correo)
         {
             LogicaHijo logica_hijo = new LogicaHijo(_context);
             try
             {
-                var lista_hijos = logica_hijo.ObtenerTodosLosHijos();
+                var lista_hijos = logica_hijo.ObtenerHijosDelUsuarioEspecifico(correo);
                 return Ok(lista_hijos);
             }
             catch (Exception ex)
             {
-                return StatusCode(404, $"Error al obtener los hijos: {ex.Message}");
+                return StatusCode(404, $"Error al obtener los hijos del usuario: {ex.Message}");
             }
         }
         // GET api/<TurnoController>/5
