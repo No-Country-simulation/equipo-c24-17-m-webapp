@@ -30,18 +30,24 @@ import { UserPenIcon } from "lucide-react";
 
 export default function ActualizarDialog({
 	pariente,
+	correoUsuario,
 }: {
 	pariente: ParienteT;
+	correoUsuario: string;
 }) {
 	const { isPending, execute } = useServerAction(actualizarParienteAction);
 	const [open, setOpen] = useState(false);
 	const form = useForm<z.infer<typeof parienteSchema>>({
 		resolver: zodResolver(parienteSchema),
-		defaultValues: pariente,
+		defaultValues: {
+			...pariente,
+			correoUsuario,
+		},
 	});
 
 	const onSubmit = form.handleSubmit(
 		async (values: z.infer<typeof parienteSchema>) => {
+			console.log("llega");
 			const fechaISO = new Date(values.fechaNacimiento)
 				.toISOString()
 				.split("T")[0];
@@ -63,6 +69,8 @@ export default function ActualizarDialog({
 			}
 			if (data) {
 				toast.success("Hijo actualizado con exito.");
+				setOpen(false);
+				form.reset();
 			}
 		}
 	);

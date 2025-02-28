@@ -104,3 +104,25 @@ export async function eliminarPariente(id: number) {
 		throw new Error("Error en el servidor.");
 	}
 }
+
+export async function actualizarPariente(pariente: ParienteT) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/hijo/${pariente.id}`,
+			{
+				method: "PUT",
+				body: JSON.stringify(pariente),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error en el server");
+		}
+	} catch (error) {
+		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}

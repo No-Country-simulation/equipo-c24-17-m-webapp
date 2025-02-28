@@ -5,7 +5,13 @@ import { User2Icon } from "lucide-react";
 import PopParienteOpciones from "./pop-pariente-opciones";
 import { ParienteT } from "@/lib/definitions";
 
-export default function CardPariente({ pariente }: { pariente: ParienteT }) {
+export default function CardPariente({
+	pariente,
+	correoUsuario,
+}: {
+	pariente: ParienteT;
+	correoUsuario: string;
+}) {
 	const {
 		apellido,
 
@@ -17,7 +23,10 @@ export default function CardPariente({ pariente }: { pariente: ParienteT }) {
 	return (
 		<Card className="relative">
 			<div className="absolute right-2 top-2">
-				<PopParienteOpciones pariente={pariente} />
+				<PopParienteOpciones
+					pariente={pariente}
+					correoUsuario={correoUsuario}
+				/>
 			</div>
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">

@@ -1,6 +1,7 @@
 "use server";
 
-import { eliminarPariente } from "@/lib/database";
+import { actualizarPariente, eliminarPariente } from "@/lib/database";
+import { parienteSchema } from "@/lib/schemas";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createServerAction } from "zsa";
@@ -14,9 +15,9 @@ export const eliminarParienteAction = createServerAction()
 	});
 
 export const actualizarParienteAction = createServerAction()
-	.input(z.object({ id: z.number() }))
+	.input(parienteSchema)
 	.handler(async ({ input }) => {
-		await eliminarPariente(input.id);
+		await actualizarPariente(input);
 		revalidatePath("/panel");
 		return { success: "ok" };
 	});

@@ -9,9 +9,9 @@ import { usePathname } from "next/navigation";
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 export const links = [
-	{ name: "Familiares", href: "/panel", icon: UsersIcon },
+	{ name: "Familiares", href: "/panel/familiares", icon: UsersIcon },
 
-	{ name: "Perfil", href: "/panel/perfil", icon: User2Icon },
+	{ name: "Panel", href: "/panel", icon: User2Icon },
 ];
 
 export default function SidebarLinks() {

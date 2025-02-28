@@ -12,20 +12,22 @@ import ActualizarDialog from "./actualizar-dialog";
 
 export default function PopParienteOpciones({
 	pariente,
+	correoUsuario,
 }: {
 	pariente: ParienteT;
+	correoUsuario: string;
 }) {
 	const { id } = pariente;
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
-				<Button variant="ghost">
+				<Button variant="link">
 					<EllipsisVerticalIcon />
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent className="w-50">
 				<div className="flex flex-col gap-4">
-					<ActualizarDialog pariente={pariente} />
+					<ActualizarDialog pariente={pariente} correoUsuario={correoUsuario} />
 					<EliminarDialog idPariente={id} />
 				</div>
 			</PopoverContent>
