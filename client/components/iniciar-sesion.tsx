@@ -11,14 +11,14 @@ export default function IniciarSesion() {
 				await signIn("google", { redirectTo: "/panel/familiares" });
 			}}
 		>
-			<Button variant={"outline"} type="submit">
-				Iniciar Sesión{" "}
+			<Button variant={"outline"} type="submit" className="rounded-full">
 				<Image
 					src={"/google-icon.svg"}
 					alt="google logo"
 					width={20}
 					height={20}
-				/>
+				/>{" "}
+				Continuar con Google
 			</Button>
 		</form>
 	);
