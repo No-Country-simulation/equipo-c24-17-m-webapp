@@ -37,7 +37,7 @@ export const PreguntasFrecuentes = () => {
     <>
     {/* //triangulo */}
     
-    <div   className="absolute border-l-[49vw] border-r-[49vw] border-t-[100px] border-l-transparent border-r-transparent border-t-[#FAEDDA] z-10"></div>
+    <div   className="absolute border-l-[48vw] md:border-l-[49vw] border-r-[48vw] md:border-r-[49vw] border-t-[100px] border-l-transparent border-r-transparent border-t-[#FAEDDA] z-10"></div>
     
 
       <div  className="bg-[url('https://plus.unsplash.com/premium_photo-1661680863986-13eb209573e0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=...')] bg-cover bg-center min-h-[800px] flex flex-col items-center py-20 opacity-70">
