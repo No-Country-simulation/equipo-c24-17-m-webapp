@@ -17,30 +17,6 @@ namespace server.Logica
         }
         #endregion
 
-        public List<IncidenciaDTO> ObtenerTodasLasIncidencias(int id)
-        {
-            RepoIncidencia repo_incidencia = new RepoIncidencia(_context);
-            List<Incidencia> lista_incidencias= [];
-
-            try
-            {
-                var incidencias = repo_incidencia.GetAllById(id);
-
-                return incidencias.Select(x => new IncidenciaDTO
-                {
-                    Id = x.Id,
-                    Fecha = x.Fecha,
-                    //Duracion = x.Duracion,
-                    Descripcion = x.Descripcion,
-                    NombreTipoIncidencia = x.IdTipoIncidenciaNavigation?.Nombre ?? "Desconocido",
-                }).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
         public Incidencia ObtenerIncidenciaPorId(int id)
         {
             RepoIncidencia repo_incidencia = new RepoIncidencia(_context);
