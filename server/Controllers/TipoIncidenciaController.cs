@@ -33,7 +33,7 @@ namespace server.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(404, $"Error al obtener las medicaciones solicitadas: {ex.Message}");
+                return StatusCode(404, $"Error al obtener todos los tipos de incidencias: {ex.Message}");
             }
         }
 
