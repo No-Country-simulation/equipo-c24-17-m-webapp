@@ -10,7 +10,7 @@ namespace server.DTOs
         public DateOnly Fecha_nacimiento { get; set; }
         public string? NombreDiagnostico { get; set; }
         public string? DescripcionDiagnostico { get; set; }
+
         public List<Incidencia> Incidencias { get; set; } = new List<Incidencia>();
     }
 }
-

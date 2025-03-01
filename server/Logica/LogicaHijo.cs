@@ -158,8 +158,7 @@ namespace server.Logica
                             Duracion = i.Duracion,
                             Descripcion = i.Descripcion,
                             IdHijo = i.IdHijo,
-                            IdTipoIncidencia = i.IdTipoIncidencia
-                            
+                            IdTipoIncidencia = i.IdTipoIncidencia                            
                         }).ToList()
                     })
                         .ToList();
