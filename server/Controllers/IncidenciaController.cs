@@ -23,13 +23,13 @@ namespace server.Controllers
         #endregion
 
         // GET: api/<IncidenciaController>
-        [HttpGet("hijo/{id}")]
-        public ActionResult<IEnumerable<Incidencia>> GetIncidenciasPorHijo(int id)
+        [HttpGet()]
+        public ActionResult<IEnumerable<Incidencia>> GetIncidenciasPorHijo(string correo)
         {
-            LogicaIncidencia logica_incidencia = new LogicaIncidencia(_context);
+            LogicaHijo logica_hijo = new LogicaHijo(_context);
             try
             {
-                var lista_incidencias = logica_incidencia.ObtenerTodasLasIncidencias(id);
+                var lista_incidencias = logica_hijo.ObtenerHijosConIncidencias(correo);
                 return Ok(lista_incidencias);
             }
             catch (Exception ex)

@@ -3,6 +3,7 @@ using server.Clases;
 using server.Data;
 using server.Data.Models;
 using server.Data.Repositorios;
+using server.DTOs;
 
 namespace server.Logica
 {
@@ -133,6 +134,40 @@ namespace server.Logica
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+
+        public List<HijoDTO> ObtenerHijosConIncidencias(string correo)
+        {
+            RepoHijo repo_Hijo = new RepoHijo(_context);
+            List<HijoDTO> lista_hijos = repo_Hijo.ObtenerHijosConIncidencias(correo)
+                .Select(h => new HijoDTO
+                {
+                    Id = h.Id,
+                    Nombre = h.Nombre,
+                    Apellido = h.Apellido,
+                    Fecha_nacimiento = h.FechaNacimiento,
+                    NombreDiagnostico = h.NombreDiagnostico,
+                    DescripcionDiagnostico = h.DescripcionDiagnostico,
+                    Incidencias = h.Incidencias.Select(i => new IncidenciaDTO
+                    {
+                        Id = i.Id,
+                        Fecha = i.Fecha,
+                        Duracion = i.Duracion,
+                        Descripcion = i.Descripcion,
+                        TipoIncidencias = new List<TipoIncidencia>
+                        {
+                            new TipoIncidencia
+                            {
+                                Id = i.IdTipoIncidenciaNavigation.Id,
+                                Nombre = i.IdTipoIncidenciaNavigation.Nombre
+                            }
+                        }
+                        }).ToList()
+                    })
+                    .ToList();
+
+            return lista_hijos;
         }
     }
 }

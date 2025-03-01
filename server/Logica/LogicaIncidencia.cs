@@ -32,7 +32,7 @@ namespace server.Logica
                     Fecha = x.Fecha,
                     //Duracion = x.Duracion,
                     Descripcion = x.Descripcion,
-                    NombreTipoIncidencia = x.IdTipoIncidenciaNavigation?.Nombre ?? "Desconocido",
+                    //NombreTipoIncidencia = x.IdTipoIncidenciaNavigation?.Nombre ?? "Desconocido",
                 }).ToList();
             }
             catch (Exception ex)
