@@ -30,7 +30,7 @@ namespace server.Logica
                 {
                     Id = x.Id,
                     Fecha = x.Fecha,
-                    Duracion = x.Duracion,
+                    //Duracion = x.Duracion,
                     Descripcion = x.Descripcion,
                     NombreTipoIncidencia = x.IdTipoIncidenciaNavigation?.Nombre ?? "Desconocido",
                 }).ToList();
