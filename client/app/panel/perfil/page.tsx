@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TablaIncidencias } from "../incidencias/tabla-incidencias";
 
 export default function page() {
 	return (
@@ -13,9 +12,7 @@ export default function page() {
 					</CardTitle>
 				</CardHeader>
 
-				<CardContent>
-					<TablaIncidencias />
-				</CardContent>
+				<CardContent></CardContent>
 			</Card>
 		</div>
 	);
