@@ -8,6 +8,7 @@ import { createServerAction } from "zsa";
 export const crearParienteAction = createServerAction()
 	.input(parienteSchemaNoID)
 	.handler(async ({ input }) => {
+		console.log(input);
 		await createPariente(input);
 		revalidatePath("/panel");
 		return { success: "ok" };

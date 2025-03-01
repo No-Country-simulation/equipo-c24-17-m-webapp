@@ -20,7 +20,7 @@ import { parienteDefaultValues } from "@/lib/defaultValues";
 import { toast } from "sonner";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
-import { KeyofPariente } from "@/lib/definitions";
+import { handleFieldErrors } from "@/lib/utils";
 
 export default function FormPariente({ email }: { email: string }) {
 	const { isPending, execute } = useServerAction(crearParienteAction);
@@ -45,18 +45,14 @@ export default function FormPariente({ email }: { email: string }) {
 
 			if (err) {
 				if (err.fieldErrors) {
-					Object.entries(err.fieldErrors).map(([field, error]) => {
-						form.setError(field as KeyofPariente, {
-							message: (error as string[])[0],
-						});
-					});
+					handleFieldErrors(err, form);
 				} else {
 					toast.error(err.message);
 				}
 			}
 			if (data) {
 				toast.success("Hijo cargado con exito.");
-				router.push("/panel");
+				router.push("/panel/familiares");
 			}
 		}
 	);
