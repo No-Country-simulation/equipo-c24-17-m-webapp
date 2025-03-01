@@ -2,6 +2,7 @@
 using server.Data;
 using server.Data.Models;
 using server.Data.Repositorios;
+using server.DTOs;
 
 namespace server.Logica
 {
@@ -16,15 +17,23 @@ namespace server.Logica
         }
         #endregion
 
-        public List<Incidencia> ObtenerTodasLasIncidencias(int id)
+        public List<IncidenciaDTO> ObtenerTodasLasIncidencias(int id)
         {
             RepoIncidencia repo_incidencia = new RepoIncidencia(_context);
             List<Incidencia> lista_incidencias= [];
 
             try
             {
-                var hijo_encontrado = _context.Hijos.Find(id) ?? throw new KeyNotFoundException("No se encuentra el hijo o no existe en el registro");
-                return lista_incidencias = repo_incidencia.GetAllById(id);
+                var incidencias = repo_incidencia.GetAllById(id);
+
+                return incidencias.Select(x => new IncidenciaDTO
+                {
+                    Id = x.Id,
+                    Fecha = x.Fecha,
+                    Duracion = x.Duracion,
+                    Descripcion = x.Descripcion,
+                    NombreTipoIncidencia = x.IdTipoIncidenciaNavigation?.Nombre ?? "Desconocido",
+                }).ToList();
             }
             catch (Exception ex)
             {
@@ -82,7 +91,7 @@ namespace server.Logica
                 incidencia_existe.Descripcion = obj_incidencia.Descripcion;
                 incidencia_existe.IdTipoIncidencia = obj_incidencia.IdTipoIncidencia;
                 incidencia_existe.Fecha = obj_incidencia.Fecha;
-                incidencia_existe.Hora = obj_incidencia.Hora;
+                incidencia_existe.Duracion = obj_incidencia.Duracion;
                 incidencia_existe.IdHijo = hijo_encontrado.Id;
 
                 repo_Incidencia.UpdateIncidencia(incidencia_existe);
