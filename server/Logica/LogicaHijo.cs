@@ -151,20 +151,15 @@ namespace server.Logica
                         Fecha_nacimiento = h.FechaNacimiento,
                         NombreDiagnostico = h.NombreDiagnostico,
                         DescripcionDiagnostico = h.DescripcionDiagnostico,
-                        Incidencias = h.Incidencias.Select(i => new IncidenciaDTO
+                        Incidencias = h.Incidencias.Select(i => new Incidencia
                         {
                             Id = i.Id,
                             Fecha = i.Fecha,
                             Duracion = i.Duracion,
                             Descripcion = i.Descripcion,
-                            TipoIncidencias = new List<TipoIncidencia>
-                            {
-                                new TipoIncidencia
-                                {
-                                    Id = i.IdTipoIncidenciaNavigation.Id,
-                                    Nombre = i.IdTipoIncidenciaNavigation.Nombre
-                                }
-                            }
+                            IdHijo = i.IdHijo,
+                            IdTipoIncidencia = i.IdTipoIncidencia
+                            
                         }).ToList()
                     })
                         .ToList();
