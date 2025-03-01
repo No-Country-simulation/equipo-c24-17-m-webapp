@@ -7,7 +7,7 @@ namespace server.Data.Models
     {
         public int Id { get; set; }
         public DateOnly Fecha { get; set; }
-        public string Duracion { get; set; }
+        public int Duracion { get; set; }
         public int IdTipoIncidencia { get; set; }
         public string Descripcion { get; set; }
         public int IdHijo { get; set; }
