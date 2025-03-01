@@ -30,10 +30,9 @@ namespace server.Logica
                 {
                     Id = x.Id,
                     Fecha = x.Fecha,
-                    Hora = x.Hora,
+                    Duracion = x.Duracion,
                     Descripcion = x.Descripcion,
                     NombreTipoIncidencia = x.IdTipoIncidenciaNavigation?.Nombre ?? "Desconocido",
-                    DescripcionTipoIncidencia = x.IdTipoIncidenciaNavigation?.Descripcion ?? "Desconocido"
                 }).ToList();
             }
             catch (Exception ex)
@@ -92,7 +91,7 @@ namespace server.Logica
                 incidencia_existe.Descripcion = obj_incidencia.Descripcion;
                 incidencia_existe.IdTipoIncidencia = obj_incidencia.IdTipoIncidencia;
                 incidencia_existe.Fecha = obj_incidencia.Fecha;
-                incidencia_existe.Hora = obj_incidencia.Hora;
+                incidencia_existe.Duracion = obj_incidencia.Duracion;
                 incidencia_existe.IdHijo = hijo_encontrado.Id;
 
                 repo_Incidencia.UpdateIncidencia(incidencia_existe);
