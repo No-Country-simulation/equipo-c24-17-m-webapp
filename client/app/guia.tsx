@@ -36,7 +36,7 @@ const cards = [
 export const Guia = () => {
   return (
     <>
-      <section className="bg-[#FAEDDA]   min-h-[650px]">
+      <section  className="bg-[#FAEDDA]   min-h-[650px]">
         <Image
           src="/nube.svg"
           alt="Imagen rotada"

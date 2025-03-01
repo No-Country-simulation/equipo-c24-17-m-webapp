@@ -35,9 +35,12 @@ const accordions = [
 export const PreguntasFrecuentes = () => {
   return (
     <>
-    <div  className="absolute border-l-[50vw] border-r-[50vw] border-t-[100px] border-l-transparent border-r-transparent border-t-[#FAEDDA] z-10"></div>
+    {/* //triangulo */}
+    
+    <div   className="absolute border-l-[49vw] border-r-[49vw] border-t-[100px] border-l-transparent border-r-transparent border-t-[#FAEDDA] z-10"></div>
+    
 
-      <div className="bg-[url('https://plus.unsplash.com/premium_photo-1661680863986-13eb209573e0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=...')] bg-cover bg-center min-h-[800px] flex flex-col items-center py-20 opacity-70">
+      <div  className="bg-[url('https://plus.unsplash.com/premium_photo-1661680863986-13eb209573e0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=...')] bg-cover bg-center min-h-[800px] flex flex-col items-center py-20 opacity-70">
         <h3 className="text-3xl font-bold text-center text-white mb-14 mt-16">
           Preguntas Frecuentes
         </h3>
