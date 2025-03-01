@@ -1,6 +1,7 @@
 import React from "react";
-import { TablaEstudios } from "./tabla-estudios";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { TablaIncidencias } from "../incidencias/tabla-incidencias";
 
 export default function page() {
 	return (
@@ -13,7 +14,7 @@ export default function page() {
 				</CardHeader>
 
 				<CardContent>
-					<TablaEstudios />
+					<TablaIncidencias />
 				</CardContent>
 			</Card>
 		</div>
