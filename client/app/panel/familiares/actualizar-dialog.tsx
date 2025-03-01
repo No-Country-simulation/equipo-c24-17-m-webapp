@@ -1,5 +1,5 @@
 "use client";
-import { KeyofPariente, ParienteT } from "@/lib/definitions";
+import { ParienteT } from "@/lib/definitions";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,6 +27,7 @@ import {
 	Form,
 } from "@/components/ui/form";
 import { UserPenIcon } from "lucide-react";
+import { handleFieldErrors } from "@/lib/utils";
 
 export default function ActualizarDialog({
 	pariente,
@@ -58,11 +59,7 @@ export default function ActualizarDialog({
 
 			if (err) {
 				if (err.fieldErrors) {
-					Object.entries(err.fieldErrors).map(([field, error]) => {
-						form.setError(field as KeyofPariente, {
-							message: (error as string[])[0],
-						});
-					});
+					handleFieldErrors(err, form);
 				} else {
 					toast.error(err.message);
 				}
@@ -185,7 +182,7 @@ export default function ActualizarDialog({
 
 							<div className="flex justify-center">
 								<Button type="submit" disabled={isPending}>
-									Agregar
+									Actualizar
 								</Button>
 							</div>
 						</form>

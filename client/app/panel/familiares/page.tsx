@@ -20,7 +20,7 @@ export default async function page() {
 				))}
 
 				<Button variant={"outline"}>
-					<Link href={"/panel/pariente/crear"}>Agregar pariente</Link>
+					<Link href={"/panel/familiares/crear"}>Agregar pariente</Link>
 				</Button>
 			</main>
 		</div>
