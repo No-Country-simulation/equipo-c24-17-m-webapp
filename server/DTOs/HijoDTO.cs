@@ -1,4 +1,6 @@
-﻿namespace server.DTOs
+﻿using server.Data.Models;
+
+namespace server.DTOs
 {
     public class HijoDTO
     {
@@ -8,7 +10,7 @@
         public DateOnly Fecha_nacimiento { get; set; }
         public string? NombreDiagnostico { get; set; }
         public string? DescripcionDiagnostico { get; set; }
-        public List<IncidenciaDTO> Incidencias { get; set; } = new List<IncidenciaDTO>();
+
+        public List<Incidencia> Incidencias { get; set; } = new List<Incidencia>();
     }
 }
-
