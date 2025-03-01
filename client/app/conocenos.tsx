@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 export default function Conocenos() {
 	return (
-		<section className="my-20">
+		<section  className="my-20">
 			<div className="container w-[90%] mx-auto  lg:max-w-[1000px] ">
 				<h1 className=" text-start text-3xl ">Conocenos</h1>
 
