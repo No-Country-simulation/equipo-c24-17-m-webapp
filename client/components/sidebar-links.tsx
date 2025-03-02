@@ -6,8 +6,6 @@ import { UsersIcon, FileUserIcon, Settings2Icon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
 export const links = [
 	{ name: "Panel", href: "/panel", icon: Settings2Icon },
 	{ name: "Familiares", href: "/panel/familiares", icon: UsersIcon },

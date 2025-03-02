@@ -6,7 +6,7 @@ export default function Showcase() {
 	return (
 		<main className="bg-bgSoftCl pt-20 pb-4  lg:pb-10 relative ">
 			<div className="container max-w-[90%] mx-auto lg:max-w-[1000px] ">
-				<h1 className="text-3xl text-blueCl font-bold text-start mb-4 sm:hidden font-rowdies ">
+				<h1 className="text-3xl text-blueCl font-bold text-start mb-2 sm:hidden font-rowdies ">
 					Junto a vos en cada paso
 				</h1>
 				<div className="flex md:items-start md:justify-center ">
@@ -25,25 +25,25 @@ export default function Showcase() {
 						</Button>
 					</div>
 
-					<div className="w-1/3 md:w-1/2 flex justify-end lg:justify-center relative">
+					<div className="w-1/3 md:w-1/2 flex justify-end lg:justify-center relative overflow-visible">
 						<Image
 							src={"/nene.svg"}
 							alt="nene abrazandose"
 							className=" lg:min-h-[500px] z-20"
 							height={500}
-							width={330}
+							width={340}
 						/>
 						<Image
 							src={"/homeBg.svg"}
 							alt="nene abrazandose"
-							className="hidden lg:block  absolute bottom-0 right-0 lg:min-h-[800px] lg:min-w-[800px]  lg:-bottom-20 lg:-right-20 z-10"
+							className="hidden lg:block  absolute bottom-0 right-0 lg:min-h-[800px] lg:min-w-[800px]  lg:-bottom-20 xl:-right-20 z-10 overflow-hidden object-contain"
 							height={800}
 							width={800}
 						/>
 					</div>
 				</div>
 			</div>
-			<div className="absolute bottom-0 xl:-bottom-32 2xl:-bottom-56 z-40">
+			<div className="absolute bottom-0 z-20">
 				<Image
 					src={"/nube.svg"}
 					alt="nene abrazandose"
