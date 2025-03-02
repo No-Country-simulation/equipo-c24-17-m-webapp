@@ -31,7 +31,7 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+// import { Calendar } from "@/components/ui/calendar";
 
 import { cn, handleFieldErrors } from "@/lib/utils";
 import { format } from "date-fns";
@@ -46,6 +46,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
+import Calendar from "react-calendar";
 import { HoverCardInfo } from "./hovercard-info";
 import { actualizarIncidenciaAction } from "./actions";
 import { IncidenciaT, TipoIncidenciaT } from "@/lib/definitions";
@@ -158,15 +159,10 @@ export default function ActualizarIncidenciaDialog({
 										</PopoverTrigger>
 										<PopoverContent className="w-auto p-0" align="start">
 											<Calendar
-												mode="single"
-												selected={
-													field.value ? new Date(field.value) : undefined
-												}
-												onSelect={field.onChange}
-												disabled={(date) =>
-													date > new Date() || date < new Date("1900-01-01")
-												}
-												initialFocus
+												onChange={field.onChange}
+												value={field.value}
+												locale="es-AR"
+												className={"rounded-lg border-slate-400"}
 											/>
 										</PopoverContent>
 									</Popover>
