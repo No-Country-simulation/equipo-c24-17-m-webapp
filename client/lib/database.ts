@@ -41,10 +41,13 @@ export async function createUsuario(
 }
 
 export async function createPariente(hijo: z.infer<typeof parienteSchemaNoID>) {
+	const fechaISO = new Date(hijo.fechaNacimiento).toISOString().split("T")[0];
+	const newData = { ...hijo, fecha: fechaISO };
+
 	try {
 		const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}api/hijo`, {
 			method: "POST",
-			body: JSON.stringify(hijo),
+			body: JSON.stringify(newData),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -106,12 +109,16 @@ export async function eliminarPariente(id: number) {
 }
 
 export async function actualizarPariente(pariente: ParienteT) {
+	const fechaISO = new Date(pariente.fechaNacimiento)
+		.toISOString()
+		.split("T")[0];
+	const newData = { ...pariente, fecha: fechaISO };
 	try {
 		const res = await fetch(
 			`${process.env.NEXT_PRIVATE_API_URL}api/hijo/${pariente.id}`,
 			{
 				method: "PUT",
-				body: JSON.stringify(pariente),
+				body: JSON.stringify(newData),
 				headers: {
 					"Content-Type": "application/json",
 				},

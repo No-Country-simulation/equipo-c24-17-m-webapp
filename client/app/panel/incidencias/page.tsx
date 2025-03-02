@@ -20,11 +20,13 @@ export default async function page() {
 			<header className="flex justify-between items-center mb-5 max-w-[900px] mx-auto">
 				<h1 className="text-center text-2xl mb-5">Inicidencias</h1>
 				<div>
-					<Button>
-						<Link href="/panel/incidencias/crear" className="mr-2">
-							Crear Incidencia
-						</Link>
-					</Button>
+					{hijosConIncidencias.length > 0 && (
+						<Button>
+							<Link href="/panel/incidencias/crear" className="mr-2">
+								Crear Incidencia
+							</Link>
+						</Button>
+					)}
 				</div>
 			</header>
 			<div className="flex flex-col gap-8 justify-center">
@@ -37,6 +39,11 @@ export default async function page() {
 						/>
 					</div>
 				))}
+				{hijosConIncidencias.length === 0 && (
+					<div className="text-center">
+						<p>Debes cargar un familiar para poder cargar incidencias.</p>
+					</div>
+				)}
 			</div>
 		</div>
 	);

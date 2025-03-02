@@ -223,7 +223,7 @@ export default function ActualizarIncidenciaDialog({
 						/>
 						<div className="flex justify-center">
 							<Button type="submit" disabled={isPending}>
-								Agregar
+								Actualizar
 							</Button>
 						</div>
 					</form>
