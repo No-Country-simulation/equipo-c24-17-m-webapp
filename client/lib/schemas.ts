@@ -51,8 +51,7 @@ export const parienteSchema = z.object({
 		.refine(
 			(val) => {
 				const fecha = new Date(val);
-				const diff = differenceInMonths(fecha, minDate);
-				console.log(diff);
+				const diff = differenceInMonths(minDate, fecha);
 				return diff > 12;
 			},
 			{ message: "Debe ser mayor de 1 año." }
@@ -61,7 +60,6 @@ export const parienteSchema = z.object({
 			(val) => {
 				const fecha = new Date(val);
 				const diff = differenceInMonths(fecha, maxDate);
-				console.log(diff);
 				return diff < 216;
 			},
 			{ message: "Debe ser menor de 18 años." }

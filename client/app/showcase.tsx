@@ -43,7 +43,7 @@ export default function Showcase() {
 					</div>
 				</div>
 			</div>
-			<div className="absolute bottom-0 z-20">
+			<div className="absolute bottom-0 z-20 xl:-bottom-2  2xl:-bottom-6">
 				<Image
 					src={"/nube.svg"}
 					alt="nene abrazandose"
