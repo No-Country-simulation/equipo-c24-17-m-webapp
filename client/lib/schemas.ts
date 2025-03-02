@@ -1,4 +1,10 @@
 import z from "zod";
+import { differenceInMonths } from "date-fns";
+const minDate = new Date();
+minDate.setFullYear(minDate.getFullYear() - 1); //fecha maxima para ser mayor de edad
+
+const maxDate = new Date();
+maxDate.setFullYear(maxDate.getFullYear() - 18); //fecha minima para ser menor de edad
 
 export const parienteSchema = z.object({
 	id: z.number(),
@@ -33,13 +39,33 @@ export const parienteSchema = z.object({
 			message: "La descripción no puede exceder los 100 caracteres.",
 		}),
 
-	fechaNacimiento: z.string().refine(
-		(val) => {
-			const fecha = new Date(val);
-			return !isNaN(fecha.getTime()) && fecha <= new Date();
-		},
-		{ message: "Debe ser una fecha válida" }
-	),
+	fechaNacimiento: z
+		.string()
+		.refine(
+			(val) => {
+				const fecha = new Date(val);
+				return !isNaN(fecha.getTime());
+			},
+			{ message: "Debe agregar una fecha" }
+		)
+		.refine(
+			(val) => {
+				const fecha = new Date(val);
+				const diff = differenceInMonths(fecha, minDate);
+				console.log(diff);
+				return diff > 12;
+			},
+			{ message: "Debe ser mayor de 1 año." }
+		)
+		.refine(
+			(val) => {
+				const fecha = new Date(val);
+				const diff = differenceInMonths(fecha, maxDate);
+				console.log(diff);
+				return diff < 216;
+			},
+			{ message: "Debe ser menor de 18 años." }
+		),
 	correoUsuario: z
 		.string()
 		.email({ message: "Debe ingresar un correo valido." }),

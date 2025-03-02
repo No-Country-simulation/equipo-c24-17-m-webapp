@@ -48,14 +48,7 @@ export default function ActualizarDialog({
 
 	const onSubmit = form.handleSubmit(
 		async (values: z.infer<typeof parienteSchema>) => {
-			console.log("llega");
-			const fechaISO = new Date(values.fechaNacimiento)
-				.toISOString()
-				.split("T")[0];
-
-			const newData = { ...values, fecha: fechaISO };
-
-			const [data, err] = await execute(newData);
+			const [data, err] = await execute(values);
 
 			if (err) {
 				if (err.fieldErrors) {
