@@ -14,7 +14,6 @@ export default function CardPariente({
 }) {
 	const {
 		apellido,
-
 		fechaNacimiento,
 		nombre,
 		nombreDiagnostico,
@@ -41,7 +40,7 @@ export default function CardPariente({
 			<CardContent>
 				<div className="flex items-center gap-1">
 					<p className="text-red-500">Fecha nacimiento:</p>{" "}
-					<p className="">{fechaNacimiento}</p>
+					<p className="">{fechaNacimiento.toString()}</p>
 				</div>
 				<div className="flex items-center gap-1">
 					<p className="text-red-500">Diagnóstico:</p>{" "}

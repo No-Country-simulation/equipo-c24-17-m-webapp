@@ -3,6 +3,7 @@ using server.Clases;
 using server.Data;
 using server.Data.Models;
 using server.Data.Repositorios;
+using server.DTOs;
 
 namespace server.Logica
 {
@@ -128,6 +129,40 @@ namespace server.Logica
                 if (usuarioPadre == null) throw new Exception("No existe ese usuario");
 
                 return repo_Hijo.ObtenerHijosDelUsuario(usuarioPadre.Id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        public List<HijoDTO> ObtenerHijosConIncidencias(string correo)
+        {
+            try
+            {
+                RepoHijo repo_Hijo = new RepoHijo(_context);
+                List<HijoDTO> lista_hijos = repo_Hijo.ObtenerHijosConIncidencias(correo)
+                    .Select(h => new HijoDTO
+                    {
+                        Id = h.Id,
+                        Nombre = h.Nombre,
+                        Apellido = h.Apellido,
+                        Fecha_nacimiento = h.FechaNacimiento,
+                        NombreDiagnostico = h.NombreDiagnostico,
+                        DescripcionDiagnostico = h.DescripcionDiagnostico,
+                        Incidencias = h.Incidencias.Select(i => new Incidencia
+                        {
+                            Id = i.Id,
+                            Fecha = i.Fecha,
+                            Duracion = i.Duracion,
+                            Descripcion = i.Descripcion,
+                            IdHijo = i.IdHijo,
+                            IdTipoIncidencia = i.IdTipoIncidencia                            
+                        }).ToList()
+                    })
+                        .ToList();
+                return lista_hijos;
             }
             catch (Exception ex)
             {

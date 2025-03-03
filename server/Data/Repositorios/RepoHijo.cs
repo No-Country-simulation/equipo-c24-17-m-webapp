@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using server.Data.Models;
+using server.DTOs;
 
 namespace server.Data.Repositorios
 {
@@ -106,6 +107,16 @@ namespace server.Data.Repositorios
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public List<Hijo> ObtenerHijosConIncidencias(string correo)
+        {
+            var obj_usuario = _context.Usuarios.Where(x => x.Correo.Equals(correo)).FirstOrDefault();
+
+            return _context.Hijos
+                .Where(o => o.IdUsuario == obj_usuario.Id)
+                .Include(h => h.Incidencias)
+                .ThenInclude(i => i.IdTipoIncidenciaNavigation)
+                .ToList();
         }
     }
 }

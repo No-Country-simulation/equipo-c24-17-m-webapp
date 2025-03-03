@@ -23,10 +23,19 @@ namespace server.Controllers
         #endregion
 
         // GET: api/<IncidenciaController>
-        [HttpGet]
-        public ActionResult<IEnumerable<Incidencia>> Get()
+        [HttpGet()]
+        public ActionResult<IEnumerable<Incidencia>> GetIncidenciasPorHijo(string correo)
         {
-            return _context.Incidencias.ToList();
+            LogicaHijo logica_hijo = new LogicaHijo(_context);
+            try
+            {
+                var lista_incidencias = logica_hijo.ObtenerHijosConIncidencias(correo);
+                return Ok(lista_incidencias);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener las incidencias de el hijo: {ex.Message}");
+            }
         }
 
         // GET api/<IncidenciaController>/5
@@ -89,22 +98,6 @@ namespace server.Controllers
             catch (Exception ex)
             {
                 return StatusCode(404, $"Error al eliminar la incidencia: {ex.Message}");
-            }
-        }
-
-
-        [HttpGet("get-incidencia-hijo/{id}")]
-        public IActionResult ObtenerIncidenciasDeUnHijoEspecifico(int id)
-        {
-            LogicaIncidencia logica_incidencia = new LogicaIncidencia(_context);
-            try
-            {
-                var lista_incidencias = logica_incidencia.ObtenerTodasLasIncidencias(id);
-                return Ok(lista_incidencias);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(404, $"Error al obtener las incidencias de el hijo: {ex.Message}");
             }
         }
     }

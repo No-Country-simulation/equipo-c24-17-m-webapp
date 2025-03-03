@@ -3,28 +3,25 @@ using server.Data.Models;
 
 namespace server.Data.Repositorios
 {
-    public class RepoIncidencia
+    public class RepoTipoIncidencia
     {
+
         #region ContextDataBase
         private readonly BdTeacompanioContext _context;
 
-        public RepoIncidencia(BdTeacompanioContext context)
+        public RepoTipoIncidencia(BdTeacompanioContext context)
         {
             _context = context;
         }
         #endregion
 
-
-        public List<Incidencia> GetAllById(int id)
+        public List<TipoIncidencia> GetAll()
         {
-            List<Incidencia> lista_incidencias = [];
+            List<TipoIncidencia> lista_tipos = [];
 
             try
             {
-                return lista_incidencias = _context.Incidencias
-                    .Where( x => x.IdHijo == id)
-                    .Include(x => x.IdTipoIncidenciaNavigation)
-                    .ToList();
+                return lista_tipos = _context.TipoIncidencias.ToList();
             }
             catch (Exception ex)
             {
@@ -32,12 +29,12 @@ namespace server.Data.Repositorios
             }
         }
 
-        public Incidencia GetById(int id)
+        public TipoIncidencia GetById(int id)
         {
-            Incidencia incidencia_obtenida = new();
+            TipoIncidencia tipo_obtenido = new();
             try
             {
-                return incidencia_obtenida = _context.Incidencias.Find(id);
+                return tipo_obtenido = _context.TipoIncidencias.Find(id);
             }
             catch (Exception ex)
             {
@@ -45,11 +42,11 @@ namespace server.Data.Repositorios
             }
         }
 
-        public void CreateIncidencia(Incidencia obj_incidencia)
+        public void CreateTipoIncidencia(TipoIncidencia obj_tipo_incidencia)
         {
             try
             {
-                _context.Add(obj_incidencia);
+                _context.Add(obj_tipo_incidencia);
                 _context.SaveChanges();
             }
             catch (Exception ex)
@@ -62,33 +59,33 @@ namespace server.Data.Repositorios
             }
         }
 
-        public void UpdateIncidencia(Incidencia obj_incidencia)
+        public void UpdateTipoIncidencia(TipoIncidencia obj_tipo_incidencia)
         {
             try
             {
-                _context.Incidencias.Update(obj_incidencia);
+                _context.TipoIncidencias.Update(obj_tipo_incidencia);
                 _context.SaveChanges();
             }
             catch (DbUpdateException dbEx)
             {
-                throw new Exception("Error al actualizar la incidencia en la base de datos.", dbEx);
+                throw new Exception("Error al actualizar el tipo de incidencia en la base de datos.", dbEx);
             }
             catch (Exception ex)
             {
-                throw new Exception("Error general al actualizar al incidencia.", ex);
+                throw new Exception("Error general al actualizar el tipo de incidencia.", ex);
             }
         }
 
-        public void DeleteIncidencia(Incidencia obj_incidencia)
+        public void DeleteTipoIncidencia(TipoIncidencia obj_tipo_incidencia)
         {
             try
             {
-                _context.Incidencias.Remove(obj_incidencia);
+                _context.TipoIncidencias.Remove(obj_tipo_incidencia);
                 _context.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception("Error general al eliminar la incidencia.", ex);
+                throw new Exception("Error general al eliminar el tipo de incidencia.", ex);
             }
         }
     }

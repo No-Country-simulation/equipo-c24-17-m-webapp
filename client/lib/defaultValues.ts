@@ -6,3 +6,8 @@ export const parienteDefaultValues = {
 	descripcionDiagnostico: "",
 	email: "",
 };
+
+export const incidenciaDefaultValues = {
+	duracion: 0,
+	descripcion: "",
+};

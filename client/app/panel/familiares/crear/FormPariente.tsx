@@ -20,10 +20,11 @@ import { parienteDefaultValues } from "@/lib/defaultValues";
 import { toast } from "sonner";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
-import { KeyofPariente } from "@/lib/definitions";
+import { handleFieldErrors } from "@/lib/utils";
 
 export default function FormPariente({ email }: { email: string }) {
 	const { isPending, execute } = useServerAction(crearParienteAction);
+
 	const router = useRouter();
 	const form = useForm<z.infer<typeof parienteSchemaNoID>>({
 		resolver: zodResolver(parienteSchemaNoID),
@@ -35,28 +36,19 @@ export default function FormPariente({ email }: { email: string }) {
 
 	const onSubmit = form.handleSubmit(
 		async (values: z.infer<typeof parienteSchemaNoID>) => {
-			const fechaISO = new Date(values.fechaNacimiento)
-				.toISOString()
-				.split("T")[0];
-
-			const newData = { ...values, fecha: fechaISO };
-
-			const [data, err] = await execute(newData);
+			const [data, err] = await execute(values);
 
 			if (err) {
 				if (err.fieldErrors) {
-					Object.entries(err.fieldErrors).map(([field, error]) => {
-						form.setError(field as KeyofPariente, {
-							message: (error as string[])[0],
-						});
-					});
+					handleFieldErrors(err, form);
 				} else {
 					toast.error(err.message);
 				}
 			}
+
 			if (data) {
 				toast.success("Hijo cargado con exito.");
-				router.push("/panel");
+				router.push("/panel/familiares");
 			}
 		}
 	);

@@ -1,4 +1,6 @@
-﻿namespace server.Data.Models
+﻿using System.Text.Json.Serialization;
+
+namespace server.Data.Models
 {
     public class TipoIncidencia
     {
@@ -6,9 +8,7 @@
 
         public string Nombre { get; set; } = null!;
 
-        public string? Descripcion { get; set; }
-
-        public DateTime? CreatedAt { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Incidencia> Incidencias { get; set; } = new List<Incidencia>();
     }
 }

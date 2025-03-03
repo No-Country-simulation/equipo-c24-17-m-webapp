@@ -1,5 +1,5 @@
 import React from "react";
-import { TablaEstudios } from "./tabla-estudios";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function page() {
@@ -12,9 +12,7 @@ export default function page() {
 					</CardTitle>
 				</CardHeader>
 
-				<CardContent>
-					<TablaEstudios />
-				</CardContent>
+				<CardContent></CardContent>
 			</Card>
 		</div>
 	);

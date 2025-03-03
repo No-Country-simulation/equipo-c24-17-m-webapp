@@ -1,8 +1,8 @@
 "use server";
 import { auth } from "@/auth";
-import { parienteSchemaNoID } from "./schemas";
+import { incidenciaSchemaNoID, parienteSchemaNoID } from "./schemas";
 import { z } from "zod";
-import { ParienteT } from "./definitions";
+import { IncidenciaT, ParienteT } from "./definitions";
 
 export async function getSession() {
 	const session = await auth();
@@ -41,10 +41,13 @@ export async function createUsuario(
 }
 
 export async function createPariente(hijo: z.infer<typeof parienteSchemaNoID>) {
+	const fechaISO = new Date(hijo.fechaNacimiento).toISOString().split("T")[0];
+	const newData = { ...hijo, fecha: fechaISO };
+
 	try {
 		const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}api/hijo`, {
 			method: "POST",
-			body: JSON.stringify(hijo),
+			body: JSON.stringify(newData),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -106,12 +109,16 @@ export async function eliminarPariente(id: number) {
 }
 
 export async function actualizarPariente(pariente: ParienteT) {
+	const fechaISO = new Date(pariente.fechaNacimiento)
+		.toISOString()
+		.split("T")[0];
+	const newData = { ...pariente, fecha: fechaISO };
 	try {
 		const res = await fetch(
 			`${process.env.NEXT_PRIVATE_API_URL}api/hijo/${pariente.id}`,
 			{
 				method: "PUT",
-				body: JSON.stringify(pariente),
+				body: JSON.stringify(newData),
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -123,6 +130,125 @@ export async function actualizarPariente(pariente: ParienteT) {
 		}
 	} catch (error) {
 		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+export async function getTiposIncidencia() {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/tipoincidencia`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+
+		return await res.json();
+	} catch (error) {
+		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+//Incidencias funciones
+export async function getIncidenciasHijo(correo: string) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/incidencia/?correo=${correo}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+
+		return await res.json();
+	} catch (error) {
+		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+export async function crearIncidencia(
+	incidencia: z.infer<typeof incidenciaSchemaNoID>
+) {
+	const fechaISO = new Date(incidencia.fecha).toISOString().split("T")[0];
+	const newData = { ...incidencia, fecha: fechaISO };
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/incidencia`,
+			{
+				method: "POST",
+				body: JSON.stringify(newData),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+	} catch (error) {
+		console.log("Error creando la incidencia", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+export async function actualizarIncidencia(incidencia: IncidenciaT) {
+	const fechaISO = new Date(incidencia.fecha).toISOString().split("T")[0];
+	const newData = { ...incidencia, fecha: fechaISO };
+	console.log({ newData });
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/incidencia/${incidencia.id}`,
+			{
+				method: "PUT",
+				body: JSON.stringify(newData),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+	} catch (error) {
+		console.log("Error creando la incidencia", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+export async function eliminarIncidencia(id: number) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/incidencia/${id}`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error en el server");
+		}
+	} catch (error) {
+		console.log("Error creando la incidencia", error);
 		throw new Error("Error en el servidor.");
 	}
 }

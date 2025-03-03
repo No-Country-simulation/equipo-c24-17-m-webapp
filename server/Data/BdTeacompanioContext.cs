@@ -44,7 +44,7 @@ public partial class BdTeacompanioContext : DbContext
                 .HasColumnName("created_at");
             entity.Property(e => e.Descripcion).HasColumnName("descripcion");
             entity.Property(e => e.Fecha).HasColumnName("fecha");
-            entity.Property(e => e.Hora).HasColumnName("hora");
+            entity.Property(e => e.Duracion).HasColumnName("duracion");
             entity.Property(e => e.IdTipoIncidencia).HasColumnName("id_tipoincidencia");
             entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
 
@@ -140,11 +140,6 @@ public partial class BdTeacompanioContext : DbContext
             entity.ToTable("tipoincidencia");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
-                .HasColumnName("created_at");
-            entity.Property(e => e.Descripcion).HasColumnName("descripcion");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(150)
                 .HasColumnName("nombre");

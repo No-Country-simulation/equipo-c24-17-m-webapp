@@ -36,42 +36,37 @@ export default function NavMobile() {
 				</SheetTitle>
 
 				<div>
-					<ul className="flex flex-col justify-start items-center gap-4 text-2xl">
+					<ul className="flex flex-col justify-start items-center gap-4  text-white">
 						{" "}
 						<li className="">
 							{" "}
-							<Button variant={"TDAMobile"}>
-								<Hand size={35} />{" "}
-								<Link href={"/"} className=" font-bold">
-									Conocenos{" "}
-								</Link>{" "}
-							</Button>{" "}
+							<Link href={"/"} className=" font-bold flex items-center gap-2">
+								<Hand size={20} /> <span>Conocenos</span>
+							</Link>{" "}
 						</li>{" "}
 						<li className="">
 							{" "}
-							<Button variant={"TDAMobile"}>
-								<House size={35} />{" "}
-								<Link href={"/"} className="font-bold">
-									Comunidad{" "}
-								</Link>{" "}
-							</Button>{" "}
+							<Link href={"/"} className="font-bold flex items-center gap-2">
+								<House size={20} /> <span>Comunidad</span>
+							</Link>{" "}
 						</li>{" "}
 						<li className="">
 							{" "}
-							<Button variant={"TDAMobile"}>
-								<MessageCircleQuestion size={35} />{" "}
-								<Link href={"/"} className="font-bold">
-									FAQs{" "}
-								</Link>{" "}
-							</Button>{" "}
+							<Link href={"/"} className="font-bold flex items-center gap-2">
+								<MessageCircleQuestion size={20} /> <span>FAQ</span>
+							</Link>{" "}
 						</li>{" "}
 					</ul>
 				</div>
 
 				<SheetFooter>
-					<Button className="bg-[#3662C1] hover:bg-[#294a91] justify-center items-center ">
-						<LogIn size={16} />
-						<Link href={"/login"}>Iniciar Sesión</Link>
+					<Button className="bg-[#3662C1] hover:bg-[#294a91] ">
+						<Link
+							href={"/login"}
+							className="text-white flex items-center gap-2"
+						>
+							<LogIn size={16} /> Iniciar Sesión
+						</Link>
 					</Button>
 				</SheetFooter>
 			</SheetContent>
