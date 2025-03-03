@@ -9,6 +9,10 @@ export default {
 	],
 	theme: {
 		extend: {
+			screens: {
+				'custom-sm': '675px', // 🟢 Definiendo un nuevo breakpoint
+				'custom-md': '970px', // 🟢 Definiendo un nuevo breakpoint
+			},
 			fontFamily: {
 				poppins: ["var(--font-poppins)", "sans-serif"],
 				rowdies: ["var(--font-rowdies)", "sans-serif"],
