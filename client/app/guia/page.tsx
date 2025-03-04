@@ -2,9 +2,10 @@ import Link from "next/link"
 import Image from "next/image"
 import {
     Card,
-    CardHeader, 
+    CardHeader,
     CardTitle
 } from "@/components/ui/card"
+import { Footer } from "@/components/Footer"
 
 export const links = [
     { name: "¿Qué terapias pueden ayudar?", src: "/cardGuia1.svg" },
@@ -21,7 +22,7 @@ export const links = [
 export default function Guia() {
 
     return (
-        <div className="bg-bgSoftCl w-[100dvw] min-h-[100dvh] max-h-[max-content] overflow-hidden">
+        <div className="bg-bgSoftCl w-[100dvw] min-h-[100dvh] max-h-[max-content] overflow-hidden" id="guias">
             <header className="bg-bgSoftCl pt-[4rem] gap-4 relative z-50">
                 <div className="container mx-auto max-w-[90%] xl:max-w-[1100px] flex justify-between items-center">
                     <div className="flex gap-2 justify-center items-center">
@@ -32,7 +33,7 @@ export default function Guia() {
 
                 </div>
             </header>
-            <section className="flex flex-col justify-center items-start m-auto p-[3rem]">
+            <section className="flex flex-col justify-center items-start m-auto p-[3rem]" >
                 <h1 className="text-xl custom-sm:text-3xl w-full font-bold text-center pb-4">Guías Informativas</h1>
                 <div className="grid grid-cols-1 custom-sm:grid-cols-2 custom-md:grid-cols-3 m-auto gap-6 sm:gap-12 h-[max-content] max-w-[1200px] place-items-center">
                     {links.map((link, index) => {
@@ -49,11 +50,13 @@ export default function Guia() {
                                     <CardTitle className="text-xl min-[500px]:text-3xl text-white ">{link.name}</CardTitle>
                                 </CardHeader>
                             </Card>
-                            )
-                        })
+                        )
+                    })
                     }
                 </div>
             </section >
+
+            <Footer />
         </div >
     )
 }
