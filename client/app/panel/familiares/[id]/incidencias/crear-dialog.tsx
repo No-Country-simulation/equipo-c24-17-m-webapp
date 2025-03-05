@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -31,7 +30,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useServerAction } from "zsa-react";
 import { incidenciaSchemaNoID } from "@/lib/schemas";
-
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { incidenciaDefaultValues } from "@/lib/defaultValues";
 import { toast } from "sonner";
 import Loader from "@/components/Loader";
@@ -45,7 +44,7 @@ import Calendar from "react-calendar";
 import { cn, handleFieldErrors } from "@/lib/utils";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { CalendarIcon, Plus } from "lucide-react";
+import { CalendarIcon, FilePenLine, Frown, Plus, Smile } from "lucide-react";
 import { TipoIncidenciaT } from "@/lib/definitions";
 import { HoverCardInfo } from "./hovercard-info";
 import { crearIncidenciaAction } from "./actions";
@@ -67,6 +66,7 @@ export default function CrearIncidencia({
 
 	const onSubmit = form.handleSubmit(
 		async (values: z.infer<typeof incidenciaSchemaNoID>) => {
+			console.log(values);
 			const [data, err] = await execute(values);
 
 			if (err) {
@@ -78,6 +78,7 @@ export default function CrearIncidencia({
 			}
 			if (data) {
 				toast.success("Inicidencia cargada con exito.");
+				form.reset();
 				setOpen(false);
 			}
 		}
@@ -96,49 +97,27 @@ export default function CrearIncidencia({
 					<Plus size={17} className="text-black" />
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[540px]">
+			<DialogContent className="sm:max-w-[440px]">
 				<DialogHeader className="space-y-3">
-					<DialogTitle>Actualizar Pariente</DialogTitle>
-					<DialogDescription>Complete todos los campos.</DialogDescription>
+					<div className="flex justify-start items-center gap-4">
+						<div className=" gap-0 rounded-full h-16 w-16 bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80 flex items-center justify-center">
+							<FilePenLine className="w-7 h-7 text-white" />{" "}
+						</div>
+						<DialogTitle className="text-xl uppercase font-normal">
+							Agregar Incidencia
+						</DialogTitle>
+					</div>
 				</DialogHeader>
 				<Form {...form}>
 					<Loader loading={isPending} />
-					<form
-						onSubmit={onSubmit}
-						className="space-y-4 p-6 border rounded-lg shadow-md mt-10 w-[310px]  bg-white"
-					>
-						{/* <FormField
-							control={form.control}
-							name="idHijo"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Familiar</FormLabel>
-									<Select onValueChange={field.onChange}>
-										<FormControl>
-											<SelectTrigger>
-												<SelectValue placeholder="Seleccionar un Familiar" />
-											</SelectTrigger>
-										</FormControl>
-										<SelectContent>
-											{parientes.map(({ id, nombre, apellido }) => (
-												<SelectItem key={id} value={id.toString()}>
-													{nombre} {apellido}
-												</SelectItem>
-											))}
-										</SelectContent>
-									</Select>
-									<FormMessage />
-								</FormItem>
-							)}
-						/> */}
-
+					<form onSubmit={onSubmit} className="space-y-4 p-6  ">
 						<FormField
 							control={form.control}
 							name="idTipoIncidencia"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>
-										Incidencia <HoverCardInfo />
+									<FormLabel className="flex items-center">
+										<span>Incidencia</span> <HoverCardInfo />
 									</FormLabel>
 									<Select onValueChange={field.onChange}>
 										<FormControl>
@@ -172,7 +151,7 @@ export default function CrearIncidencia({
 												<Button
 													variant={"outline"}
 													className={cn(
-														"w-[240px] pl-3 text-left font-normal",
+														"w-full pl-3 text-left font-normal",
 														!field.value && "text-muted-foreground"
 													)}
 												>
@@ -205,14 +184,16 @@ export default function CrearIncidencia({
 							name="duracion"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Duración</FormLabel>
+									<FormLabel>
+										Duración <span className="text-[11px]">(minutos)</span>
+									</FormLabel>
 									<FormControl>
 										<Input
 											type="text"
 											placeholder="2"
 											{...field}
 											onKeyDown={(e) =>
-												!/[0-9]|Backspace|ArrowLeft|ArrowRight/.exec(e.key)
+												!/[0-9]|Backspace|ArrowLeft|ArrowRight|Tab/.exec(e.key)
 													? e.preventDefault()
 													: e.key
 											}
@@ -249,8 +230,47 @@ export default function CrearIncidencia({
 								</FormItem>
 							)}
 						/>
-						<div className="flex justify-center">
-							<Button type="submit" disabled={isPending}>
+						<FormField
+							control={form.control}
+							name="es_positiva"
+							render={({ field }) => (
+								<FormItem className="space-y-3">
+									<FormControl>
+										<RadioGroup
+											onValueChange={field.onChange}
+											className="flex space-y-1"
+										>
+											<FormItem className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<RadioGroupItem value="false" />
+												</FormControl>
+												<FormLabel className="font-normal flex items-center gap-1">
+													<Frown />
+													Incidencia negativa
+												</FormLabel>
+											</FormItem>
+											<FormItem className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<RadioGroupItem value="true" />
+												</FormControl>
+
+												<FormLabel className="font-normal flex items-center gap-1">
+													<Smile />
+													Incidencia Positiva
+												</FormLabel>
+											</FormItem>
+										</RadioGroup>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<div className="flex justify-center pt-8">
+							<Button
+								type="submit"
+								disabled={isPending}
+								className="bg-blueCl hover:bg-blueCl hover:text-white hover:opacity-90 rounded-full px-8 shadow-xl"
+							>
 								Agregar
 							</Button>
 						</div>

@@ -31,12 +31,11 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-// import { Calendar } from "@/components/ui/calendar";
-
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn, handleFieldErrors } from "@/lib/utils";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { CalendarIcon, FilePenLine } from "lucide-react";
+import { CalendarIcon, FilePenLine, Frown, Smile } from "lucide-react";
 import {
 	Dialog,
 	DialogContent,
@@ -67,6 +66,7 @@ export default function ActualizarIncidenciaDialog({
 	});
 
 	const onSubmit = form.handleSubmit(async (values: IncidenciaT) => {
+		console.log(values);
 		const [data, err] = await execute(values);
 
 		if (err) {
@@ -92,7 +92,7 @@ export default function ActualizarIncidenciaDialog({
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[540px]">
 				<DialogHeader className="space-y-3">
-					<DialogTitle>Actualizar Pariente</DialogTitle>
+					<DialogTitle>Actualizar Incidencia</DialogTitle>
 					<DialogDescription>Complete todos los campos.</DialogDescription>
 				</DialogHeader>
 				<Form {...form}>
@@ -184,7 +184,7 @@ export default function ActualizarIncidenciaDialog({
 											placeholder="2"
 											{...field}
 											onKeyDown={(e) =>
-												!/[0-9]|Backspace|ArrowLeft|ArrowRight/.exec(e.key)
+												!/[0-9]|Backspace|ArrowLeft|ArrowRight|Tab/.exec(e.key)
 													? e.preventDefault()
 													: e.key
 											}
@@ -217,6 +217,45 @@ export default function ActualizarIncidenciaDialog({
 									<FormDescription>
 										*Describir al menos 2 características de la incidencia.
 									</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+
+						<FormField
+							control={form.control}
+							name="es_positiva"
+							render={({ field }) => (
+								<FormItem className="space-y-3">
+									<FormControl>
+										<RadioGroup
+											onValueChange={(e) => {
+												form.setValue("es_positiva", e === "true");
+											}}
+											defaultValue={field.value.toString()}
+											className="flex space-y-1"
+										>
+											<FormItem className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<RadioGroupItem value="false" />
+												</FormControl>
+												<FormLabel className="font-normal flex items-center gap-1">
+													<Frown />
+													Incidencia negativa
+												</FormLabel>
+											</FormItem>
+											<FormItem className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<RadioGroupItem value="true" />
+												</FormControl>
+
+												<FormLabel className="font-normal flex items-center gap-1">
+													<Smile />
+													Incidencia Positiva
+												</FormLabel>
+											</FormItem>
+										</RadioGroup>
+									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}

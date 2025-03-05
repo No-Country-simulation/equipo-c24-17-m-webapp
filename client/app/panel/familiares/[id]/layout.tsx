@@ -5,7 +5,7 @@ import Calendar from "react-calendar";
 import Image from "next/image";
 import { getPariente } from "@/lib/database";
 import { Button } from "@/components/ui/button";
-import { HeartHandshake, UserPen } from "lucide-react";
+import { FilePenLine, HeartHandshake } from "lucide-react";
 import Link from "next/link";
 
 export default async function Layout({
@@ -83,7 +83,7 @@ export default async function Layout({
 							href={`/panel/familiares/${id}/incidencias`}
 							className="flex flex-col items-center justify-center"
 						>
-							<UserPen className="w-7 h-7 text-white" />{" "}
+							<FilePenLine className="w-7 h-7 text-white" />{" "}
 							<span className="text-[8px]">Incidencias</span>{" "}
 						</Link>
 					</Button>

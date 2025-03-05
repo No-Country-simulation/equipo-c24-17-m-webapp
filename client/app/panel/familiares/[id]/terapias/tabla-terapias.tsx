@@ -9,48 +9,45 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { IncidenciaT, TipoIncidenciaT } from "@/lib/definitions";
-import { format } from "date-fns";
-import { Frown, Smile, UserPen } from "lucide-react";
-import ActualizarIncidenciaDialog from "./actualizar-dialog";
-import { EliminarIncidenciaDialog } from "./eliminar-dialog";
-import CrearIncidencia from "./crear-dialog";
+import { HeartHandshake } from "lucide-react";
 
-export function TablaIncidencias({
+export function TablaTerapias({
 	id,
-	incidencias,
-	tipoIncidencia,
+	terapias,
+	tipoEspecialidad,
 }: {
 	id: number;
-	incidencias: IncidenciaT[];
-	tipoIncidencia: TipoIncidenciaT[];
+	terapias: IncidenciaT[];
+	tipoEspecialidad: TipoIncidenciaT[];
 }) {
 	return (
 		<Card className="max-w-full mx-auto overflow-hidden">
-			<CardHeader className="bg-rosaCl text-white overflow-hidden relative">
+			<CardHeader className="bg-blueCl text-white overflow-hidden relative">
 				<CardTitle className="text-center capitalize flex items-center justify-center gap-4 text-xl">
-					<UserPen className="text-white" /> <span>Control de Incidencias</span>
+					<HeartHandshake className="text-white" />{" "}
+					<span>Lista de Terapias</span>
 				</CardTitle>
 
-				<CrearIncidencia tipoIncidencia={tipoIncidencia} id={id} />
+				{/* <CrearIncidencia tipoIncidencia={tipoIncidencia} id={id} /> */}
 			</CardHeader>
 			<Table>
 				<TableCaption>
-					{incidencias.length
-						? "Lista de incidencias"
-						: "No hay incidencias para mostrar."}
+					{terapias.length
+						? "Lista de Terapias"
+						: "No hay terapias para mostrar."}
 				</TableCaption>
 				<TableHeader>
 					<TableRow>
-						<TableHead>Incidencia</TableHead>
-						<TableHead>Fecha</TableHead>
-						<TableHead className="text-center">Duración</TableHead>
-						<TableHead className="text-center">Descripción</TableHead>
-						<TableHead className="text-center">Estado</TableHead>
+						<TableHead>Especialidad</TableHead>
+						<TableHead>Fecha Inicio</TableHead>
+						<TableHead className="text-center">Fecha Fin</TableHead>
+						<TableHead className="text-center">Dia</TableHead>
+						<TableHead className="text-center">Horario</TableHead>
 						<TableHead className="text-center">Acciones</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{incidencias.map((incidencia) => (
+					{/* {terapias.map((terapia) => (
 						<TableRow key={incidencia.id}>
 							<TableCell>
 								{
@@ -79,7 +76,7 @@ export function TablaIncidencias({
 								</div>
 							</TableCell>
 						</TableRow>
-					))}
+					))} */}
 				</TableBody>
 			</Table>
 		</Card>

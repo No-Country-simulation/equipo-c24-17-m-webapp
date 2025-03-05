@@ -86,6 +86,30 @@ export async function getParientes(correoUsuario: string) {
 	}
 }
 
+export async function getPariente(idPariente: number) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/hijo/${idPariente}`,
+			{
+				method: "GET",
+
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+
+		return (await res.json()) as ParienteT;
+	} catch (error) {
+		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
 export async function eliminarPariente(id: number) {
 	try {
 		const res = await fetch(
@@ -158,10 +182,10 @@ export async function getTiposIncidencia() {
 }
 
 //Incidencias funciones
-export async function getIncidenciasHijo(correo: string) {
+export async function getIncidenciasHijo(id: number) {
 	try {
 		const res = await fetch(
-			`${process.env.NEXT_PRIVATE_API_URL}api/incidencia/?correo=${correo}`,
+			`${process.env.NEXT_PRIVATE_API_URL}api/incidencia/hijo/${id}`,
 			{
 				method: "GET",
 				headers: {
@@ -210,7 +234,7 @@ export async function crearIncidencia(
 export async function actualizarIncidencia(incidencia: IncidenciaT) {
 	const fechaISO = new Date(incidencia.fecha).toISOString().split("T")[0];
 	const newData = { ...incidencia, fecha: fechaISO };
-	console.log({ newData });
+
 	try {
 		const res = await fetch(
 			`${process.env.NEXT_PRIVATE_API_URL}api/incidencia/${incidencia.id}`,

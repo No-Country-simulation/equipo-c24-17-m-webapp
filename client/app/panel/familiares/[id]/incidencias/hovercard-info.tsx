@@ -11,7 +11,7 @@ export function HoverCardInfo() {
 	return (
 		<HoverCard>
 			<HoverCardTrigger asChild>
-				<Button variant="link">
+				<Button variant="link" onClick={(e) => e.preventDefault()}>
 					<InfoIcon />
 				</Button>
 			</HoverCardTrigger>

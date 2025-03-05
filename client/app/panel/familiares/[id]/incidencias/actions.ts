@@ -15,7 +15,7 @@ export const crearIncidenciaAction = createServerAction()
 	.input(incidenciaSchemaNoID)
 	.handler(async ({ input }) => {
 		await crearIncidencia(input);
-		revalidatePath("/panel");
+		revalidatePath("/panel/familiares");
 		return { success: "ok" };
 	});
 
