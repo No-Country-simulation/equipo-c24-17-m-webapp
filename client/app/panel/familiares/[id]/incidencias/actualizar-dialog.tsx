@@ -36,7 +36,7 @@ import {
 import { cn, handleFieldErrors } from "@/lib/utils";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { CalendarIcon, UserPenIcon } from "lucide-react";
+import { CalendarIcon, FilePenLine } from "lucide-react";
 import {
 	Dialog,
 	DialogContent,
@@ -86,8 +86,8 @@ export default function ActualizarIncidenciaDialog({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button variant="outline">
-					<UserPenIcon /> <p>Actualizar</p>
+				<Button variant="ghost" className="p-0">
+					<FilePenLine size={17} className="text-black" />
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[540px]">
