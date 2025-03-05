@@ -10,7 +10,7 @@ export function Footer() {
 
     return (
         <footer className="bg-[#BED2FA] relative">
-            <div className="container h-[max-content] w-[100dvw] py-12 flex flex-col justify-center items-center md:flex-row md:pl-12 md:justify-around">
+            <div className="min-[1000px]:container h-[max-content] w-[100dvw] py-12 flex flex-col pl-4 justify-center items-start md:flex-row md:pl-12 md:gap-12">
                 <section className="pl-4 flex gap-8">
                     <div>
                         <div className="pr-4 py-4">
