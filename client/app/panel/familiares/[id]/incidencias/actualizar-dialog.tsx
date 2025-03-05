@@ -97,10 +97,7 @@ export default function ActualizarIncidenciaDialog({
 				</DialogHeader>
 				<Form {...form}>
 					<Loader loading={isPending} />
-					<form
-						onSubmit={onSubmit}
-						className="space-y-4 p-6 border rounded-lg shadow-md mt-10 w-[310px]  bg-white"
-					>
+					<form onSubmit={onSubmit} className="space-y-4 p-6 bg-white">
 						<FormField
 							control={form.control}
 							name="idTipoIncidencia"
@@ -260,8 +257,12 @@ export default function ActualizarIncidenciaDialog({
 								</FormItem>
 							)}
 						/>
-						<div className="flex justify-center">
-							<Button type="submit" disabled={isPending}>
+						<div className="flex justify-center pt-8">
+							<Button
+								type="submit"
+								disabled={isPending}
+								className="bg-blueCl hover:bg-blueCl hover:text-white hover:opacity-90 rounded-full px-8 shadow-xl"
+							>
 								Actualizar
 							</Button>
 						</div>
