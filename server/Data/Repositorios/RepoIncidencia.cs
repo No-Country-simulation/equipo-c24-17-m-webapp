@@ -91,5 +91,13 @@ namespace server.Data.Repositorios
                 throw new Exception("Error general al eliminar la incidencia.", ex);
             }
         }
+
+        public List<Incidencia> ObtenerIncidenciasDeHijos(int id)
+        {
+            return _context.Incidencias
+                .Where(o => o.IdHijo == id)                
+                .Include(h => h.IdHijoNavigation)
+                .ToList();
+        }
     }
 }
