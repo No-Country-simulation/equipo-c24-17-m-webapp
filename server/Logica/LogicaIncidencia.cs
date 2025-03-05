@@ -90,6 +90,20 @@ namespace server.Logica
             {
                 throw new Exception(ex.Message);
             }
+        }        
+        
+        public List<Incidencia> ObtenerListadoDeIncidenciasDeUnHijo(int id)
+        {
+            RepoIncidencia repo_Incidencia = new RepoIncidencia(_context);
+            try
+            {
+                var hijo_existe = _context.Hijos.Find(id) ?? throw new KeyNotFoundException("El hijo no está cargado en el sistema.");
+                return repo_Incidencia.ObtenerIncidenciasDeHijos(hijo_existe.Id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

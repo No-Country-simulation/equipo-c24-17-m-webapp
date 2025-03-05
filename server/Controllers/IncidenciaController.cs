@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.Data.Models;
+using server.Data.Repositorios;
 using server.Logica;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -98,6 +99,20 @@ namespace server.Controllers
             catch (Exception ex)
             {
                 return StatusCode(404, $"Error al eliminar la incidencia: {ex.Message}");
+            }
+        }
+
+        [HttpGet("hijo/{id}")]
+        public ActionResult ObtenerIncidenciasDeHijos(int id)
+        {
+            LogicaIncidencia logica_incidencia = new LogicaIncidencia(_context);
+            try
+            {
+                return Ok(logica_incidencia.ObtenerListadoDeIncidenciasDeUnHijo(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener las incidencias de el hijo solicitada: {ex.Message}");
             }
         }
     }
