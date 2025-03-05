@@ -16,6 +16,7 @@ public partial class BdTeacompanioContext : DbContext
     {
     }
 
+    public virtual DbSet<Consulta> Consultas { get; set; }
     public virtual DbSet<Medicacion> Medicaciones { get; set; }
     public virtual DbSet<Terapia> Terapias { get; set; }
     public virtual DbSet<TipoEspecialidad> TipoEspecialidades { get; set; }
@@ -45,6 +46,7 @@ public partial class BdTeacompanioContext : DbContext
             entity.Property(e => e.Descripcion).HasColumnName("descripcion");
             entity.Property(e => e.Fecha).HasColumnName("fecha");
             entity.Property(e => e.Duracion).HasColumnName("duracion");
+            entity.Property(e => e.Es_positiva).HasColumnName("es_positiva");
             entity.Property(e => e.IdTipoIncidencia).HasColumnName("id_tipoincidencia");
             entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
 
@@ -60,6 +62,36 @@ public partial class BdTeacompanioContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
         });
         //-------------------------------------------------------------------------------------
+
+
+        modelBuilder.Entity<Consulta>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("consultas_pkey");
+
+            entity.ToTable("consulta");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Fecha).HasColumnName("fecha");
+            entity.Property(e => e.Duracion).HasColumnName("duracion");
+            entity.Property(e => e.Nombre_especialista).HasColumnName("nombre_especialista");
+            entity.Property(e => e.IdTerapia).HasColumnName("id_terapia");
+
+            entity.HasOne(d => d.IdTipoEspecialidadNavigation)
+                .WithMany(p => p.Consultas)
+                .HasForeignKey(d => d.IdTipoEspecialidad)
+                .HasConstraintName("fk_tipoespecialidad_consultas");
+
+            entity.HasOne(d => d.IdTerapiaNavigation)
+                .WithMany(p => p.Consultas)
+                .HasForeignKey(d => d.IdTerapia)
+                .HasConstraintName("fk_terapia_consultas");
+        });
+        //-------------------------------------------------------------------------------------
+
 
         modelBuilder.Entity<Medicacion>(entity =>
         {
@@ -86,7 +118,6 @@ public partial class BdTeacompanioContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
-        //-------------------------------------------------------------------------------------
         modelBuilder.Entity<Terapia>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("terapias_pkey");
@@ -98,16 +129,10 @@ public partial class BdTeacompanioContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
-            entity.Property(e => e.Horario).HasColumnName("horario");
             entity.Property(e => e.Fecha_inicio).HasColumnName("fecha_inicio");
             entity.Property(e => e.Fecha_culminacion).HasColumnName("fecha_culminacion");
-            entity.Property(e => e.IdTipoEspecialidad).HasColumnName("id_tipoespecialidad");
             entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
-
-            entity.HasOne(d => d.IdTipoEspecialidadNavigation)
-                .WithMany(p => p.Terapias)
-                .HasForeignKey(d => d.IdTipoEspecialidad)
-                .HasConstraintName("fk_tipoespecialidad_incidencias");
+            entity.Property(e => e.Esta_activo).HasColumnName("esta_activo");
 
             entity.HasOne(d => d.IdHijoNavigation)
                 .WithMany(h => h.Terapias)
@@ -116,22 +141,22 @@ public partial class BdTeacompanioContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
-            modelBuilder.Entity<TipoEspecialidad>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("tipoespecialidad_pkey");
+        modelBuilder.Entity<TipoEspecialidad>(entity =>
+    {
+        entity.HasKey(e => e.Id).HasName("tipoespecialidad_pkey");
 
-            entity.ToTable("tipoespecialidad");
+        entity.ToTable("tipoespecialidad");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
-                .HasColumnName("created_at");
-            entity.Property(e => e.Descripcion).HasColumnName("descripcion");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(150)
-                .HasColumnName("nombre");
-        });
+        entity.Property(e => e.Id).HasColumnName("id");
+        entity.Property(e => e.CreatedAt)
+            .HasDefaultValueSql("now()")
+            .HasColumnType("timestamp without time zone")
+            .HasColumnName("created_at");
+        entity.Property(e => e.Descripcion).HasColumnName("descripcion");
+        entity.Property(e => e.Nombre)
+            .HasMaxLength(150)
+            .HasColumnName("nombre");
+    });
 
         modelBuilder.Entity<TipoIncidencia>(entity =>
         {
@@ -162,10 +187,9 @@ public partial class BdTeacompanioContext : DbContext
             entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
             entity.Property(e => e.IdTipoestudio).HasColumnName("id_tipoestudio");
 
-
-            //entity.HasOne(d => d.IdHijoNavigation).WithMany(p => p.Estudiosmedicos)
-            //    .HasForeignKey(d => d.IdHijo)
-            //    .HasConstraintName("fk_hijo_estudiosmedicos");
+            entity.HasOne(d => d.IdHijoNavigation).WithMany(p => p.Estudiosmedicos)
+                .HasForeignKey(d => d.IdHijo)
+                .HasConstraintName("fk_hijo_estudiosmedicos");
 
             entity.HasOne(d => d.IdTipoestudioNavigation).WithMany(p => p.Estudiosmedicos)
                 .HasForeignKey(d => d.IdTipoestudio)
@@ -199,7 +223,6 @@ public partial class BdTeacompanioContext : DbContext
                 .HasMaxLength(150)
                 .IsFixedLength()
                 .HasColumnName("nombre_diagnostico");
-
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Hijos)
                 .HasForeignKey(d => d.IdUsuario)
@@ -250,6 +273,5 @@ public partial class BdTeacompanioContext : DbContext
 
         OnModelCreatingPartial(modelBuilder);
     }
-
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
