@@ -1,6 +1,4 @@
 "use client"
-
-import { Separator } from "@radix-ui/react-separator";
 import { MapPin, Mail, ArrowUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,7 +39,7 @@ export function Footer() {
                             <small className="hover:underline cursor-pointer">Comunidad</small>
                             <small className="hover:underline cursor-pointer">Guías de apoyo</small>
                             <small className="hover:underline cursor-pointer">Crea tu perfil</small>
-                            <small className="hover:underline cursor-pointer">FAQ's</small>
+                            <small className="hover:underline cursor-pointer">FAQs</small>
                         </div>
 
                     </section>

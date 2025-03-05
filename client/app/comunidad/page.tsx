@@ -8,8 +8,15 @@ import {
 import { Footer } from "@/components/Footer"
 import Header from "@/components/Header";
 
-export const links = [
-    { title: 'AUTISMO Y SUS DERECHOS', src: '/cardComunidad1.svg', href:'discapacidadyderechos.org.a' },
+
+type LinksT = {
+    title: string,
+    src: string,
+    href: string
+}
+
+const links: LinksT[] = [
+    { title: 'AUTISMO Y SUS DERECHOS', src: '/cardComunidad1.svg', href:'discapacidadyderechos.org.ar' },
     { title: 'HABLEMOS DE AUTISMO', src: '/cardComunidad2.svg', href:'https://diaazul.wordpress.com/' },
     { title: 'TRIBU PEQUES CON TEA', src: '/cardComunidad3.svg', href:'https://chat.whatsapp.com/' },
     { title: 'PADRES DE NENES CON AUTISMO', src: '/cardComunidad4.svg', href:'https://www.facebook.com/' },
