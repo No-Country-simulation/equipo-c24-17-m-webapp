@@ -3,7 +3,6 @@ import {
 	Table,
 	TableBody,
 	TableCaption,
-	TableCell,
 	TableHead,
 	TableHeader,
 	TableRow,
@@ -20,6 +19,8 @@ export function TablaTerapias({
 	terapias: IncidenciaT[];
 	tipoEspecialidad: TipoIncidenciaT[];
 }) {
+	console.log(id);
+	console.log(tipoEspecialidad);
 	return (
 		<Card className="max-w-full mx-auto overflow-hidden">
 			<CardHeader className="bg-blueCl text-white overflow-hidden relative">
