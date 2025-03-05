@@ -43,15 +43,15 @@ export const PreguntasFrecuentes = () => {
 				alt="triangulo divisor"
 				width={2500}
 				height={300}
-				className=" absolute top-0 right-0 left-0 w-full z-20"
+				className=" absolute -top-1 right-0 left-0 w-full z-20"
 			/>
 
-			<div className="bg-[url('https://plus.unsplash.com/premium_photo-1661680863986-13eb209573e0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=...')] bg-cover bg-center min-h-[800px] flex flex-col items-center py-20 opacity-70">
+			<div className="bg-[url('https://plus.unsplash.com/premium_photo-1661680863986-13eb209573e0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=...')] bg-cover bg-center min-h-[800px] flex flex-col items-center py-20 lg:pt-32 xl:pt-44 opacity-70">
 				<h3 className="text-3xl font-bold text-center text-white mb-14 mt-16">
 					Preguntas Frecuentes
 				</h3>
 
-				<div className="container mx-auto max-w-[1100px]">
+				<div className="container mx-auto max-w-[1100px] ">
 					<Accordion type="single" collapsible className="w-full space-y-6 ">
 						{accordions.map((accordion) => (
 							<AccordionItem
