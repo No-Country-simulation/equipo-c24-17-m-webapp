@@ -40,8 +40,8 @@ export function EliminarIncidenciaDialog({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button variant="destructive">
-					<TrashIcon /> <p>Eliminar</p>
+				<Button variant="ghost" className="p-0">
+					<TrashIcon size={17} className="text-rose-500" />
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[340px]">

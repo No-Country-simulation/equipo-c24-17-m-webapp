@@ -89,6 +89,7 @@ export const incidenciaSchema = z.object({
 		.max(100, {
 			message: "La descripción no puede exceder los 100 caracteres.",
 		}),
+	es_positiva: z.coerce.boolean({ message: "Debe seleccionar una reacción." }),
 });
 
 export const incidenciaSchemaNoID = incidenciaSchema.omit({ id: true });
