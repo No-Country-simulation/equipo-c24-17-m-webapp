@@ -13,7 +13,6 @@ namespace server.Data.Models
         public int IdTipoEspecialidad { get; set; }
         public string Nombre_especialista { get; set; } 
         public int IdTerapia { get; set; }
-        public int IdEspecialidad { get; set; }
         public DateTime CreatedAt { get; set; }
 
         [JsonIgnore]
