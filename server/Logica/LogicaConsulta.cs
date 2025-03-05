@@ -2,6 +2,7 @@
 using server.Data;
 using server.Data.Models;
 using server.Data.Repositorios;
+using server.DTOs;
 
 namespace server.Logica
 {
@@ -16,19 +17,39 @@ namespace server.Logica
         }
         #endregion
 
-        public List<Consulta> ObtenerTodosLasConsultas()
+        public List<ConsultaDTO> ObtenerTodosLasConsultasDeUnaTerapia(int id)
         {
             RepoConsulta repo_consulta = new RepoConsulta(_context);
-            List<Consulta> lista_consultas = [];
-
+        {
             try
             {
-                return lista_consultas = repo_consulta.GetAll();
+                RepoHijo repo_Hijo = new RepoHijo(_context);
+                List<ConsultaDTO> lista_consultas = repo_consulta.GetAll(id)
+                    .Select(h => new ConsultaDTO
+                    {
+                        Id = h.Id,
+                        IdTerapia = h.IdTerapia,
+                        NombreEspecialista = h.Nombre_especialista,
+                        Horario = h.Horario,
+                        Fecha = h.Fecha,
+                        Duracion = h.Duracion,
+                        NombreEspecialidad = h.IdTipoEspecialidadNavigation != null ? h.IdTipoEspecialidadNavigation.Nombre : "N/A",
+
+                        NombreHijo = h.IdTerapiaNavigation != null && h.IdTerapiaNavigation.IdHijoNavigation != null
+                        ? h.IdTerapiaNavigation.IdHijoNavigation.Nombre
+                        : "N/A",                       
+                        ApellidoHijo = h.IdTerapiaNavigation != null && h.IdTerapiaNavigation.IdHijoNavigation != null
+                        ? h.IdTerapiaNavigation.IdHijoNavigation.Apellido
+                        : "N/A"
+                    })
+        .ToList();
+                    return lista_consultas;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
         }
 
         public Consulta ObtenerConsultaPorId(int id)
@@ -75,7 +96,7 @@ namespace server.Logica
                 consulta_existente.Duracion = obj_consulta.Duracion;
                 consulta_existente.Horario = obj_consulta.Horario;
                 consulta_existente.Fecha = obj_consulta.Fecha;
-                consulta_existente.IdEspecialidad = obj_consulta.IdEspecialidad;
+                consulta_existente.IdTipoEspecialidad = obj_consulta.IdTipoEspecialidad;
 
                 repo_consulta.UpdateConsulta(consulta_existente);
             }

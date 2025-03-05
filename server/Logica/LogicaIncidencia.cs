@@ -69,6 +69,7 @@ namespace server.Logica
                 incidencia_existe.Fecha = obj_incidencia.Fecha;
                 incidencia_existe.Duracion = obj_incidencia.Duracion;
                 incidencia_existe.IdHijo = hijo_encontrado.Id;
+                incidencia_existe.Es_positiva = obj_incidencia.Es_positiva;
 
                 repo_Incidencia.UpdateIncidencia(incidencia_existe);
             }

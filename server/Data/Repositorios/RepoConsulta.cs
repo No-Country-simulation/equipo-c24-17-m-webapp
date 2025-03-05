@@ -15,17 +15,22 @@ namespace server.Data.Repositorios
         #endregion
 
 
-        public List<Consulta> GetAll()
+        public List<Consulta> GetAll(int id)
         {
             List<Consulta> lista_consultas = [];
 
             try
             {
-                return lista_consultas = _context.Consultas.ToList();
+                return lista_consultas = _context.Consultas
+                    .Where(i => i.IdTerapia == id)
+                    .Include(x=> x.IdTipoEspecialidadNavigation)
+                    .Include(h=> h.IdTerapiaNavigation)
+                        .ThenInclude(t => t.IdHijoNavigation)
+                    .ToList();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(($"Error al obtener consultas: {ex}"));
             }
         }
 
