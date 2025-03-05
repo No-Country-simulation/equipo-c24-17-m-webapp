@@ -78,7 +78,6 @@ namespace server.Logica
                 terapia_existe.Fecha_inicio = obj_terapia.Fecha_inicio;
                 terapia_existe.Fecha_culminacion = obj_terapia.Fecha_culminacion;
                 terapia_existe.Esta_activo = obj_terapia.Esta_activo;
-                terapia_existe.Horario = obj_terapia.Horario;
 
                 repo_terapia.UpdateTerapia(terapia_existe);
             }

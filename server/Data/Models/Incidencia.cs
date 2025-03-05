@@ -10,6 +10,7 @@ namespace server.Data.Models
         public int Duracion { get; set; }
         public int IdTipoIncidencia { get; set; }
         public string Descripcion { get; set; }
+        public bool Es_positiva { get; set; }
         public int IdHijo { get; set; }
         public DateTime CreatedAt { get; set; }
 

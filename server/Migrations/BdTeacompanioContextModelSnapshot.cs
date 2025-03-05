@@ -22,6 +22,57 @@ namespace server.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("server.Data.Models.Consulta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<int>("Duracion")
+                        .HasColumnType("integer")
+                        .HasColumnName("duracion");
+
+                    b.Property<DateOnly>("Fecha")
+                        .HasColumnType("date")
+                        .HasColumnName("fecha");
+
+                    b.Property<TimeOnly>("Horario")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<int>("IdEspecialidad")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdTerapia")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_terapia");
+
+                    b.Property<int>("IdTipoEspecialidad")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Nombre_especialista")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("nombre_especialista");
+
+                    b.HasKey("Id")
+                        .HasName("consultas_pkey");
+
+                    b.HasIndex("IdTerapia");
+
+                    b.HasIndex("IdTipoEspecialidad");
+
+                    b.ToTable("consulta", (string)null);
+                });
+
             modelBuilder.Entity("server.Data.Models.EstudioMedico", b =>
                 {
                     b.Property<int>("Id")
@@ -49,9 +100,6 @@ namespace server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_hijo");
 
-                    b.Property<int?>("IdHijoNavigationId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("IdTipoestudio")
                         .HasColumnType("integer")
                         .HasColumnName("id_tipoestudio");
@@ -63,7 +111,7 @@ namespace server.Migrations
                     b.HasKey("Id")
                         .HasName("estudiosmedicos_pkey");
 
-                    b.HasIndex("IdHijoNavigationId");
+                    b.HasIndex("IdHijo");
 
                     b.HasIndex("IdTipoestudio");
 
@@ -111,8 +159,9 @@ namespace server.Migrations
 
                     b.Property<string>("NombreDiagnostico")
                         .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
-                        .HasColumnName("nombre_diagnostico");
+                        .HasColumnType("character(150)")
+                        .HasColumnName("nombre_diagnostico")
+                        .IsFixedLength();
 
                     b.HasKey("Id")
                         .HasName("hijos_pkey");
@@ -141,6 +190,14 @@ namespace server.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("descripcion");
+
+                    b.Property<int>("Duracion")
+                        .HasColumnType("integer")
+                        .HasColumnName("duracion");
+
+                    b.Property<bool>("Es_positiva")
+                        .HasColumnType("boolean")
+                        .HasColumnName("es_positiva");
 
                     b.Property<DateOnly>("Fecha")
                         .HasColumnType("date")
@@ -222,7 +279,8 @@ namespace server.Migrations
                         .HasDefaultValueSql("now()");
 
                     b.Property<bool>("Esta_activo")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("esta_activo");
 
                     b.Property<DateOnly>("Fecha_culminacion")
                         .HasColumnType("date")
@@ -232,24 +290,14 @@ namespace server.Migrations
                         .HasColumnType("date")
                         .HasColumnName("fecha_inicio");
 
-                    b.Property<TimeOnly>("Horario")
-                        .HasColumnType("time without time zone")
-                        .HasColumnName("horario");
-
                     b.Property<int>("IdHijo")
                         .HasColumnType("integer")
                         .HasColumnName("id_hijo");
-
-                    b.Property<int>("IdTipoEspecialidad")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_tipoespecialidad");
 
                     b.HasKey("Id")
                         .HasName("terapias_pkey");
 
                     b.HasIndex("IdHijo");
-
-                    b.HasIndex("IdTipoEspecialidad");
 
                     b.ToTable("terapia", (string)null);
                 });
@@ -360,8 +408,9 @@ namespace server.Migrations
 
                     b.Property<string>("Imagen")
                         .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
-                        .HasColumnName("imagen");
+                        .HasColumnType("character(150)")
+                        .HasColumnName("imagen")
+                        .IsFixedLength();
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -378,11 +427,35 @@ namespace server.Migrations
                     b.ToTable("usuario", (string)null);
                 });
 
+            modelBuilder.Entity("server.Data.Models.Consulta", b =>
+                {
+                    b.HasOne("server.Data.Models.Terapia", "IdTerapiaNavigation")
+                        .WithMany("Consultas")
+                        .HasForeignKey("IdTerapia")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_terapia_consultas");
+
+                    b.HasOne("server.Data.Models.TipoEspecialidad", "IdTipoEspecialidadNavigation")
+                        .WithMany("Consultas")
+                        .HasForeignKey("IdTipoEspecialidad")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_tipoespecialidad_consultas");
+
+                    b.Navigation("IdTerapiaNavigation");
+
+                    b.Navigation("IdTipoEspecialidadNavigation");
+                });
+
             modelBuilder.Entity("server.Data.Models.EstudioMedico", b =>
                 {
                     b.HasOne("server.Data.Models.Hijo", "IdHijoNavigation")
                         .WithMany("Estudiosmedicos")
-                        .HasForeignKey("IdHijoNavigationId");
+                        .HasForeignKey("IdHijo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_hijo_estudiosmedicos");
 
                     b.HasOne("server.Data.Models.Tipoestudio", "IdTipoestudioNavigation")
                         .WithMany("Estudiosmedicos")
@@ -450,16 +523,7 @@ namespace server.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_hijos_terapias");
 
-                    b.HasOne("server.Data.Models.TipoEspecialidad", "IdTipoEspecialidadNavigation")
-                        .WithMany("Terapias")
-                        .HasForeignKey("IdTipoEspecialidad")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_tipoespecialidad_incidencias");
-
                     b.Navigation("IdHijoNavigation");
-
-                    b.Navigation("IdTipoEspecialidadNavigation");
                 });
 
             modelBuilder.Entity("server.Data.Models.Hijo", b =>
@@ -473,9 +537,14 @@ namespace server.Migrations
                     b.Navigation("Terapias");
                 });
 
+            modelBuilder.Entity("server.Data.Models.Terapia", b =>
+                {
+                    b.Navigation("Consultas");
+                });
+
             modelBuilder.Entity("server.Data.Models.TipoEspecialidad", b =>
                 {
-                    b.Navigation("Terapias");
+                    b.Navigation("Consultas");
                 });
 
             modelBuilder.Entity("server.Data.Models.TipoIncidencia", b =>
