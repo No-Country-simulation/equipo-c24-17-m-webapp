@@ -13,7 +13,7 @@ export function NavDesktot() {
 						</Link>
 					</li>
 					<li>
-						<Link href={"/"} className="font-semibold hover:opacity-70">
+						<Link href={"/comunidad"} className="font-semibold hover:opacity-70">
 							Comunidad
 						</Link>
 					</li>
