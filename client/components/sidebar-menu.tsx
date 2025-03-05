@@ -23,6 +23,11 @@ export default async function SidebarMain() {
 		<SidebarGroup>
 			<SidebarGroupLabel>Accesos</SidebarGroupLabel>
 			<SidebarMenu>
+				<SidebarMenuButton className="border-full bg-blueCl text-white hover:bg-blueCl hover:text-white hover:opacity-80">
+					<Link href={`/panel/familiares`}>Inicio</Link>
+				</SidebarMenuButton>
+			</SidebarMenu>
+			<SidebarMenu>
 				<Collapsible className="group/collapsible">
 					<CollapsibleTrigger asChild>
 						<SidebarMenuButton className="border-full bg-blueCl text-white hover:bg-blueCl hover:text-white hover:opacity-80">
