@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
@@ -21,7 +22,7 @@ export default function Showcase() {
 						</p>
 
 						<Button className=" bg-gradient-to-r  from-fucCl  to-yellowCl rounded-3xl  transition-colors py-5 px-4 my-2 hover:opacity-80 font-semibold text-white tracking-wide">
-							CONOCÉ NUESTRAS GUÍAS
+							<Link href={"/guia"}>CONOCÉ NUESTRAS GUÍAS</Link>
 						</Button>
 					</div>
 
