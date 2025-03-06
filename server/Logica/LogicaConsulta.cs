@@ -20,36 +20,36 @@ namespace server.Logica
         public List<ConsultaDTO> ObtenerTodosLasConsultasDeUnaTerapia(int id)
         {
             RepoConsulta repo_consulta = new RepoConsulta(_context);
-        {
-            try
             {
-                RepoHijo repo_Hijo = new RepoHijo(_context);
-                List<ConsultaDTO> lista_consultas = repo_consulta.GetAll(id)
-                    .Select(h => new ConsultaDTO
-                    {
-                        Id = h.Id,
-                        IdTerapia = h.IdTerapia,
-                        NombreEspecialista = h.Nombre_especialista,
-                        Horario = h.Horario,
-                        Fecha = h.Fecha,
-                        Duracion = h.Duracion,
-                        NombreEspecialidad = h.IdTipoEspecialidadNavigation != null ? h.IdTipoEspecialidadNavigation.Nombre : "N/A",
+                try
+                {
+                    RepoHijo repo_Hijo = new RepoHijo(_context);
+                    List<ConsultaDTO> lista_consultas = repo_consulta.GetAll(id)
+                        .Select(h => new ConsultaDTO
+                        {
+                            Id = h.Id,
+                            IdHijo = h.IdHijo,
+                            NombreEspecialista = h.NombreEspecialista,
+                            Horario = h.Horario,
+                            Fecha = h.Fecha,
+                            Duracion = h.Duracion,
+                            NombreEspecialidad = h.IdTipoEspecialidadNavigation != null ? h.IdTipoEspecialidadNavigation.Nombre : "N/A",
 
-                        NombreHijo = h.IdTerapiaNavigation != null && h.IdTerapiaNavigation.IdHijoNavigation != null
-                        ? h.IdTerapiaNavigation.IdHijoNavigation.Nombre
-                        : "N/A",                       
-                        ApellidoHijo = h.IdTerapiaNavigation != null && h.IdTerapiaNavigation.IdHijoNavigation != null
-                        ? h.IdTerapiaNavigation.IdHijoNavigation.Apellido
-                        : "N/A"
-                    })
-        .ToList();
+                            NombreHijo = h.IdHijoNavigation != null && h.IdHijoNavigation.Nombre != null
+                            ? h.IdHijoNavigation.Nombre
+                            : "N/A",
+                             ApellidoHijo= h.IdHijoNavigation != null && h.IdHijoNavigation.Apellido!= null
+                            ? h.IdHijoNavigation.Apellido
+                            : "N/A",
+                        })
+            .ToList();
                     return lista_consultas;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
         }
 
         public Consulta ObtenerConsultaPorId(int id)
@@ -92,7 +92,7 @@ namespace server.Logica
             try
             {
                 var consulta_existente = _context.Consultas.Find(id) ?? throw new KeyNotFoundException("La consulta no existe.");
-                consulta_existente.Nombre_especialista = obj_consulta.Nombre_especialista;
+                consulta_existente.NombreEspecialista = obj_consulta.NombreEspecialista;
                 consulta_existente.Duracion = obj_consulta.Duracion;
                 consulta_existente.Horario = obj_consulta.Horario;
                 consulta_existente.Fecha = obj_consulta.Fecha;

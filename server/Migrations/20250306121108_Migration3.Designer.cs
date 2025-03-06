@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using server.Data;
@@ -11,9 +12,11 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    partial class BdTeacompanioContextModelSnapshot : ModelSnapshot
+    [Migration("20250306121108_Migration3")]
+    partial class Migration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,17 +143,15 @@ namespace server.Migrations
                         .HasColumnType("text")
                         .HasColumnName("descripcion_diagnostico");
 
-                    b.Property<DateOnly?>("FechaCulminacion")
-                        .HasColumnType("date")
-                        .HasColumnName("fecha_culminacion");
-
-                    b.Property<DateOnly?>("FechaInicio")
-                        .HasColumnType("date")
-                        .HasColumnName("fecha_inicio");
-
                     b.Property<DateOnly>("FechaNacimiento")
                         .HasColumnType("date")
                         .HasColumnName("fecha_nacimiento");
+
+                    b.Property<DateOnly?>("Fecha_culminacion")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("Fecha_inicio")
+                        .HasColumnType("date");
 
                     b.Property<int>("IdUsuario")
                         .HasColumnType("integer")
@@ -169,8 +170,7 @@ namespace server.Migrations
                         .IsFixedLength();
 
                     b.Property<bool>("RealizaTerapias")
-                        .HasColumnType("boolean")
-                        .HasColumnName("realiza_terapias");
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id")
                         .HasName("hijos_pkey");
