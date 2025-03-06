@@ -14,6 +14,7 @@ import { Frown, Smile, UserPen } from "lucide-react";
 import ActualizarIncidenciaDialog from "./actualizar-dialog";
 import { EliminarIncidenciaDialog } from "./eliminar-dialog";
 import CrearIncidencia from "./crear-dialog";
+import { TextPopover } from "@/components/panel/text-popover";
 
 export function TablaIncidencias({
 	id,
@@ -64,7 +65,7 @@ export function TablaIncidencias({
 								{incidencia.duracion}min.
 							</TableCell>
 							<TableCell className="text-center">
-								{incidencia.descripcion}
+								<TextPopover text={incidencia.descripcion} />
 							</TableCell>
 							<TableCell className="flex justify-center">
 								{incidencia.es_positiva ? <Smile /> : <Frown />}

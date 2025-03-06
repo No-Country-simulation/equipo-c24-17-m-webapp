@@ -27,6 +27,7 @@ export default {
 				darkCl: "#696868",
 				bgSoftCl: "#FAEDDA",
 				rosaCl: "#E8386C",
+				verdeCl: "#5FBDAC",
 				card: {
 					DEFAULT: "hsl(var(--card))",
 					foreground: "hsl(var(--card-foreground))",
