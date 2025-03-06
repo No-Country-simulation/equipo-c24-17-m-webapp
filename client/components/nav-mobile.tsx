@@ -46,7 +46,7 @@ export default function NavMobile() {
 						</li>{" "}
 						<li className="">
 							{" "}
-							<Link href={"/"} className="font-bold flex items-center gap-2">
+							<Link href={"/comunidad"} className="font-bold flex items-center gap-2">
 								<House size={20} /> <span>Comunidad</span>
 							</Link>{" "}
 						</li>{" "}

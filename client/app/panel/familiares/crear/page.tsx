@@ -6,7 +6,7 @@ export default async function page() {
 
 	return (
 		<div className="flex flex-col justify-center items-center">
-			<h1 className="text-2xl">Crear Pariente</h1>
+			<h1 className="text-2xl">Agregar Familiar</h1>
 			<div>
 				<FormPariente email={email} />
 			</div>

@@ -151,7 +151,11 @@ export default function FormPariente({ email }: { email: string }) {
 				/>
 
 				<div className="flex justify-center">
-					<Button type="submit" disabled={isPending}>
+					<Button
+						type="submit"
+						disabled={isPending}
+						className="bg-blueCl hover:bg-blueCl hover:text-white hover:opacity-90 rounded-full px-8 shadow-xl"
+					>
 						Agregar
 					</Button>
 				</div>
