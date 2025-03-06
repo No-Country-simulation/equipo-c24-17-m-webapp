@@ -199,7 +199,6 @@ public partial class BdTeacompanioContext : DbContext
                 .HasMaxLength(150)
                 .IsFixedLength()
                 .HasColumnName("nombre_diagnostico");
-            entity.Property(e => e.RealizaTerapias).HasColumnName("realiza_terapias");
             entity.Property(e => e.FechaInicio).HasColumnName("fecha_inicio");
             entity.Property(e => e.FechaCulminacion).HasColumnName("fecha_culminacion");
 
