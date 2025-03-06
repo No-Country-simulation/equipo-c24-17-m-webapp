@@ -39,7 +39,6 @@ import { CalendarIcon, FilePenLine, Frown, Smile } from "lucide-react";
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -90,10 +89,16 @@ export default function ActualizarIncidenciaDialog({
 					<FilePenLine size={17} className="text-black" />
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[540px]">
+			<DialogContent className="sm:max-w-[440px]">
 				<DialogHeader className="space-y-3">
-					<DialogTitle>Actualizar Incidencia</DialogTitle>
-					<DialogDescription>Complete todos los campos.</DialogDescription>
+					<div className="flex justify-start items-center gap-4">
+						<div className=" gap-0 rounded-full h-16 w-16 bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80 flex items-center justify-center">
+							<FilePenLine className="w-7 h-7 text-white" />{" "}
+						</div>
+						<DialogTitle className="text-xl uppercase font-normal">
+							Actualizar Incidencia
+						</DialogTitle>
+					</div>
 				</DialogHeader>
 				<Form {...form}>
 					<Loader loading={isPending} />
@@ -103,8 +108,8 @@ export default function ActualizarIncidenciaDialog({
 							name="idTipoIncidencia"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>
-										Incidencia <HoverCardInfo />
+									<FormLabel className="flex items-center gap-1">
+										<span>Incidencia</span> <HoverCardInfo />
 									</FormLabel>
 									<Select
 										onValueChange={field.onChange}
