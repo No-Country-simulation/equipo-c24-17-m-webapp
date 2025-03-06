@@ -18,7 +18,6 @@ public partial class BdTeacompanioContext : DbContext
 
     public virtual DbSet<Consulta> Consultas { get; set; }
     public virtual DbSet<Medicacion> Medicaciones { get; set; }
-    public virtual DbSet<Terapia> Terapias { get; set; }
     public virtual DbSet<TipoEspecialidad> TipoEspecialidades { get; set; }
     public virtual DbSet<TipoIncidencia> TipoIncidencias { get; set; }
     public virtual DbSet<Incidencia> Incidencias { get; set; }
@@ -77,18 +76,18 @@ public partial class BdTeacompanioContext : DbContext
                 .HasColumnName("created_at");
             entity.Property(e => e.Fecha).HasColumnName("fecha");
             entity.Property(e => e.Duracion).HasColumnName("duracion");
-            entity.Property(e => e.Nombre_especialista).HasColumnName("nombre_especialista");
-            entity.Property(e => e.IdTerapia).HasColumnName("id_terapia");
+            entity.Property(e => e.NombreEspecialista).HasColumnName("nombre_especialista");
+            entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
 
             entity.HasOne(d => d.IdTipoEspecialidadNavigation)
                 .WithMany(p => p.Consultas)
                 .HasForeignKey(d => d.IdTipoEspecialidad)
                 .HasConstraintName("fk_tipoespecialidad_consultas");
 
-            entity.HasOne(d => d.IdTerapiaNavigation)
+            entity.HasOne(d => d.IdHijoNavigation)
                 .WithMany(p => p.Consultas)
-                .HasForeignKey(d => d.IdTerapia)
-                .HasConstraintName("fk_terapia_consultas");
+                .HasForeignKey(d => d.IdHijo)
+                .HasConstraintName("fk_hijo_consultas");
         });
         //-------------------------------------------------------------------------------------
 
@@ -115,29 +114,6 @@ public partial class BdTeacompanioContext : DbContext
                 .WithMany(h => h.Medicaciones)
                 .HasForeignKey(d => d.IdHijo)
                 .HasConstraintName("fk_hijos_medicaciones")
-                .OnDelete(DeleteBehavior.Cascade);
-        });
-
-        modelBuilder.Entity<Terapia>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("terapias_pkey");
-
-            entity.ToTable("terapia");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
-                .HasColumnName("created_at");
-            entity.Property(e => e.Fecha_inicio).HasColumnName("fecha_inicio");
-            entity.Property(e => e.Fecha_culminacion).HasColumnName("fecha_culminacion");
-            entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
-            entity.Property(e => e.Esta_activo).HasColumnName("esta_activo");
-
-            entity.HasOne(d => d.IdHijoNavigation)
-                .WithMany(h => h.Terapias)
-                .HasForeignKey(d => d.IdHijo)
-                .HasConstraintName("fk_hijos_terapias")
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
@@ -223,6 +199,9 @@ public partial class BdTeacompanioContext : DbContext
                 .HasMaxLength(150)
                 .IsFixedLength()
                 .HasColumnName("nombre_diagnostico");
+            entity.Property(e => e.RealizaTerapias).HasColumnName("realiza_terapias");
+            entity.Property(e => e.FechaInicio).HasColumnName("fecha_inicio");
+            entity.Property(e => e.FechaCulminacion).HasColumnName("fecha_culminacion");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Hijos)
                 .HasForeignKey(d => d.IdUsuario)
