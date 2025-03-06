@@ -9,6 +9,14 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import Calendar from "react-calendar";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
@@ -20,7 +28,15 @@ import { parienteDefaultValues } from "@/lib/defaultValues";
 import { toast } from "sonner";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
-import { handleFieldErrors } from "@/lib/utils";
+import { cn, handleFieldErrors } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+} from "@/components/ui/card";
 
 export default function FormPariente({ email }: { email: string }) {
 	const { isPending, execute } = useServerAction(crearParienteAction);
@@ -58,7 +74,7 @@ export default function FormPariente({ email }: { email: string }) {
 			<Loader loading={isPending} />
 			<form
 				onSubmit={onSubmit}
-				className="space-y-4 p-6 border rounded-lg shadow-md mt-10 w-[310px]  bg-white"
+				className="grid grid-cols-2  gap-8 p-6 border rounded-lg shadow-md mt-10   bg-white"
 			>
 				<FormField
 					control={form.control}
@@ -119,13 +135,53 @@ export default function FormPariente({ email }: { email: string }) {
 
 				<FormField
 					control={form.control}
+					name="fechaNacimiento"
+					render={({ field }) => (
+						<FormItem className="flex flex-col pt-[10px] ">
+							<FormLabel>Fecha de Nacimiento</FormLabel>
+							<Popover>
+								<PopoverTrigger asChild>
+									<FormControl>
+										<Button
+											variant={"outline"}
+											className={cn(
+												"w-full pl-3 text-left font-normal",
+												!field.value && "text-muted-foreground"
+											)}
+										>
+											{field.value ? (
+												format(field.value, "PPP", { locale: es })
+											) : (
+												<span>Seleccione una fecha</span>
+											)}
+											<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+										</Button>
+									</FormControl>
+								</PopoverTrigger>
+								<PopoverContent className="w-auto p-0" align="start">
+									<Calendar
+										onChange={field.onChange}
+										value={field.value}
+										locale="es-AR"
+										className={"rounded-lg border-slate-400"}
+										maxDate={new Date()}
+									/>
+								</PopoverContent>
+							</Popover>
+
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
 					name="descripcionDiagnostico"
 					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Descripción</FormLabel>
+						<FormItem className="col-span-2">
+							<FormLabel>Descripción del diagnostico</FormLabel>
 							<FormControl>
-								<Input
-									type="text"
+								<Textarea
+									className="resize-none"
 									placeholder="Descripción del diagnóstico"
 									{...field}
 									disabled={isPending}
@@ -136,21 +192,99 @@ export default function FormPariente({ email }: { email: string }) {
 					)}
 				/>
 
-				<FormField
-					control={form.control}
-					name="fechaNacimiento"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Fecha de Nacimiento</FormLabel>
-							<FormControl>
-								<Input type="date" {...field} disabled={isPending} />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
+				<Card className="col-span-2">
+					<CardHeader>
+						<CardDescription>
+							Fecha inicio y fin de terapia (opcional)
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<div className="flex items-center gap-8">
+							<FormField
+								control={form.control}
+								name="fechaInicioTerapia"
+								render={({ field }) => (
+									<FormItem className="flex flex-col pt-[10px] ">
+										<FormLabel>Fecha de Inicio</FormLabel>
+										<Popover>
+											<PopoverTrigger asChild>
+												<FormControl>
+													<Button
+														variant={"outline"}
+														className={cn(
+															"w-full pl-3 text-left font-normal",
+															!field.value && "text-muted-foreground"
+														)}
+													>
+														{field.value ? (
+															format(field.value, "PPP", { locale: es })
+														) : (
+															<span>Seleccione una fecha</span>
+														)}
+														<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+													</Button>
+												</FormControl>
+											</PopoverTrigger>
+											<PopoverContent className="w-auto p-0" align="start">
+												<Calendar
+													onChange={field.onChange}
+													value={field.value}
+													locale="es-AR"
+													className={"rounded-lg border-slate-400"}
+													maxDate={new Date()}
+												/>
+											</PopoverContent>
+										</Popover>
 
-				<div className="flex justify-center">
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="fechaFinTerapia"
+								render={({ field }) => (
+									<FormItem className="flex flex-col pt-[10px] ">
+										<FormLabel>Fecha de Nacimiento</FormLabel>
+										<Popover>
+											<PopoverTrigger asChild>
+												<FormControl>
+													<Button
+														variant={"outline"}
+														className={cn(
+															"w-full pl-3 text-left font-normal",
+															!field.value && "text-muted-foreground"
+														)}
+													>
+														{field.value ? (
+															format(field.value, "PPP", { locale: es })
+														) : (
+															<span>Seleccione una fecha</span>
+														)}
+														<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+													</Button>
+												</FormControl>
+											</PopoverTrigger>
+											<PopoverContent className="w-auto p-0" align="start">
+												<Calendar
+													onChange={field.onChange}
+													value={field.value}
+													locale="es-AR"
+													className={"rounded-lg border-slate-400"}
+													maxDate={new Date()}
+												/>
+											</PopoverContent>
+										</Popover>
+
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						</div>
+					</CardContent>
+				</Card>
+
+				<div className="flex justify-center col-span-2">
 					<Button
 						type="submit"
 						disabled={isPending}

@@ -1,5 +1,4 @@
 "use client";
-import { ParienteT } from "@/lib/definitions";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,10 +12,10 @@ import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useServerAction } from "zsa-react";
-import { parienteSchema } from "@/lib/schemas";
+import { parienteSchemaNoID } from "@/lib/schemas";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { actualizarParienteAction } from "./actions";
+import { crearParienteAction } from "./actions";
 import {
 	FormControl,
 	FormField,
@@ -25,7 +24,7 @@ import {
 	FormMessage,
 	Form,
 } from "@/components/ui/form";
-import { CalendarIcon, UserPen, UserPenIcon } from "lucide-react";
+import { CalendarIcon, UserPen, UserPlus } from "lucide-react";
 import { cn, handleFieldErrors } from "@/lib/utils";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -42,26 +41,25 @@ import {
 	CardDescription,
 	CardHeader,
 } from "@/components/ui/card";
+import { parienteDefaultValues } from "@/lib/defaultValues";
 
-export default function ActualizarDialog({
-	pariente,
+export default function CrearDialog({
 	correoUsuario,
 }: {
-	pariente: ParienteT;
 	correoUsuario: string;
 }) {
-	const { isPending, execute } = useServerAction(actualizarParienteAction);
+	const { isPending, execute } = useServerAction(crearParienteAction);
 	const [open, setOpen] = useState(false);
-	const form = useForm<z.infer<typeof parienteSchema>>({
-		resolver: zodResolver(parienteSchema),
+	const form = useForm<z.infer<typeof parienteSchemaNoID>>({
+		resolver: zodResolver(parienteSchemaNoID),
 		defaultValues: {
-			...pariente,
-			correoUsuario,
+			...parienteDefaultValues,
+			correoUsuario: correoUsuario,
 		},
 	});
 
 	const onSubmit = form.handleSubmit(
-		async (values: z.infer<typeof parienteSchema>) => {
+		async (values: z.infer<typeof parienteSchemaNoID>) => {
 			const [data, err] = await execute(values);
 
 			if (err) {
@@ -78,11 +76,13 @@ export default function ActualizarDialog({
 			}
 		}
 	);
+
+	console.log(form.formState.errors);
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button variant="outline">
-					<UserPenIcon /> <p>Actualizar</p>
+				<Button className=" gap-0 flex flex-col items-center justify-center  rounded-full h-12 w-12 bg-blueStrongCl text-white hover:bg-blueStrongCl hover:opacity-80 ">
+					<UserPlus className="w-7 h-7 text-white" />{" "}
 				</Button>
 			</DialogTrigger>
 			<DialogContent className=" ">
@@ -92,7 +92,7 @@ export default function ActualizarDialog({
 							<UserPen className="w-7 h-7 text-white" />{" "}
 						</div>
 						<DialogTitle className="text-xl uppercase font-normal">
-							Actualizar Familiar
+							Agregar Familiar
 						</DialogTitle>
 					</div>
 				</DialogHeader>
@@ -228,7 +228,7 @@ export default function ActualizarDialog({
 									<div className="flex items-center gap-4">
 										<FormField
 											control={form.control}
-											name="fechaInicioTerapia"
+											name="fechaInicio"
 											render={({ field }) => (
 												<FormItem className="flex flex-col pt-[10px] w-1/2 ">
 													<FormLabel>Fecha de Inicio</FormLabel>
@@ -271,7 +271,7 @@ export default function ActualizarDialog({
 										/>
 										<FormField
 											control={form.control}
-											name="fechaFinTerapia"
+											name="fechaCulminacion"
 											render={({ field }) => (
 												<FormItem className="flex flex-col pt-[10px] w-1/2 ">
 													<FormLabel>Fecha de Fin</FormLabel>
@@ -322,7 +322,7 @@ export default function ActualizarDialog({
 									disabled={isPending}
 									className="bg-blueCl hover:bg-blueCl hover:text-white hover:opacity-90 rounded-full px-8 shadow-xl"
 								>
-									Actualizar
+									Agregar
 								</Button>
 							</div>
 						</form>

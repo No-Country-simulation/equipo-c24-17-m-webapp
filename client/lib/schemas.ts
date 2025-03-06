@@ -39,27 +39,18 @@ export const parienteSchema = z.object({
 			message: "La descripción no puede exceder los 100 caracteres.",
 		}),
 
-	fechaNacimiento: z
-		.string()
+	fechaNacimiento: z.coerce
+		.date({ message: "Debe ingresar una fecha" })
 		.refine(
 			(val) => {
-				const fecha = new Date(val);
-				return !isNaN(fecha.getTime());
-			},
-			{ message: "Debe agregar una fecha" }
-		)
-		.refine(
-			(val) => {
-				const fecha = new Date(val);
-				const diff = differenceInMonths(minDate, fecha);
+				const diff = differenceInMonths(minDate, val);
 				return diff > 12;
 			},
 			{ message: "Debe ser mayor de 1 año." }
 		)
 		.refine(
 			(val) => {
-				const fecha = new Date(val);
-				const diff = differenceInMonths(fecha, maxDate);
+				const diff = differenceInMonths(val, maxDate);
 				return diff < 216;
 			},
 			{ message: "Debe ser menor de 18 años." }
@@ -67,6 +58,8 @@ export const parienteSchema = z.object({
 	correoUsuario: z
 		.string()
 		.email({ message: "Debe ingresar un correo valido." }),
+	fechaInicio: z.coerce.date().optional(),
+	fechaCulminacion: z.coerce.date().optional(),
 });
 
 export const parienteSchemaNoID = parienteSchema.omit({ id: true });

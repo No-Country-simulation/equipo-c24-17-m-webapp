@@ -6,7 +6,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
 	return (
 		<SidebarProvider>
 			<AppSidebar />
-			<main className="w-full">
+			<main className="w-full bg-bgSoftCl">
 				<SidebarTrigger />
 				{children}
 			</main>

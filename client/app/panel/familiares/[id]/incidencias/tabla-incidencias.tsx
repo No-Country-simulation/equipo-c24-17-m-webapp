@@ -61,7 +61,7 @@ export function TablaIncidencias({
 							</TableCell>
 							<TableCell>{format(incidencia.fecha, "dd/MM/yyyy")}</TableCell>
 							<TableCell className="text-center">
-								{incidencia.duracion}hs.
+								{incidencia.duracion}min.
 							</TableCell>
 							<TableCell className="text-center">
 								{incidencia.descripcion}

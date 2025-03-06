@@ -23,7 +23,10 @@ export default async function SidebarMain() {
 		<SidebarGroup>
 			<SidebarGroupLabel>Accesos</SidebarGroupLabel>
 			<SidebarMenu>
-				<SidebarMenuButton className="border-full bg-blueCl text-white hover:bg-blueCl hover:text-white hover:opacity-80">
+				<SidebarMenuButton
+					className="border-full bg-blueCl text-white hover:bg-blueCl hover:text-white hover:opacity-80"
+					asChild
+				>
 					<Link href={`/panel/familiares`}>Inicio</Link>
 				</SidebarMenuButton>
 			</SidebarMenu>
@@ -40,7 +43,7 @@ export default async function SidebarMain() {
 							{familiares.map(({ id, nombre, apellido }) => (
 								<SidebarMenuSubItem key={id}>
 									<SidebarMenuSubButton asChild>
-										<Link href={`/panel/familiares/${id}`}>
+										<Link href={`/panel/familiares/${id}/incidencias`}>
 											{apellido}, {nombre}
 										</Link>
 									</SidebarMenuSubButton>
