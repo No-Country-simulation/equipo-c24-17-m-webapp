@@ -22,10 +22,9 @@ namespace server.Data.Repositorios
             try
             {
                 return lista_consultas = _context.Consultas
-                    .Where(i => i.IdTerapia == id)
+                    .Where(i => i.IdHijo== id)
                     .Include(x=> x.IdTipoEspecialidadNavigation)
-                    .Include(h=> h.IdTerapiaNavigation)
-                        .ThenInclude(t => t.IdHijoNavigation)
+                    .Include(h=> h.IdHijoNavigation)
                     .ToList();
             }
             catch (Exception ex)

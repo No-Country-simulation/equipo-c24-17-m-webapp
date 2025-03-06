@@ -7,7 +7,7 @@ namespace server.DTOs
     public class ConsultaDTO
     {
         public int Id { get; set; }
-        public int IdTerapia { get; set; }
+        public int IdHijo { get; set; }
         public DateOnly Fecha { get; set; }
         [JsonConverter(typeof(TimeOnlyConverter))]
         public TimeOnly Horario { get; set; }

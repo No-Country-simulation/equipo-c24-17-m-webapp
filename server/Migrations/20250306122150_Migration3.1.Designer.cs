@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using server.Data;
@@ -11,9 +12,11 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    partial class BdTeacompanioContextModelSnapshot : ModelSnapshot
+    [Migration("20250306122150_Migration3.1")]
+    partial class Migration31
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,6 +170,10 @@ namespace server.Migrations
                         .HasColumnType("character(150)")
                         .HasColumnName("nombre_diagnostico")
                         .IsFixedLength();
+
+                    b.Property<bool>("RealizaTerapias")
+                        .HasColumnType("boolean")
+                        .HasColumnName("realiza_terapias");
 
                     b.HasKey("Id")
                         .HasName("hijos_pkey");

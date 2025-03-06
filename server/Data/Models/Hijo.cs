@@ -21,6 +21,8 @@ public partial class Hijo
     public string? NombreDiagnostico { get; set; }
 
     public string? DescripcionDiagnostico { get; set; }
+    public DateOnly? FechaInicio { get; set; }
+    public DateOnly? FechaCulminacion { get; set; }
 
     [JsonIgnore]
     public virtual ICollection<EstudioMedico> Estudiosmedicos { get; set; } = new List<EstudioMedico>();
@@ -31,7 +33,7 @@ public partial class Hijo
     [JsonIgnore]
     public virtual ICollection<Incidencia> Incidencias { get; set; } = new List<Incidencia>();    
     [JsonIgnore]
-    public virtual ICollection<Terapia> Terapias { get; set; } = new List<Terapia>();
+    public virtual ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();
     [JsonIgnore]
     public virtual ICollection<Medicacion> Medicaciones { get; set; } = new List<Medicacion>();
 }

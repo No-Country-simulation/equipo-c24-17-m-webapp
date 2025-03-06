@@ -11,14 +11,14 @@ namespace server.Data.Models
         public TimeOnly Horario { get; set; }
         public int Duracion { get; set; }
         public int IdTipoEspecialidad { get; set; }
-        public string Nombre_especialista { get; set; } 
-        public int IdTerapia { get; set; }
+        public string NombreEspecialista { get; set; } 
         public DateTime CreatedAt { get; set; }
+        public int IdHijo { get; set; }
 
         [JsonIgnore]
         public virtual TipoEspecialidad? IdTipoEspecialidadNavigation { get; set; } = null!;
         [JsonIgnore]
-        public virtual Terapia? IdTerapiaNavigation { get; set; } = null!;
+        public virtual Hijo? IdHijoNavigation { get; set; } = null!;
 
     }
 }
