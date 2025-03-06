@@ -9,18 +9,17 @@ import {
 } from "@/components/ui/table";
 import { IncidenciaT, TipoIncidenciaT } from "@/lib/definitions";
 import { HeartHandshake } from "lucide-react";
+import CrearConsulta from "./crear-dialog";
 
-export function TablaTerapias({
+export function TablaConsultas({
 	id,
 	terapias,
-	tipoEspecialidad,
+	tipoEspecialidades,
 }: {
 	id: number;
 	terapias: IncidenciaT[];
-	tipoEspecialidad: TipoIncidenciaT[];
+	tipoEspecialidades: TipoIncidenciaT[];
 }) {
-	console.log(id);
-	console.log(tipoEspecialidad);
 	return (
 		<Card className="max-w-full mx-auto overflow-hidden">
 			<CardHeader className="bg-blueCl text-white overflow-hidden relative">
@@ -29,7 +28,7 @@ export function TablaTerapias({
 					<span>Lista de Terapias</span>
 				</CardTitle>
 
-				{/* <CrearIncidencia tipoIncidencia={tipoIncidencia} id={id} /> */}
+				<CrearConsulta especialistas={tipoEspecialidades} id={id} />
 			</CardHeader>
 			<Table>
 				<TableCaption>

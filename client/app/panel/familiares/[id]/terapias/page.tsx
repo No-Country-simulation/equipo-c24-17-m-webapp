@@ -1,7 +1,7 @@
 import React from "react";
-import { TablaTerapias } from "./tabla-terapias";
+import { TablaConsultas } from "./tabla-consultas";
 
-const tipoEspecialidad = [
+const tipoEspecialidades = [
 	{ id: 1, nombre: "Especialidad 1 " },
 	{ id: 2, nombre: "Especialidad 2 " },
 ];
@@ -17,9 +17,9 @@ export default async function page({
 	// const terapias = await getIncidenciasHijo(id);
 	return (
 		<div>
-			<TablaTerapias
+			<TablaConsultas
 				terapias={[]}
-				tipoEspecialidad={tipoEspecialidad}
+				tipoEspecialidades={tipoEspecialidades}
 				id={id}
 			/>
 		</div>

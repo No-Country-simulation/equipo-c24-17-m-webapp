@@ -92,6 +92,10 @@
 	}
 }
 
+.input-time-picker {
+	border-radius: 20px;
+}
+
 .react-calendar {
 	width: 350px;
 	max-width: 100%;

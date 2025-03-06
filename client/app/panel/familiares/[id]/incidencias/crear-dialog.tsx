@@ -66,7 +66,6 @@ export default function CrearIncidencia({
 
 	const onSubmit = form.handleSubmit(
 		async (values: z.infer<typeof incidenciaSchemaNoID>) => {
-			console.log(values);
 			const [data, err] = await execute(values);
 
 			if (err) {

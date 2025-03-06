@@ -95,3 +95,24 @@ export const incidenciaSchema = z.object({
 });
 
 export const incidenciaSchemaNoID = incidenciaSchema.omit({ id: true });
+
+export const consultaSchema = z.object({
+	id: z.number(),
+	idHijo: z.number(),
+	dia: z.enum(
+		["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"],
+		{ message: "Debe seleccionar un dia valido." }
+	),
+	horaDesde: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, {
+		message: "Hora invalida. Usar HH:MM (24-horas formato).",
+	}),
+	horaHasta: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, {
+		message: "Hora invalida. Usar HH:MM (24-horas formato).",
+	}),
+	idTipoEspecialidad: z.number({ message: "Seleccione una especialidad" }),
+	nombreEspecialista: z.string({
+		message: "Ingrese el nombre del especialista.",
+	}),
+});
+
+export const consultaSchemNoID = consultaSchema.omit({ id: true });

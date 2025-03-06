@@ -1,9 +1,10 @@
 import { z } from "zod";
-import { incidenciaSchema, parienteSchema } from "./schemas";
+import { incidenciaSchema, parienteSchema, consultaSchema } from "./schemas";
 
 export type ParienteT = z.infer<typeof parienteSchema>;
 
 export type IncidenciaT = z.infer<typeof incidenciaSchema>;
+export type ConsultaT = z.infer<typeof consultaSchema>;
 
 export interface FieldErrors {
 	fieldErrors: {
