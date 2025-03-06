@@ -228,7 +228,7 @@ export default function ActualizarDialog({
 									<div className="flex items-center gap-4">
 										<FormField
 											control={form.control}
-											name="fechaInicioTerapia"
+											name="fechaInicio"
 											render={({ field }) => (
 												<FormItem className="flex flex-col pt-[10px] w-1/2 ">
 													<FormLabel>Fecha de Inicio</FormLabel>
@@ -271,7 +271,7 @@ export default function ActualizarDialog({
 										/>
 										<FormField
 											control={form.control}
-											name="fechaFinTerapia"
+											name="fechaCulminacion"
 											render={({ field }) => (
 												<FormItem className="flex flex-col pt-[10px] w-1/2 ">
 													<FormLabel>Fecha de Fin</FormLabel>
