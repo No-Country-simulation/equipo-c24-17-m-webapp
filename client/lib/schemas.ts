@@ -1,10 +1,5 @@
 import z from "zod";
-import { differenceInMonths } from "date-fns";
-const minDate = new Date();
-minDate.setFullYear(minDate.getFullYear() - 1); //fecha maxima para ser mayor de edad
-
-const maxDate = new Date();
-maxDate.setFullYear(maxDate.getFullYear() - 18); //fecha minima para ser menor de edad
+import { differenceInDays } from "date-fns";
 
 export const parienteSchema = z.object({
 	id: z.number(),
@@ -42,16 +37,18 @@ export const parienteSchema = z.object({
 	fechaNacimiento: z.coerce
 		.date({ message: "Debe ingresar una fecha" })
 		.refine(
-			(val) => {
-				const diff = differenceInMonths(minDate, val);
-				return diff > 12;
+			(date) => {
+				const today = new Date();
+				const diff = differenceInDays(today, date);
+				return diff >= 365;
 			},
 			{ message: "Debe ser mayor de 1 año." }
 		)
 		.refine(
-			(val) => {
-				const diff = differenceInMonths(val, maxDate);
-				return diff < 216;
+			(date) => {
+				const maxDate = new Date();
+				maxDate.setFullYear(maxDate.getFullYear() - 18);
+				return date >= maxDate;
 			},
 			{ message: "Debe ser menor de 18 años." }
 		),
@@ -62,7 +59,19 @@ export const parienteSchema = z.object({
 	fechaCulminacion: z.coerce.date().optional(),
 });
 
-export const parienteSchemaNoID = parienteSchema.omit({ id: true });
+export const parienteSchemaNoID = parienteSchema.omit({ id: true }).refine(
+	(val) => {
+		return (
+			val.fechaCulminacion !== undefined &&
+			val.fechaInicio !== undefined &&
+			val.fechaCulminacion > val.fechaInicio
+		);
+	},
+	{
+		message: "La fecha de Inicio debe ser menor a la fecha de Culminación.",
+		path: ["fechaInicio"],
+	}
+);
 
 export const incidenciaSchema = z.object({
 	id: z.number(),

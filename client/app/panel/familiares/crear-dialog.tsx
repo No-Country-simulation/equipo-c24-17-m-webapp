@@ -260,7 +260,6 @@ export default function CrearDialog({
 																value={field.value}
 																locale="es-AR"
 																className={"rounded-lg border-slate-400"}
-																maxDate={new Date()}
 															/>
 														</PopoverContent>
 													</Popover>
@@ -303,7 +302,6 @@ export default function CrearDialog({
 																value={field.value}
 																locale="es-AR"
 																className={"rounded-lg border-slate-400"}
-																maxDate={new Date()}
 															/>
 														</PopoverContent>
 													</Popover>
