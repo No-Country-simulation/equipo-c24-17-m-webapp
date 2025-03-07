@@ -15,7 +15,7 @@ namespace server.Logica
         }
         #endregion
 
-        public List<TipoEspecialidad> ObtenerTodosLosEstudiosMedicos(int id)
+        public List<TipoEspecialidad> ObtenerTodosLosTiposDeEspecialidad()
         {
             RepoTipoEspecialidad repo_especialidad = new RepoTipoEspecialidad(_context);
             List<TipoEspecialidad> lista_especialistas = [];
