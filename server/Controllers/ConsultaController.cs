@@ -39,9 +39,17 @@ namespace server.Controllers
 
         // GET api/<ConsultaController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
+            try
+            {
+                return Ok(logica_consulta.ObtenerConsultaPorId(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener la consulta solicitada {ex.Message}");
+            }
         }
 
         // POST api/<ConsultaController>
