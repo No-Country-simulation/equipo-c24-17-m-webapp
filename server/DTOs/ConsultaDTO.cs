@@ -10,8 +10,8 @@ namespace server.DTOs
         public int IdHijo { get; set; }
         public DateOnly Fecha { get; set; }
         [JsonConverter(typeof(TimeOnlyConverter))]
-        public TimeOnly Horario { get; set; }
-        public int Duracion { get; set; }
+        public TimeOnly HorarioInicio { get; set; }
+        public TimeOnly HorarioFin { get; set; }
         public string NombreEspecialidad { get; set; }
         public string NombreEspecialista { get; set; }
         public string NombreHijo { get; set; }

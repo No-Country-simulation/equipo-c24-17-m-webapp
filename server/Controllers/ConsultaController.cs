@@ -22,7 +22,7 @@ namespace server.Controllers
         #endregion
 
         // GET: api/<ConsultaController>
-        [HttpGet("terapia/")]
+        [HttpGet("hijo/")]
         public ActionResult<IEnumerable<Consulta>> ObtenerConsultasPorIdTerapia(int id)
         {
             LogicaConsulta logica_consulta = new LogicaConsulta(_context);
@@ -46,8 +46,18 @@ namespace server.Controllers
 
         // POST api/<ConsultaController>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult Post([FromBody] Consulta obj_consulta)
         {
+            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
+            try
+            {
+                logica_consulta.CrearConsulta(obj_consulta);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al crear la consulta: {ex.Message}");
+            }
         }
 
         // PUT api/<ConsultaController>/5

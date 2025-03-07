@@ -75,7 +75,8 @@ public partial class BdTeacompanioContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
             entity.Property(e => e.Fecha).HasColumnName("fecha");
-            entity.Property(e => e.Duracion).HasColumnName("duracion");
+            entity.Property(e => e.HorarioInicio).HasColumnName("horario_inicio");
+            entity.Property(e => e.HorarioFin).HasColumnName("horario_fin");
             entity.Property(e => e.NombreEspecialista).HasColumnName("nombre_especialista");
             entity.Property(e => e.IdHijo).HasColumnName("id_hijo");
 
@@ -124,11 +125,6 @@ public partial class BdTeacompanioContext : DbContext
         entity.ToTable("tipoespecialidad");
 
         entity.Property(e => e.Id).HasColumnName("id");
-        entity.Property(e => e.CreatedAt)
-            .HasDefaultValueSql("now()")
-            .HasColumnType("timestamp without time zone")
-            .HasColumnName("created_at");
-        entity.Property(e => e.Descripcion).HasColumnName("descripcion");
         entity.Property(e => e.Nombre)
             .HasMaxLength(150)
             .HasColumnName("nombre");

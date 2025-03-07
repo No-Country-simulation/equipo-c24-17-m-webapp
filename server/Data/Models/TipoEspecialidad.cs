@@ -6,9 +6,6 @@
 
         public string Nombre { get; set; } = null!;
 
-        public string? Descripcion { get; set; }
-
-        public DateTime? CreatedAt { get; set; }
         public virtual ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();
     }
 }

@@ -8,10 +8,13 @@ namespace server.Data.Models
         public int Id { get; set; }
         public DateOnly Fecha { get; set; }
         [JsonConverter(typeof(TimeOnlyConverter))]
-        public TimeOnly Horario { get; set; }
-        public int Duracion { get; set; }
+        public TimeOnly HorarioInicio { get; set; }
+        [JsonConverter(typeof(TimeOnlyConverter))]
+        public TimeOnly HorarioFin { get; set; }
         public int IdTipoEspecialidad { get; set; }
-        public string NombreEspecialista { get; set; } 
+        public string NombreEspecialista { get; set; }
+
+        [JsonIgnore]
         public DateTime CreatedAt { get; set; }
         public int IdHijo { get; set; }
 

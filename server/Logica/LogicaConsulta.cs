@@ -30,9 +30,9 @@ namespace server.Logica
                             Id = h.Id,
                             IdHijo = h.IdHijo,
                             NombreEspecialista = h.NombreEspecialista,
-                            Horario = h.Horario,
+                            HorarioInicio = h.HorarioInicio,
+                            HorarioFin = h.HorarioFin,
                             Fecha = h.Fecha,
-                            Duracion = h.Duracion,
                             NombreEspecialidad = h.IdTipoEspecialidadNavigation != null ? h.IdTipoEspecialidadNavigation.Nombre : "N/A",
 
                             NombreHijo = h.IdHijoNavigation != null && h.IdHijoNavigation.Nombre != null
@@ -93,8 +93,8 @@ namespace server.Logica
             {
                 var consulta_existente = _context.Consultas.Find(id) ?? throw new KeyNotFoundException("La consulta no existe.");
                 consulta_existente.NombreEspecialista = obj_consulta.NombreEspecialista;
-                consulta_existente.Duracion = obj_consulta.Duracion;
-                consulta_existente.Horario = obj_consulta.Horario;
+                consulta_existente.HorarioInicio = obj_consulta.HorarioInicio;
+                consulta_existente.HorarioFin = obj_consulta.HorarioFin;
                 consulta_existente.Fecha = obj_consulta.Fecha;
                 consulta_existente.IdTipoEspecialidad = obj_consulta.IdTipoEspecialidad;
 
