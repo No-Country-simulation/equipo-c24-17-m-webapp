@@ -6,15 +6,21 @@ namespace server.DTOs
 {
     public class ConsultaDTO
     {
-        public int Id { get; set; }
+        public int IdTipoEspecialidad { get; set; }
+        public string NombreEspecialista { get; set; }
         public int IdHijo { get; set; }
-        public DateOnly Fecha { get; set; }
+        public List<DiaConsultaDTO> Dias { get; set; }
+    }
+
+    public class DiaConsultaDTO
+    {
+        public DayOfWeek Dia { get; set; }
+
         [JsonConverter(typeof(TimeOnlyConverter))]
         public TimeOnly HorarioInicio { get; set; }
+
+
+        [JsonConverter(typeof(TimeOnlyConverter))]
         public TimeOnly HorarioFin { get; set; }
-        public string NombreEspecialidad { get; set; }
-        public string NombreEspecialista { get; set; }
-        public string NombreHijo { get; set; }
-        public string ApellidoHijo { get; set; }
     }
 }
