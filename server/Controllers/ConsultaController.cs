@@ -62,8 +62,19 @@ namespace server.Controllers
 
         // PUT api/<ConsultaController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put(int id, [FromBody]Consulta obj_consulta)
         {
+            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
+            try
+            {
+                logica_consulta.ActualizarConsulta(id, obj_consulta);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al actualizar la consulta: {ex.Message}");
+            }
+
         }
 
         // DELETE api/<ConsultaController>/5
