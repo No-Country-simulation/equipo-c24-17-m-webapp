@@ -1,10 +1,23 @@
 "use server";
 
-import { actualizarPariente, eliminarPariente } from "@/lib/database";
-import { parienteSchema } from "@/lib/schemas";
+import {
+	actualizarPariente,
+	createPariente,
+	eliminarPariente,
+} from "@/lib/database";
+import { parienteSchema, parienteSchemaNoID } from "@/lib/schemas";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createServerAction } from "zsa";
+
+export const crearParienteAction = createServerAction()
+	.input(parienteSchemaNoID)
+	.handler(async ({ input }) => {
+		console.log({ input });
+		await createPariente(input);
+		revalidatePath("/panel");
+		return { success: "ok" };
+	});
 
 export const eliminarParienteAction = createServerAction()
 	.input(z.object({ id: z.number() }))

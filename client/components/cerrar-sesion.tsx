@@ -9,7 +9,11 @@ export function CerrarSesion() {
 				await signOut({ redirectTo: "/" });
 			}}
 		>
-			<Button variant={"outline"} type="submit" className="w-full">
+			<Button
+				variant={"outline"}
+				type="submit"
+				className="w-full text-white bg-[#7596cc] hover:bg-[#7596cc] hover:text-white hover:opacity-80  border-none"
+			>
 				Cerrar Sesión
 			</Button>
 		</form>

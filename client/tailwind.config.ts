@@ -10,8 +10,8 @@ export default {
 	theme: {
 		extend: {
 			screens: {
-				'custom-sm': '675px', // 🟢 Definiendo un nuevo breakpoint
-				'custom-md': '970px', // 🟢 Definiendo un nuevo breakpoint
+				"custom-sm": "675px", // 🟢 Definiendo un nuevo breakpoint
+				"custom-md": "970px", // 🟢 Definiendo un nuevo breakpoint
 			},
 			fontFamily: {
 				poppins: ["var(--font-poppins)", "sans-serif"],
@@ -21,11 +21,13 @@ export default {
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				blueCl: "#6D89CF",
+				blueStrongCl: "#3662C1",
 				fucCl: "#F9326A",
 				yellowCl: "#f9d423",
 				darkCl: "#696868",
 				bgSoftCl: "#FAEDDA",
 				rosaCl: "#E8386C",
+				verdeCl: "#5FBDAC",
 				card: {
 					DEFAULT: "hsl(var(--card))",
 					foreground: "hsl(var(--card-foreground))",

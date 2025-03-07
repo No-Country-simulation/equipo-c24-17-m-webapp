@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	SidebarGroup,
 	SidebarGroupLabel,
@@ -13,24 +15,34 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "./ui/collapsible";
-import { getParientes, getSession } from "@/lib/database";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ParienteT } from "@/lib/definitions";
 
-export default async function SidebarMain() {
-	const { email } = await getSession();
-	const familiares = await getParientes(email);
+export default function SidebarMain({
+	familiares,
+}: {
+	familiares: ParienteT[];
+}) {
+	const path = usePathname();
+
+	console.log(path);
 	return (
 		<SidebarGroup>
 			<SidebarGroupLabel>Accesos</SidebarGroupLabel>
 			<SidebarMenu>
-				<SidebarMenuButton className="border-full bg-blueCl text-white hover:bg-blueCl hover:text-white hover:opacity-80">
+				<SidebarMenuButton
+					className=""
+					asChild
+					isActive={path === "/panel/familiares"}
+				>
 					<Link href={`/panel/familiares`}>Inicio</Link>
 				</SidebarMenuButton>
 			</SidebarMenu>
 			<SidebarMenu>
 				<Collapsible className="group/collapsible">
 					<CollapsibleTrigger asChild>
-						<SidebarMenuButton className="border-full bg-blueCl text-white hover:bg-blueCl hover:text-white hover:opacity-80">
+						<SidebarMenuButton className="">
 							Familiares
 							<ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
 						</SidebarMenuButton>
@@ -39,18 +51,16 @@ export default async function SidebarMain() {
 						<SidebarMenuSub>
 							{familiares.map(({ id, nombre, apellido }) => (
 								<SidebarMenuSubItem key={id}>
-									<SidebarMenuSubButton asChild>
-										<Link href={`/panel/familiares/${id}`}>
+									<SidebarMenuSubButton
+										asChild
+										isActive={path.includes(`/panel/familiares/${id}`)}
+									>
+										<Link href={`/panel/familiares/${id}/incidencias`}>
 											{apellido}, {nombre}
 										</Link>
 									</SidebarMenuSubButton>
 								</SidebarMenuSubItem>
 							))}
-							<SidebarMenuSubItem>
-								<SidebarMenuSubButton asChild>
-									<Link href={`/panel/familiares/crear`}>Agregar Familiar</Link>
-								</SidebarMenuSubButton>
-							</SidebarMenuSubItem>
 						</SidebarMenuSub>
 					</CollapsibleContent>
 				</Collapsible>
