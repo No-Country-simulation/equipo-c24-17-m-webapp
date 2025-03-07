@@ -124,11 +124,6 @@ public partial class BdTeacompanioContext : DbContext
         entity.ToTable("tipoespecialidad");
 
         entity.Property(e => e.Id).HasColumnName("id");
-        entity.Property(e => e.CreatedAt)
-            .HasDefaultValueSql("now()")
-            .HasColumnType("timestamp without time zone")
-            .HasColumnName("created_at");
-        entity.Property(e => e.Descripcion).HasColumnName("descripcion");
         entity.Property(e => e.Nombre)
             .HasMaxLength(150)
             .HasColumnName("nombre");
