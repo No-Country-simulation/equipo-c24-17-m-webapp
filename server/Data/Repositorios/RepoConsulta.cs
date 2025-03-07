@@ -81,7 +81,7 @@ namespace server.Data.Repositorios
             }
             catch (DbUpdateException dbEx)
             {
-                throw new Exception("Error al actualizar la consuklta en la base de datos.", dbEx);
+                throw new Exception("Error al actualizar la consulta en la base de datos.", dbEx);
             }
             catch (Exception ex)
             {
