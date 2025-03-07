@@ -20,6 +20,7 @@ export default {
 			colors: {
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
+				lightBlueCl: "#bed2fa",
 				blueCl: "#6D89CF",
 				blueStrongCl: "#3662C1",
 				fucCl: "#F9326A",
