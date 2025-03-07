@@ -17,41 +17,6 @@ namespace server.Logica
         }
         #endregion
 
-        public List<ConsultaDTO> ObtenerTodosLasConsultasDeUnaTerapia(int id)
-        {
-            RepoConsulta repo_consulta = new RepoConsulta(_context);
-            {
-                try
-                {
-                    RepoHijo repo_Hijo = new RepoHijo(_context);
-                    List<ConsultaDTO> lista_consultas = repo_consulta.GetAll(id)
-                        .Select(h => new ConsultaDTO
-                        {
-                            Id = h.Id,
-                            IdHijo = h.IdHijo,
-                            NombreEspecialista = h.NombreEspecialista,
-                            Horario = h.Horario,
-                            Fecha = h.Fecha,
-                            Duracion = h.Duracion,
-                            NombreEspecialidad = h.IdTipoEspecialidadNavigation != null ? h.IdTipoEspecialidadNavigation.Nombre : "N/A",
-
-                            NombreHijo = h.IdHijoNavigation != null && h.IdHijoNavigation.Nombre != null
-                            ? h.IdHijoNavigation.Nombre
-                            : "N/A",
-                             ApellidoHijo= h.IdHijoNavigation != null && h.IdHijoNavigation.Apellido!= null
-                            ? h.IdHijoNavigation.Apellido
-                            : "N/A",
-                        })
-            .ToList();
-                    return lista_consultas;
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-            }
-        }
-
         public Consulta ObtenerConsultaPorId(int id)
         {
             RepoConsulta repo_consulta = new RepoConsulta(_context);
@@ -68,42 +33,28 @@ namespace server.Logica
                 throw new Exception(ex.Message);
             }
         }
-
-        public void CrearConsulta(Consulta obj_consulta)
+        public async Task<int> CrearConsultaAsync(ConsultaDTO request)
         {
             RepoConsulta repo_consulta = new RepoConsulta(_context);
-            try
-            {
-                repo_consulta.CreateConsulta(obj_consulta);
-            }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-                }
-                throw new Exception(ex.Message);
-            }
-        }
 
-        public void ActualizarConsulta(int id, Consulta obj_consulta)
-        {
-            RepoConsulta repo_consulta = new RepoConsulta(_context);
-            try
-            {
-                var consulta_existente = _context.Consultas.Find(id) ?? throw new KeyNotFoundException("La consulta no existe.");
-                consulta_existente.NombreEspecialista = obj_consulta.NombreEspecialista;
-                consulta_existente.Duracion = obj_consulta.Duracion;
-                consulta_existente.Horario = obj_consulta.Horario;
-                consulta_existente.Fecha = obj_consulta.Fecha;
-                consulta_existente.IdTipoEspecialidad = obj_consulta.IdTipoEspecialidad;
+            if (request == null || request.Dias == null || !request.Dias.Any())
+                throw new ArgumentException("Debe seleccionar al menos un día de consulta.");
 
-                repo_consulta.UpdateConsulta(consulta_existente);
-            }
-            catch (Exception ex)
+            var consulta = new Consulta
             {
-                throw new Exception(ex.Message);
-            }
+                IdTipoEspecialidad = request.IdTipoEspecialidad,
+                NombreEspecialista = request.NombreEspecialista,
+                IdHijo = request.IdHijo
+            };
+
+            var diasConsulta = request.Dias.Select(d => new ConsultaDia
+            {
+                Dia = d.Dia,
+                HorarioInicio = d.HorarioInicio,
+                HorarioFin = d.HorarioFin
+            }).ToList();
+
+            return await repo_consulta.CrearConsultaAsync(consulta, diasConsulta);
         }
 
         public void EliminarHijo(int id)

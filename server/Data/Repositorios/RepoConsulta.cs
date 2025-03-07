@@ -46,20 +46,29 @@ namespace server.Data.Repositorios
             }
         }
 
-        public void CreateConsulta(Consulta obj_consulta)
+        public async Task<int> CrearConsultaAsync(Consulta consulta, List<ConsultaDia> dias)
         {
+            using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                _context.Add(obj_consulta);
-                _context.SaveChanges();
+                _context.Consultas.Add(consulta);
+                await _context.SaveChangesAsync();
+
+                foreach (var dia in dias)
+                {
+                    dia.IdConsulta = consulta.Id;
+                    _context.ConsultaDias.Add(dia);
+                }
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return consulta.Id;
             }
             catch (Exception ex)
             {
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-                }
-                throw new Exception(ex.Message);
+                await transaction.RollbackAsync();
+                throw new Exception("Error al crear la consulta: ", ex);
             }
         }
 
