@@ -9,10 +9,8 @@ public class ConsultaDia
     public int IdConsulta { get; set; }
     public DayOfWeek Dia { get; set; }
 
-    [JsonConverter(typeof(TimeOnlyConverter))]
     public TimeOnly HorarioInicio { get; set; }
 
-    [JsonConverter(typeof(TimeOnlyConverter))]
     public TimeOnly HorarioFin { get; set; }
 
     public DateTime CreatedAt { get; set; }
