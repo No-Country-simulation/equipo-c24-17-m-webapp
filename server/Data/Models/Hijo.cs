@@ -21,6 +21,8 @@ public partial class Hijo
     public string? NombreDiagnostico { get; set; }
 
     public string? DescripcionDiagnostico { get; set; }
+    public DateOnly? FechaInicio { get; set; }
+    public DateOnly? FechaCulminacion { get; set; }
 
     public bool RealizaTerapias { get; set; }
     public DateOnly? FechaInicio { get; set; }

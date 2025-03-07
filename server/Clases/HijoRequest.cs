@@ -15,5 +15,8 @@ namespace server.Clases
         public string? NombreDiagnostico { get; set; }
 
         public string? DescripcionDiagnostico { get; set; }
+
+        public DateOnly? FechaInicio { get; set; }
+        public DateOnly? FechaCulminacion { get; set; }
     }
 }

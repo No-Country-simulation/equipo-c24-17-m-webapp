@@ -65,6 +65,8 @@ namespace server.Logica
                     FechaNacimiento = obj_request.FechaNacimiento,
                     NombreDiagnostico = obj_request.NombreDiagnostico,
                     DescripcionDiagnostico = obj_request.DescripcionDiagnostico,
+                    FechaInicio = obj_request.FechaInicio,
+                    FechaCulminacion = obj_request.FechaCulminacion,
                     IdUsuario = obtener_id_usuario.Id,
                 };
 
@@ -91,6 +93,8 @@ namespace server.Logica
                 hijo_existente.FechaNacimiento = obj_hijo.FechaNacimiento;
                 hijo_existente.NombreDiagnostico = obj_hijo.NombreDiagnostico;
                 hijo_existente.DescripcionDiagnostico = obj_hijo.DescripcionDiagnostico;
+                hijo_existente.FechaInicio = obj_hijo.FechaInicio;
+                hijo_existente.FechaCulminacion = obj_hijo.FechaCulminacion;
 
                 repo_Hijo.UpdateHijo(hijo_existente);
             }

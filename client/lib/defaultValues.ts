@@ -1,7 +1,6 @@
 export const parienteDefaultValues = {
 	nombre: "",
 	apellido: "",
-	fechaNacimiento: "",
 	nombreDiagnostico: "",
 	descripcionDiagnostico: "",
 	email: "",
@@ -10,4 +9,5 @@ export const parienteDefaultValues = {
 export const incidenciaDefaultValues = {
 	duracion: 0,
 	descripcion: "",
+	es_positiva: true,
 };
