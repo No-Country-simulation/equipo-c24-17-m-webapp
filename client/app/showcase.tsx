@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
@@ -21,13 +22,13 @@ export default function Showcase() {
 						</p>
 
 						<Button className=" bg-gradient-to-r  from-fucCl  to-yellowCl rounded-3xl  transition-colors py-5 px-4 my-2 hover:opacity-80 font-semibold text-white tracking-wide">
-							CONOCÉ NUESTRAS GUÍAS
+							<Link href={"/"}>CONOCÉ NUESTRAS GUÍAS</Link>
 						</Button>
 					</div>
 
 					<div className="w-1/3 md:w-1/2 flex justify-end lg:justify-center relative overflow-visible">
 						<Image
-							src={"https://imgur.com/a/xw3z3Ly"}
+							src={"/nene.png"}
 							alt="nene abrazandose"
 							className=" lg:min-h-[500px] z-20"
 							height={500}

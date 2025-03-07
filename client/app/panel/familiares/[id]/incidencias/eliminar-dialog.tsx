@@ -10,7 +10,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { LoaderCircleIcon, TrashIcon } from "lucide-react";
+import { LoaderCircleIcon, TrashIcon, FilePenLine } from "lucide-react";
 import { useState } from "react";
 import { useServerAction } from "zsa-react";
 import { toast } from "sonner";
@@ -40,13 +40,20 @@ export function EliminarIncidenciaDialog({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button variant="destructive">
-					<TrashIcon /> <p>Eliminar</p>
+				<Button variant="ghost" className="p-0">
+					<TrashIcon size={17} className="text-rose-500" />
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[340px]">
 				<DialogHeader className="space-y-3">
-					<DialogTitle>Eliminar Incidencia</DialogTitle>
+					<div className="flex justify-start items-center gap-4">
+						<div className=" gap-0 rounded-full h-16 w-16 bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80 flex items-center justify-center">
+							<FilePenLine className="w-7 h-7 text-white" />{" "}
+						</div>
+						<DialogTitle className="text-xl uppercase font-normal">
+							Eliminar Incidencia
+						</DialogTitle>
+					</div>
 					<DialogDescription>
 						Esta seguro que desea eliminar la incidencia ?
 					</DialogDescription>

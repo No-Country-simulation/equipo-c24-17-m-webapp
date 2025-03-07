@@ -31,16 +31,14 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-// import { Calendar } from "@/components/ui/calendar";
-
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn, handleFieldErrors } from "@/lib/utils";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { CalendarIcon, UserPenIcon } from "lucide-react";
+import { CalendarIcon, FilePenLine, Frown, Smile } from "lucide-react";
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -67,6 +65,7 @@ export default function ActualizarIncidenciaDialog({
 	});
 
 	const onSubmit = form.handleSubmit(async (values: IncidenciaT) => {
+		console.log(values);
 		const [data, err] = await execute(values);
 
 		if (err) {
@@ -86,28 +85,31 @@ export default function ActualizarIncidenciaDialog({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button variant="outline">
-					<UserPenIcon /> <p>Actualizar</p>
+				<Button variant="ghost" className="p-0">
+					<FilePenLine size={17} className="text-black" />
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[540px]">
+			<DialogContent className="sm:max-w-[440px]">
 				<DialogHeader className="space-y-3">
-					<DialogTitle>Actualizar Pariente</DialogTitle>
-					<DialogDescription>Complete todos los campos.</DialogDescription>
+					<div className="flex justify-start items-center gap-4">
+						<div className=" gap-0 rounded-full h-16 w-16 bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80 flex items-center justify-center">
+							<FilePenLine className="w-7 h-7 text-white" />{" "}
+						</div>
+						<DialogTitle className="text-xl uppercase font-normal">
+							Actualizar Incidencia
+						</DialogTitle>
+					</div>
 				</DialogHeader>
 				<Form {...form}>
 					<Loader loading={isPending} />
-					<form
-						onSubmit={onSubmit}
-						className="space-y-4 p-6 border rounded-lg shadow-md mt-10 w-[310px]  bg-white"
-					>
+					<form onSubmit={onSubmit} className="space-y-4 p-6 bg-white">
 						<FormField
 							control={form.control}
 							name="idTipoIncidencia"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>
-										Incidencia <HoverCardInfo />
+									<FormLabel className="flex items-center gap-1">
+										<span>Incidencia</span> <HoverCardInfo />
 									</FormLabel>
 									<Select
 										onValueChange={field.onChange}
@@ -184,7 +186,7 @@ export default function ActualizarIncidenciaDialog({
 											placeholder="2"
 											{...field}
 											onKeyDown={(e) =>
-												!/[0-9]|Backspace|ArrowLeft|ArrowRight/.exec(e.key)
+												!/[0-9]|Backspace|ArrowLeft|ArrowRight|Tab/.exec(e.key)
 													? e.preventDefault()
 													: e.key
 											}
@@ -221,8 +223,51 @@ export default function ActualizarIncidenciaDialog({
 								</FormItem>
 							)}
 						/>
-						<div className="flex justify-center">
-							<Button type="submit" disabled={isPending}>
+
+						<FormField
+							control={form.control}
+							name="es_positiva"
+							render={({ field }) => (
+								<FormItem className="space-y-3">
+									<FormControl>
+										<RadioGroup
+											onValueChange={(e) => {
+												form.setValue("es_positiva", e === "true");
+											}}
+											defaultValue={field.value.toString()}
+											className="flex space-y-1"
+										>
+											<FormItem className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<RadioGroupItem value="false" />
+												</FormControl>
+												<FormLabel className="font-normal flex items-center gap-1">
+													<Frown />
+													Incidencia negativa
+												</FormLabel>
+											</FormItem>
+											<FormItem className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<RadioGroupItem value="true" />
+												</FormControl>
+
+												<FormLabel className="font-normal flex items-center gap-1">
+													<Smile />
+													Incidencia Positiva
+												</FormLabel>
+											</FormItem>
+										</RadioGroup>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<div className="flex justify-center pt-8">
+							<Button
+								type="submit"
+								disabled={isPending}
+								className="bg-blueCl hover:bg-blueCl hover:text-white hover:opacity-90 rounded-full px-8 shadow-xl"
+							>
 								Actualizar
 							</Button>
 						</div>
