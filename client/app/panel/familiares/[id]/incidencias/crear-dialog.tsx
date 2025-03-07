@@ -236,7 +236,10 @@ export default function CrearIncidencia({
 								<FormItem className="space-y-3">
 									<FormControl>
 										<RadioGroup
-											onValueChange={field.onChange}
+											onValueChange={(e) => {
+												form.setValue("es_positiva", e === "true");
+											}}
+											defaultValue={field.value.toString()}
 											className="flex space-y-1"
 										>
 											<FormItem className="flex items-center space-x-3 space-y-0">

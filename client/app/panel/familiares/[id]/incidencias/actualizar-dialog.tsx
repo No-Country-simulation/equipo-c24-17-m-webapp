@@ -65,7 +65,6 @@ export default function ActualizarIncidenciaDialog({
 	});
 
 	const onSubmit = form.handleSubmit(async (values: IncidenciaT) => {
-		console.log(values);
 		const [data, err] = await execute(values);
 
 		if (err) {

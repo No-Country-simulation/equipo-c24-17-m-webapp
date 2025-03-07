@@ -9,6 +9,7 @@ export const parienteDefaultValues = {
 export const incidenciaDefaultValues = {
 	duracion: 0,
 	descripcion: "",
+	es_positiva: true,
 };
 
 export const consultaDefaultValues = {

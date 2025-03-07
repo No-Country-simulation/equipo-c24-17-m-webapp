@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
-import Calendar from "react-calendar";
 import Image from "next/image";
 import { getPariente } from "@/lib/database";
 import { Button } from "@/components/ui/button";
-import { FilePenLine, HeartHandshake } from "lucide-react";
+import { AppWindow, FilePenLine, HeartHandshake } from "lucide-react";
 import Link from "next/link";
-
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 export default async function Layout({
 	children,
 	params,
@@ -24,6 +24,8 @@ export default async function Layout({
 		fechaNacimiento,
 		nombreDiagnostico,
 		descripcionDiagnostico,
+		fechaInicio,
+		fechaCulminacion,
 	} = familiar;
 
 	const edad = () => {
@@ -34,7 +36,7 @@ export default async function Layout({
 	return (
 		<section className="container w-[95%] mx-auto space-y-8">
 			<div className="grid grid-cols-[1fr_300px] gap-8">
-				<Card>
+				<Card className="min-h-[200px]">
 					<CardContent className="flex items-center justify-start gap-4 h-full">
 						<div className="flex items-center justify-center">
 							<Image
@@ -62,34 +64,58 @@ export default async function Layout({
 								<span className="text-black">{descripcionDiagnostico}</span>{" "}
 							</p>
 						</div>
+						<div className="self-end text-center mb-2 ml-8">
+							{fechaInicio && fechaCulminacion && (
+								<div className="space-y-1">
+									<div className="text-darkCl space-y-1">
+										<p>Inicio de terapia: </p>
+										<p className="text-black">
+											{format(fechaInicio, "dd/MM/yyyy", { locale: es })}
+										</p>{" "}
+									</div>
+									<div className="text-darkCl space-y-1">
+										<p>Fin de terapia: </p>
+										<p className="text-black">
+											{format(fechaCulminacion, "dd/MM/yyyy", { locale: es })}
+										</p>{" "}
+									</div>
+								</div>
+							)}
+						</div>
 					</CardContent>
 				</Card>
-				<Calendar className="rounded-md border shadow" locale="es-AR" />
-			</div>
-
-			<div className="grid grid-cols-[100px_1fr] gap-4">
-				<div className="flex flex-col items-center gap-4">
-					<Button className=" gap-0  rounded-full h-16 w-16 bg-blueCl text-white hover:bg-blueCl hover:opacity-80">
+				<div className="flex flex-col justify-between items-center gap-4">
+					<Button className="w-full  bg-verdeCl text-white hover:bg-verdeCl hover:opacity-80 h-12 rounded-full">
 						<Link
 							href={`/panel/familiares/${id}/terapias`}
-							className="flex flex-col items-center justify-center"
+							className="flex items-center justify-center gap-2"
 						>
-							<HeartHandshake className="w-7 h-7 text-white" />{" "}
-							<span className="text-[8px]">Terapias</span>{" "}
+							<span className="text-xl">Panel</span>{" "}
+							<AppWindow className="w-7 h-7 text-white" />{" "}
 						</Link>
 					</Button>
-					<Button className=" gap-0 rounded-full h-16 w-16 bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80">
+					<Button className="w-full  bg-blueCl text-white hover:bg-blueCl hover:opacity-80 h-12 rounded-full">
+						<Link
+							href={`/panel/familiares/${id}/terapias`}
+							className="flex items-center justify-center gap-2"
+						>
+							<span className="text-xl">Terapias</span>{" "}
+							<HeartHandshake className="w-7 h-7 text-white" />{" "}
+						</Link>
+					</Button>
+					<Button className="w-full bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80 h-12 rounded-full">
 						<Link
 							href={`/panel/familiares/${id}/incidencias`}
-							className="flex flex-col items-center justify-center"
+							className="flex items-center justify-center gap-2"
 						>
+							<span className="text-xl">Incidencias</span>{" "}
 							<FilePenLine className="w-7 h-7 text-white" />{" "}
-							<span className="text-[8px]">Incidencias</span>{" "}
 						</Link>
 					</Button>
 				</div>
-				<div>{children}</div>
 			</div>
+
+			<div>{children}</div>
 		</section>
 	);
 }

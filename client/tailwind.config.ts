@@ -20,6 +20,7 @@ export default {
 			colors: {
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
+				lightBlueCl: "#bed2fa",
 				blueCl: "#6D89CF",
 				blueStrongCl: "#3662C1",
 				fucCl: "#F9326A",
@@ -27,6 +28,7 @@ export default {
 				darkCl: "#696868",
 				bgSoftCl: "#FAEDDA",
 				rosaCl: "#E8386C",
+				verdeCl: "#5FBDAC",
 				card: {
 					DEFAULT: "hsl(var(--card))",
 					foreground: "hsl(var(--card-foreground))",
