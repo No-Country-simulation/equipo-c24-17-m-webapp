@@ -23,7 +23,7 @@ namespace server.Controllers
         #endregion
 
         // GET: api/<ConsultaController>
-        [HttpGet("hijo/")]
+        [HttpGet("hijo/{id}")]
         public ActionResult<IEnumerable<Consulta>> ObtenerConsultasPorIdTerapia(int id)
         {
             LogicaConsulta logica_consulta = new LogicaConsulta(_context);
