@@ -16,11 +16,8 @@ namespace server.DTOs
     {
         public DayOfWeek Dia { get; set; }
 
-        [JsonConverter(typeof(TimeOnlyConverter))]
-        public TimeOnly HorarioInicio { get; set; }
+        public string HorarioInicio { get; set; }
 
-
-        [JsonConverter(typeof(TimeOnlyConverter))]
-        public TimeOnly HorarioFin { get; set; }
+        public string HorarioFin { get; set; }
     }
 }
