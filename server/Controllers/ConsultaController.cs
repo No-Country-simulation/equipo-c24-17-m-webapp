@@ -26,7 +26,9 @@ namespace server.Controllers
         [HttpGet("hijo/")]
         public ActionResult<IEnumerable<Consulta>> ObtenerConsultasPorIdTerapia(int id)
         {
-            return null;
+            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
+            return Ok(logica_consulta.ObtenerConsultasDeHijosPorId(id));
+           
         }
 
         // GET api/<ConsultaController>/5
@@ -67,11 +69,14 @@ namespace server.Controllers
 
         // PUT api/<ConsultaController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Consulta obj_consulta)
+        public ActionResult Put(int id, [FromBody] ConsultaDTO obj_consulta)
         {
-            return null;
-        }
+            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
 
+            logica_consulta.UpdateConsulta(id, obj_consulta);
+            return Ok();
+
+                }
         // DELETE api/<ConsultaController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)

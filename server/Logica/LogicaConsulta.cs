@@ -17,6 +17,30 @@ namespace server.Logica
         }
         #endregion
 
+
+        public List<ConsultaDTO> ObtenerConsultasDeHijosPorId(int id)
+        {
+            RepoConsulta repo_consulta = new RepoConsulta(_context);
+
+            List<ConsultaDTO> lista_consultas = repo_consulta.GetAll(id)
+                .Select(h => new ConsultaDTO
+                {
+                    Id = h.Id,
+                    NombreEspecialista = h.NombreEspecialista,
+                    IdHijo = h.IdHijo,
+                    IdTipoEspecialidad = h.IdTipoEspecialidad,
+                    Dias = h.ConsultasDias.Select(i => new DiaConsultaDTO
+                    {
+                        HorarioInicio = i.HorarioInicio,
+                        HorarioFin = i.HorarioFin,
+                        Dia = i.Dia
+                    }).ToList()
+                }
+                    ).ToList();
+
+            return lista_consultas;
+
+        }
         public Consulta ObtenerConsultaPorId(int id)
         {
             RepoConsulta repo_consulta = new RepoConsulta(_context);
@@ -57,7 +81,49 @@ namespace server.Logica
             return await repo_consulta.CrearConsultaAsync(consulta, diasConsulta);
         }
 
-        public void EliminarHijo(int id)
+        public void UpdateConsulta(int id, ConsultaDTO obj_consulta)
+        {
+            var repo_consulta = new RepoConsulta(_context);
+            try
+            {
+                var consulta = _context.Consultas.FirstOrDefault(c => c.Id == id);
+                if (consulta == null)
+                {
+                    throw new Exception("La consulta no existe.");
+                }
+
+                consulta.IdTipoEspecialidad = obj_consulta.IdTipoEspecialidad;
+                consulta.NombreEspecialista = obj_consulta.NombreEspecialista;
+                consulta.IdHijo = obj_consulta.IdHijo;
+
+                var horarioExistente = _context.ConsultaDias.FirstOrDefault(d => d.IdConsulta == id);
+                if (horarioExistente != null)
+                {
+                    horarioExistente.Dia = obj_consulta.Dias[0].Dia;
+                    horarioExistente.HorarioInicio = obj_consulta.Dias[0].HorarioInicio;
+                    horarioExistente.HorarioFin = obj_consulta.Dias[0].HorarioFin;
+                }
+                else
+                {
+                    var horarioNuevo = new ConsultaDia
+                    {
+                        IdConsulta = id,
+                        Dia = obj_consulta.Dias[0].Dia,
+                        HorarioInicio = obj_consulta.Dias[0].HorarioInicio,
+                        HorarioFin = obj_consulta.Dias[0].HorarioFin
+                    };
+                    _context.ConsultaDias.Add(horarioNuevo);
+                }
+
+                repo_consulta.UpdateConsulta(consulta);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la consulta: " + ex.Message, ex);
+            }
+        }
+
+        public void EliminarConsulta(int id)
         {
             RepoConsulta repo_consulta = new RepoConsulta(_context);
             try
