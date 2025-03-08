@@ -29,34 +29,33 @@ import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useServerAction } from "zsa-react";
-import { consultaSchemNoID } from "@/lib/schemas";
+import { consultaSchema } from "@/lib/schemas";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { consultaDefaultValues } from "@/lib/defaultValues";
 import { toast } from "sonner";
 import Loader from "@/components/Loader";
 import TimePicker from "react-time-picker";
-import { HeartHandshake, Plus } from "lucide-react";
-import { TipoIncidenciaT } from "@/lib/definitions";
-import { crearConsultaAction } from "./actions";
+import { FilePenLine, HeartHandshake } from "lucide-react";
+import { ConsultaT, TipoIncidenciaT } from "@/lib/definitions";
+import { actualizarConsultaAction } from "./actions";
 import { handleFieldErrors } from "@/lib/utils";
 
-export default function CrearConsulta({
-	id,
+export default function ActualizarConsultaDialog({
+	consulta,
 	especialistas,
 }: {
-	id: number;
+	consulta: ConsultaT;
 	especialistas: TipoIncidenciaT[];
 }) {
-	const { isPending, execute } = useServerAction(crearConsultaAction);
+	const { isPending, execute } = useServerAction(actualizarConsultaAction);
 	const [open, setOpen] = useState(false);
 
-	const form = useForm<z.infer<typeof consultaSchemNoID>>({
-		resolver: zodResolver(consultaSchemNoID),
-		defaultValues: { ...consultaDefaultValues, idHijo: id },
+	const form = useForm<z.infer<typeof consultaSchema>>({
+		resolver: zodResolver(consultaSchema),
+		defaultValues: consulta,
 	});
 
 	const onSubmit = form.handleSubmit(
-		async (values: z.infer<typeof consultaSchemNoID>) => {
+		async (values: z.infer<typeof consultaSchema>) => {
 			const [data, err] = await execute(values);
 			if (err) {
 				if (err.fieldErrors) {
@@ -66,7 +65,7 @@ export default function CrearConsulta({
 				}
 			}
 			if (data) {
-				toast.success("Consulta cargada con exito.");
+				toast.success("Consulta actualizada con exito.");
 				form.reset();
 				setOpen(false);
 			}
@@ -80,11 +79,8 @@ export default function CrearConsulta({
 				className="mt-0
 			"
 			>
-				<Button
-					variant="ghost"
-					className="p-2 bg-white rounded-full absolute right-4 top-4 "
-				>
-					<Plus size={17} className="text-black" />
+				<Button variant="ghost" className="p-0">
+					<FilePenLine size={17} className="text-black" />
 				</Button>
 			</DialogTrigger>
 			<DialogContent aria-describedby="formulario para agregar una consulta">
@@ -94,7 +90,7 @@ export default function CrearConsulta({
 							<HeartHandshake className="w-7 h-7 text-white" />{" "}
 						</div>
 						<DialogTitle className="text-xl uppercase font-normal">
-							Agregar Consulta
+							Actualizar Consulta
 						</DialogTitle>
 					</div>
 				</DialogHeader>
@@ -109,7 +105,11 @@ export default function CrearConsulta({
 									<FormLabel className="flex items-center">
 										<span>Tipo de Especialidad</span>
 									</FormLabel>
-									<Select onValueChange={field.onChange} disabled={isPending}>
+									<Select
+										onValueChange={field.onChange}
+										value={field.value.toString()}
+										disabled={isPending}
+									>
 										<FormControl>
 											<SelectTrigger>
 												<SelectValue placeholder="Seleccionar especialidad" />
@@ -156,6 +156,7 @@ export default function CrearConsulta({
 									<FormControl>
 										<RadioGroup
 											onValueChange={field.onChange}
+											value={field.value.toString()}
 											className="flex  justify-start  gap-4"
 											disabled={isPending}
 										>
@@ -283,7 +284,7 @@ export default function CrearConsulta({
 								disabled={isPending}
 								className="bg-blueCl hover:bg-blueCl hover:text-white hover:opacity-90 rounded-full px-8 shadow-xl"
 							>
-								Agregar
+								Actualizar
 							</Button>
 						</div>
 					</form>

@@ -3,21 +3,25 @@ import {
 	Table,
 	TableBody,
 	TableCaption,
+	TableCell,
 	TableHead,
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { IncidenciaT, TipoIncidenciaT } from "@/lib/definitions";
+import { ConsultaT, TipoIncidenciaT } from "@/lib/definitions";
 import { HeartHandshake } from "lucide-react";
 import CrearConsulta from "./crear-dialog";
+import { formatDia } from "@/lib/utils";
+import ActualizarConsultaDialog from "./actualizar-dialog";
+import { EliminarConsultaDialog } from "./eliminar-dialog";
 
 export function TablaConsultas({
 	id,
-	terapias,
+	consultas,
 	tipoEspecialidades,
 }: {
 	id: number;
-	terapias: IncidenciaT[];
+	consultas: ConsultaT[];
 	tipoEspecialidades: TipoIncidenciaT[];
 }) {
 	return (
@@ -25,58 +29,58 @@ export function TablaConsultas({
 			<CardHeader className="bg-blueCl text-white overflow-hidden relative">
 				<CardTitle className="text-center capitalize flex items-center justify-center gap-4 text-xl">
 					<HeartHandshake className="text-white" />{" "}
-					<span>Lista de Terapias</span>
+					<span>Lista de Consultas</span>
 				</CardTitle>
 
 				<CrearConsulta especialistas={tipoEspecialidades} id={id} />
 			</CardHeader>
 			<Table>
 				<TableCaption>
-					{terapias.length
-						? "Lista de Terapias"
-						: "No hay terapias para mostrar."}
+					{consultas.length
+						? "Lista de Consultas"
+						: "No hay consultas para mostrar."}
 				</TableCaption>
 				<TableHeader>
 					<TableRow>
 						<TableHead>Especialidad</TableHead>
-						<TableHead>Fecha Inicio</TableHead>
-						<TableHead className="text-center">Fecha Fin</TableHead>
+						<TableHead>Nombre Especialista</TableHead>
 						<TableHead className="text-center">Dia</TableHead>
-						<TableHead className="text-center">Horario</TableHead>
+						<TableHead className="text-center">Hora Inicio</TableHead>
+						<TableHead className="text-center">Hora Fin</TableHead>
 						<TableHead className="text-center">Acciones</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{/* {terapias.map((terapia) => (
-						<TableRow key={incidencia.id}>
+					{consultas.map((consulta) => (
+						<TableRow key={consulta.id}>
 							<TableCell>
 								{
-									tipoIncidencia.find(
-										(tipo) => tipo.id === incidencia.idTipoIncidencia
+									tipoEspecialidades.find(
+										(tipo) => tipo.id === consulta.idTipoEspecialidad
 									)?.nombre
 								}
 							</TableCell>
-							<TableCell>{format(incidencia.fecha, "dd/MM/yyyy")}</TableCell>
+							<TableCell>{consulta.nombreEspecialista}</TableCell>
 							<TableCell className="text-center">
-								{incidencia.duracion}hs.
+								{formatDia(consulta.dia)}
 							</TableCell>
 							<TableCell className="text-center">
-								{incidencia.descripcion}
+								{consulta.horarioInicio}
 							</TableCell>
 							<TableCell className="flex justify-center">
-								{incidencia.es_positiva ? <Smile /> : <Frown />}
+								{consulta.horarioFin}
 							</TableCell>
 							<TableCell>
 								<div className="flex justify-center items-center   gap-4 ">
-									<ActualizarIncidenciaDialog
-										incidencia={incidencia}
-										tipoIncidencia={tipoIncidencia}
+									<ActualizarConsultaDialog
+										consulta={consulta}
+										especialistas={tipoEspecialidades}
 									/>
-									<EliminarIncidenciaDialog idIncidecia={incidencia.id} />
+									<EliminarConsultaDialog idConsulta={consulta.id} />
 								</div>
 							</TableCell>
 						</TableRow>
-					))} */}
+					))}
 				</TableBody>
 			</Table>
 		</Card>
