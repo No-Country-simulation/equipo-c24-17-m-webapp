@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using server.Data;
 using server.Data.Models;
+using server.DTOs;
 using server.Logica;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,38 +23,53 @@ namespace server.Controllers
         #endregion
 
         // GET: api/<ConsultaController>
-        [HttpGet("terapia/")]
+        [HttpGet("hijo/")]
         public ActionResult<IEnumerable<Consulta>> ObtenerConsultasPorIdTerapia(int id)
         {
-            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
-            try
-            {
-                var lista_consultas = logica_consulta.ObtenerTodosLasConsultasDeUnaTerapia(id);
-                return Ok(lista_consultas);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(404, $"Error al obtener las consultas del usuario: {ex.Message}");
-            }
+            return null;
         }
 
         // GET api/<ConsultaController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
+            try
+            {
+                return Ok(logica_consulta.ObtenerConsultaPorId(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener la consulta solicitada {ex.Message}");
+            }
         }
 
         // POST api/<ConsultaController>
+
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> CrearConsulta([FromBody] ConsultaDTO request)
         {
+            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
+            try
+            {
+                var consultaId = await logica_consulta.CrearConsultaAsync(request);
+                return Ok(new { Message = "Consulta registrada", ConsultaId = consultaId });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { Message = "Error interno del servidor" });
+            }
         }
 
         // PUT api/<ConsultaController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put(int id, [FromBody] Consulta obj_consulta)
         {
+            return null;
         }
 
         // DELETE api/<ConsultaController>/5

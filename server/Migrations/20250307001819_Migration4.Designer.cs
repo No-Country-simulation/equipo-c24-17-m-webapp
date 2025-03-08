@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using server.Data;
@@ -11,9 +12,11 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    partial class BdTeacompanioContextModelSnapshot : ModelSnapshot
+    [Migration("20250307001819_Migration4")]
+    partial class Migration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,44 +24,6 @@ namespace server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("ConsultaDia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("created_at")
-                        .HasDefaultValueSql("now()");
-
-                    b.Property<int>("Dia")
-                        .HasColumnType("integer")
-                        .HasColumnName("dia");
-
-                    b.Property<TimeOnly>("HorarioFin")
-                        .HasColumnType("time without time zone")
-                        .HasColumnName("horario_fin");
-
-                    b.Property<TimeOnly>("HorarioInicio")
-                        .HasColumnType("time without time zone")
-                        .HasColumnName("horario_inicio");
-
-                    b.Property<int>("IdConsulta")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_consulta");
-
-                    b.HasKey("Id")
-                        .HasName("dia_consulta_pkey");
-
-                    b.HasIndex("IdConsulta");
-
-                    b.ToTable("diaconsulta", (string)null);
-                });
 
             modelBuilder.Entity("server.Data.Models.Consulta", b =>
                 {
@@ -74,6 +39,18 @@ namespace server.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at")
                         .HasDefaultValueSql("now()");
+
+                    b.Property<DateOnly>("Fecha")
+                        .HasColumnType("date")
+                        .HasColumnName("fecha");
+
+                    b.Property<TimeOnly>("HorarioFin")
+                        .HasColumnType("time without time zone")
+                        .HasColumnName("horario_fin");
+
+                    b.Property<TimeOnly>("HorarioInicio")
+                        .HasColumnType("time without time zone")
+                        .HasColumnName("horario_inicio");
 
                     b.Property<int>("IdHijo")
                         .HasColumnType("integer")
@@ -410,18 +387,6 @@ namespace server.Migrations
                     b.ToTable("usuario", (string)null);
                 });
 
-            modelBuilder.Entity("ConsultaDia", b =>
-                {
-                    b.HasOne("server.Data.Models.Consulta", "IdConsultaNavigation")
-                        .WithMany("ConsultasDias")
-                        .HasForeignKey("IdConsulta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_consultas_consultasdias");
-
-                    b.Navigation("IdConsultaNavigation");
-                });
-
             modelBuilder.Entity("server.Data.Models.Consulta", b =>
                 {
                     b.HasOne("server.Data.Models.Hijo", "IdHijoNavigation")
@@ -507,11 +472,6 @@ namespace server.Migrations
                         .HasConstraintName("fk_hijos_medicaciones");
 
                     b.Navigation("IdHijoNavigation");
-                });
-
-            modelBuilder.Entity("server.Data.Models.Consulta", b =>
-                {
-                    b.Navigation("ConsultasDias");
                 });
 
             modelBuilder.Entity("server.Data.Models.Hijo", b =>
