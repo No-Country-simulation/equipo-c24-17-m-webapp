@@ -1,5 +1,6 @@
 import z from "zod";
-import { differenceInDays } from "date-fns";
+import { differenceInDays, differenceInHours } from "date-fns";
+import { parseTime } from "./utils";
 
 export const parienteSchema = z.object({
 	id: z.number(),
@@ -95,3 +96,30 @@ export const incidenciaSchema = z.object({
 });
 
 export const incidenciaSchemaNoID = incidenciaSchema.omit({ id: true });
+
+export const consultaSchema = z.object({
+	id: z.number(),
+	idHijo: z.coerce.number(),
+	dia: z.coerce.number({ message: "Seleccione un dia" }),
+	horarioInicio: z.string({ message: "Debe agegar una hora." }),
+	horarioFin: z.string({ message: "Debe agegar una hora." }),
+	idTipoEspecialidad: z.coerce.number({
+		message: "Seleccione una especialidad",
+	}),
+	nombreEspecialista: z.string({
+		message: "Ingrese el nombre del especialista.",
+	}),
+});
+
+export const consultaSchemNoID = consultaSchema.omit({ id: true }).refine(
+	(val) => {
+		const horaInicio = parseTime(val.horarioInicio);
+		const horaFin = parseTime(val.horarioFin);
+
+		return differenceInHours(horaFin, horaInicio) > 0;
+	},
+	{
+		message: "La Hora hasta debe ser mayor.",
+		path: ["horarioFin"],
+	}
+);

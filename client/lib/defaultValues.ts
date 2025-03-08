@@ -11,3 +11,9 @@ export const incidenciaDefaultValues = {
 	descripcion: "",
 	es_positiva: true,
 };
+
+export const consultaDefaultValues = {
+	nombreEspecialista: "",
+	horarioInicio: "00:00:00",
+	horarioFin: "00:00:00",
+};

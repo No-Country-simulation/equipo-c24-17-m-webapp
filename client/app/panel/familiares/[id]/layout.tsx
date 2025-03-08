@@ -99,7 +99,7 @@ export default async function Layout({
 							href={`/panel/familiares/${id}/terapias`}
 							className="flex items-center justify-center gap-2"
 						>
-							<span className="text-xl">Terapias</span>{" "}
+							<span className="text-xl">Consultas</span>{" "}
 							<HeartHandshake className="w-7 h-7 text-white" />{" "}
 						</Link>
 					</Button>
