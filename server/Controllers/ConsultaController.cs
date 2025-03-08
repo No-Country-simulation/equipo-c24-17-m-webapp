@@ -79,8 +79,18 @@ namespace server.Controllers
                 }
         // DELETE api/<ConsultaController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
+            try
+            {
+                logica_consulta.EliminarConsulta(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al eliminar la consulta: {ex.Message}");
+            }
         }
     }
 }
