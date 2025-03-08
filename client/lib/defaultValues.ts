@@ -13,6 +13,7 @@ export const incidenciaDefaultValues = {
 };
 
 export const consultaDefaultValues = {
-	horaDesde: "00:00",
-	horaHasta: "00:00",
+	nombreEspecialista: "",
+	horarioInicio: "00:00:00",
+	horarioFin: "00:00:00",
 };

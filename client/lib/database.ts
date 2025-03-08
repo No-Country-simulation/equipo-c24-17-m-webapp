@@ -1,6 +1,10 @@
 "use server";
 import { auth } from "@/auth";
-import { incidenciaSchemaNoID, parienteSchemaNoID } from "./schemas";
+import {
+	consultaSchemNoID,
+	incidenciaSchemaNoID,
+	parienteSchemaNoID,
+} from "./schemas";
 import { z } from "zod";
 import { IncidenciaT, ParienteT } from "./definitions";
 
@@ -292,6 +296,54 @@ export async function eliminarIncidencia(id: number) {
 		if (!res.ok) {
 			throw new Error("Error en el server");
 		}
+	} catch (error) {
+		console.log("Error creando la incidencia", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+function formatGuardia(consulta: z.infer<typeof consultaSchemNoID>) {
+	const {
+		dia,
+		horarioFin,
+		horarioInicio,
+		idHijo,
+		idTipoEspecialidad,
+		nombreEspecialista,
+	} = consulta;
+	return {
+		idHijo: idHijo,
+		idTipoEspecialidad: idTipoEspecialidad,
+		nombreEspecialista: nombreEspecialista,
+		dias: [
+			{
+				dia: dia,
+				horarioInicio: horarioInicio,
+				horarioFin: horarioFin,
+			},
+		],
+	};
+}
+
+export async function crearConsulta(
+	consulta: z.infer<typeof consultaSchemNoID>
+) {
+	const newData = formatGuardia(consulta);
+	console.log(newData.dias);
+	try {
+		// const res = await fetch(
+		// 	`${process.env.NEXT_PRIVATE_API_URL}api/incidencia`,
+		// 	{
+		// 		method: "POST",
+		// 		body: JSON.stringify(newData),
+		// 		headers: {
+		// 			"Content-Type": "application/json",
+		// 		},
+		// 	}
+		// );
+		// if (!res.ok) {
+		// 	throw new Error("Error in the server");
+		// }
 	} catch (error) {
 		console.log("Error creando la incidencia", error);
 		throw new Error("Error en el servidor.");
