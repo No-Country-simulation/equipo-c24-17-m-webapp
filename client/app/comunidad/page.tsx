@@ -11,7 +11,7 @@ import {
 import { Footer } from "@/components/Footer"
 import Header from "@/components/Header";
 
-export const links = [
+const links = [
     {
         title: 'AUTISMO Y SUS DERECHOS',
         src: '/cardComunidad1.svg',
