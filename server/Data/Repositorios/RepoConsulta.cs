@@ -56,9 +56,6 @@ namespace server.Data.Repositorios
 
                 foreach (var dia in dias)
                 {
-                    Console.WriteLine("---------------------------------------------");
-                    Console.WriteLine($"Día: {dia.Dia}, Inicio: {dia.HorarioInicio}, Fin: {dia.HorarioFin}");
-                    Console.WriteLine("---------------------------------------------");
                     dia.IdConsulta = consulta.Id;
                     _context.ConsultaDias.Add(dia);
                 }
@@ -75,11 +72,11 @@ namespace server.Data.Repositorios
             }
         }
 
-        public void UpdateConsulta(Consulta obj_consulta)
+        public void UpdateConsulta(ConsultaDia obj_consulta)
         {
             try
             {
-                _context.Consultas.Update(obj_consulta);
+                _context.ConsultaDias.Update(obj_consulta);
                 _context.SaveChanges();
             }
             catch (DbUpdateException dbEx)
