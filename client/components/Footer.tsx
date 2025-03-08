@@ -9,10 +9,11 @@ export function Footer() {
     return (
         <footer className="relative transition-all bg-no-repeat bg-[#4F73CE] pt-[2rem] pb-8 z-[50]">
 
-            <div className=" absolute bg-[url('/footerWave.svg')] bg-cover bg-no-repeat top-[-50px] w-[100dvw] h-[250px] z-[1]"></div>
+            <div className="absolute bg-[url('/footerWave.svg')] bg-cover bg-no-repeat top-[-50px] w-[100dvw] h-[250px] z-[1]"></div>
 
-            <div className="flex flex-col min-[1065px]:flex-row items-center justify-start gap-8 px-8">
-                <section className="min:[1500px]:mx-[12rem] m-auto z-[100]">
+            <div className="flex flex-col min-[1065px]:flex-row items-center justify-start gap-8 mx-auto px-8 max-w-[1100px]">
+                
+                <section className=" m-auto z-[100]">
 
                     <Link href={"/"}>
                         <Image src={"/logoFooter.png"} alt="Logo TEA" width={240} height={60} />
@@ -20,7 +21,7 @@ export function Footer() {
 
                 </section>
 
-                <div className="flex flex-wrap m-auto justify-center pb-8 min-[800px]:gap-12 text-center sm:text-left min-[1700px]:translate-x-[-20rem] z-[100]" >
+                <div className="flex flex-wrap m-auto justify-center pb-8 min-[800px]:gap-12 text-center sm:text-left z-[100]" >
                     <section className="flex flex-col gap-8 p-8 text-[#fff]">
 
                         <h2 className="font-bold">RECURSOS</h2>
