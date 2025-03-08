@@ -9,9 +9,9 @@ public class ConsultaDia
     public int IdConsulta { get; set; }
     public DayOfWeek Dia { get; set; }
 
-    public TimeOnly HorarioInicio { get; set; }
+    public string HorarioInicio { get; set; }
 
-    public TimeOnly HorarioFin { get; set; }
+    public string HorarioFin { get; set; }
 
     public DateTime CreatedAt { get; set; }
 

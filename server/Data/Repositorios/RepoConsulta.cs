@@ -56,6 +56,9 @@ namespace server.Data.Repositorios
 
                 foreach (var dia in dias)
                 {
+                    Console.WriteLine("---------------------------------------------");
+                    Console.WriteLine($"Día: {dia.Dia}, Inicio: {dia.HorarioInicio}, Fin: {dia.HorarioFin}");
+                    Console.WriteLine("---------------------------------------------");
                     dia.IdConsulta = consulta.Id;
                     _context.ConsultaDias.Add(dia);
                 }
