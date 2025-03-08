@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using server.Data.Models;
 
 namespace server.Data;
@@ -32,6 +33,10 @@ public partial class BdTeacompanioContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        var timeOnlyConverter = new ValueConverter<TimeOnly, TimeSpan>(
+        v => v.ToTimeSpan(),      // Convierte `TimeOnly` a `TimeSpan` para PostgreSQL
+        v => TimeOnly.FromTimeSpan(v) // Convierte `TimeSpan` de PostgreSQL a `TimeOnly`
+);
         modelBuilder.Entity<Incidencia>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("incidencias_pkey");
@@ -97,8 +102,10 @@ public partial class BdTeacompanioContext : DbContext
 
             entity.ToTable("diaconsulta");
 
-            entity.Property(e => e.HorarioInicio).HasColumnName("horario_inicio");
-            entity.Property(e => e.HorarioFin).HasColumnName("horario_fin");
+            entity.Property(t => t.HorarioInicio).HasColumnName("horario_inicio");
+            entity.Property(t => t.HorarioFin).HasColumnName("horario_fin");
+
+
             entity.Property(e => e.Dia).HasColumnName("dia");
             entity.Property(e => e.IdConsulta).HasColumnName("id_consulta");
             entity.Property(e => e.CreatedAt)

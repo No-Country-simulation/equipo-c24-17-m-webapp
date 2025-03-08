@@ -11,7 +11,7 @@ export default function Header() {
 			<div className="container mx-auto max-w-[90%] xl:max-w-[1100px] flex justify-between items-center">
 				<div className="flex gap-2 justify-center items-center">
 					<Link href={"/#"}>
-						<Image src={"/logo.svg"} alt="Logo TEA" width={240} height={60} />
+						<Image src={"/logoFidelidad.svg"} alt="Logo TEA" width={240} height={60} />
 					</Link>
 				</div>
 

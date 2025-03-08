@@ -23,8 +23,7 @@ namespace server.Data.Repositorios
             {
                 return lista_consultas = _context.Consultas
                     .Where(i => i.IdHijo== id)
-                    .Include(x=> x.IdTipoEspecialidadNavigation)
-                    .Include(h=> h.IdHijoNavigation)
+                    .Include(i=> i.ConsultasDias)
                     .ToList();
             }
             catch (Exception ex)
@@ -72,20 +71,37 @@ namespace server.Data.Repositorios
             }
         }
 
-        public void UpdateConsulta(Consulta obj_consulta)
+
+        public void UpdateConsulta(Consulta consulta)
         {
+            using var transaction = _context.Database.BeginTransaction();
             try
             {
-                _context.Consultas.Update(obj_consulta);
+                _context.Consultas.Update(consulta);
                 _context.SaveChanges();
+
+                var consultaDias = _context.ConsultaDias.Where(d => d.IdConsulta == consulta.Id).ToList();
+
+                foreach (var dia in consultaDias)
+                {
+                    dia.HorarioInicio = consulta.ConsultasDias[0].HorarioInicio;
+                    dia.HorarioFin = consulta.ConsultasDias[0].HorarioFin;
+                    _context.ConsultaDias.Update(dia);
+                }
+
+                _context.SaveChanges();
+
+                transaction.Commit();
             }
             catch (DbUpdateException dbEx)
             {
+                transaction.Rollback();
                 throw new Exception("Error al actualizar la consulta en la base de datos.", dbEx);
             }
             catch (Exception ex)
             {
-                throw new Exception("Error general al actualizar el hijo.", ex);
+                transaction.Rollback();
+                throw new Exception("Error general al actualizar la consulta.", ex);
             }
         }
 

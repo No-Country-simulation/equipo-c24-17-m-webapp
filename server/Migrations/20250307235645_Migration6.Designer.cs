@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using server.Data;
@@ -11,9 +12,11 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(BdTeacompanioContext))]
-    partial class BdTeacompanioContextModelSnapshot : ModelSnapshot
+    [Migration("20250307235645_Migration6")]
+    partial class Migration6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,16 +42,6 @@ namespace server.Migrations
                     b.Property<int>("Dia")
                         .HasColumnType("integer")
                         .HasColumnName("dia");
-
-                    b.Property<string>("HorarioFin")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("horario_fin");
-
-                    b.Property<string>("HorarioInicio")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("horario_inicio");
 
                     b.Property<int>("IdConsulta")
                         .HasColumnType("integer")

@@ -1,9 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.Utils;
+using Microsoft.AspNetCore.Mvc;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+
+
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new TimeOnlyConverter());
+});
 
 var config = builder.Configuration;
 
