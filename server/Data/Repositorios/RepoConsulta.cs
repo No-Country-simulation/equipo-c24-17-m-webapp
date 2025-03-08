@@ -23,8 +23,7 @@ namespace server.Data.Repositorios
             {
                 return lista_consultas = _context.Consultas
                     .Where(i => i.IdHijo== id)
-                    .Include(x=> x.IdTipoEspecialidadNavigation)
-                    .Include(h=> h.IdHijoNavigation)
+                    .Include(i=> i.ConsultasDias)
                     .ToList();
             }
             catch (Exception ex)

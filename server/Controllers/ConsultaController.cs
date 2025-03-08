@@ -26,7 +26,9 @@ namespace server.Controllers
         [HttpGet("hijo/")]
         public ActionResult<IEnumerable<Consulta>> ObtenerConsultasPorIdTerapia(int id)
         {
-            return null;
+            LogicaConsulta logica_consulta = new LogicaConsulta(_context);
+            return Ok(logica_consulta.ObtenerConsultasDeHijosPorId(id));
+           
         }
 
         // GET api/<ConsultaController>/5

@@ -17,6 +17,30 @@ namespace server.Logica
         }
         #endregion
 
+
+        public List<ConsultaDTO> ObtenerConsultasDeHijosPorId(int id)
+        {
+            RepoConsulta repo_consulta = new RepoConsulta(_context);
+
+            List<ConsultaDTO> lista_consultas = repo_consulta.GetAll(id)
+                .Select(h => new ConsultaDTO
+                {
+                    Id = h.Id,
+                    NombreEspecialista = h.NombreEspecialista,
+                    IdHijo = h.IdHijo,
+                    IdTipoEspecialidad = h.IdTipoEspecialidad,
+                    Dias = h.ConsultasDias.Select(i => new DiaConsultaDTO
+                    {
+                        HorarioInicio = i.HorarioInicio,
+                        HorarioFin = i.HorarioFin,
+                        Dia = i.Dia
+                    }).ToList()
+                }
+                    ).ToList();
+
+            return lista_consultas;
+
+        }
         public Consulta ObtenerConsultaPorId(int id)
         {
             RepoConsulta repo_consulta = new RepoConsulta(_context);

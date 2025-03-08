@@ -6,6 +6,7 @@ namespace server.DTOs
 {
     public class ConsultaDTO
     {
+        public int Id{ get; set; }
         public int IdTipoEspecialidad { get; set; }
         public string NombreEspecialista { get; set; }
         public int IdHijo { get; set; }
