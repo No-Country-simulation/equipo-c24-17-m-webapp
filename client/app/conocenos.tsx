@@ -7,7 +7,7 @@ export default function Conocenos() {
 				<h1 className=" text-start text-3xl font-semibold md:hidden">
 					Conocenos
 				</h1>
-				<div className="flex  flex-col items-center justify-center gap-14 mt-8 md:flex-row ">
+				<div className="flex  flex-col items-center justify-center gap-14 mt-8 md:flex-row  ">
 					<div className="md:w-[50%]">
 						<Image
 							src={"/conocenos-image.svg"}

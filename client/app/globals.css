@@ -116,6 +116,18 @@
 	}
 }
 
+.react-time-picker__inputGroup {
+	border: none;
+}
+
+.myclass > div {
+	border-radius: 20px;
+	overflow: hidden;
+	padding-block: 5px;
+	padding-left: 10px;
+	border: 1px solid gray;
+}
+
 .react-calendar {
 	width: 350px;
 	max-width: 100%;
