@@ -36,13 +36,13 @@ const cards = [
 export const Guia = () => {
 	return (
 		<>
-			<section className="bg-[#FAEDDA] mt-20 ">
+			<section className="bg-[#FAEDDA] mt-20 shadow-inner overflow-hidden">
 				<Image
-					src="/nube.svg"
+					src="/nubeAbajo.svg"
 					alt="Imagen rotada"
 					width={1920}
 					height={1500}
-					className="rotate-180 top-0 left-0 w-full "
+					className="translate-y-[-25px] left-0 w-fulls"
 				/>
 
 				<div className="container mx-auto max-w-[1100px] px-4 py-10 text-center">
