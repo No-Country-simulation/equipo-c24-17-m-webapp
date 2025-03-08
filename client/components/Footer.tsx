@@ -7,33 +7,23 @@ import Link from "next/link";
 export function Footer() {
 
     return (
-        <footer className="bg-[#BED2FA] relative">
-            <div className="min-[1000px]:container h-[max-content] w-[100dvw] py-12 flex flex-col pl-4 justify-center items-start md:flex-row md:pl-12 md:gap-12">
-                <section className="pl-4 flex gap-8">
-                    <div>
-                        <div className="pr-4 py-4">
-                            <Link href={"/"}>
-                                <Image src={"/logo.svg"} alt="Logo TEA" width={240} height={60} />
-                            </Link>
-                        </div>
+        <footer className="relative transition-all bg-no-repeat bg-[#4F73CE] pt-[2rem] pb-8 z-[50]">
 
-                        <div className="w-[250px] h-[1px] bg-black" />
+            <div className=" absolute bg-[url('/footerWave.svg')] bg-cover bg-no-repeat top-[-50px] w-[100dvw] h-[250px] z-[1]"></div>
 
-                        <div className="flex flex-col gap-8 pb-12">
-                            <h3 className="font-bold pt-4 text-[#5881C1] text-xl">Contacto</h3>
-                            <span className="flex gap-2 text-sm"><MapPin />Buenos Aires, Argentina</span>
-                            <span className="flex gap-2 text-sm"><Mail />teacompsoporte@gmail.com</span>
-                        </div>
-                    </div>
+            <div className="flex flex-col min-[1065px]:flex-row items-center justify-start gap-8 px-8">
+                <section className="min:[1500px]:mx-[12rem] m-auto z-[100]">
 
-                    <div className="w-[1px] h-[300px] bg-black hidden md:block" />
+                    <Link href={"/"}>
+                        <Image src={"/logoFooter.png"} alt="Logo TEA" width={240} height={60} />
+                    </Link>
 
                 </section>
 
-                <div className="flex">
-                    <section className="flex flex-col gap-8 p-8 min-[850px]:mx-12">
+                <div className="flex flex-wrap m-auto justify-center pb-8 min-[800px]:gap-12 text-center sm:text-left min-[1700px]:translate-x-[-20rem] z-[100]" >
+                    <section className="flex flex-col gap-8 p-8 text-[#fff]">
 
-                        <h2 className="text-[#FA4A0C] text-2xl">Recursos</h2>
+                        <h2 className="font-bold">RECURSOS</h2>
 
                         <div className="flex flex-col gap-2">
                             <small className="hover:underline cursor-pointer">Comunidad</small>
@@ -44,13 +34,22 @@ export function Footer() {
 
                     </section>
 
-                    <section className="flex flex-col gap-8 p-8 min-[850px]:mx-12">
-
-                        <h2 className="text-[#FA4A0C] text-2xl">Nosotros</h2>
+                    <section className="flex flex-col gap-8 p-8 text-[#fff] ">
+                        <h2 className="font-bold">NOSOTROS</h2>
                         <div className="flex flex-col gap-2">
                             <small className="hover:underline cursor-pointer">Quiénes Somos</small>
                             <small className="hover:underline cursor-pointer">Información útil</small>
                             <small className="hover:underline cursor-pointer">Contacto</small>
+                        </div>
+
+                    </section>
+
+                    <section className="flex flex-col gap-8 p-8 text-[#fff]">
+
+                        <h3 className="font-bold">CONTACTO</h3>
+                        <div className="flex flex-col gap-4">
+                            <small className="hover:underline cursor-pointer flex gap-2"><MapPin />Buenos Aires, Argentina</small>
+                            <small className="hover:underline cursor-pointer flex gap-2"><Mail />teacompsoporte@gmail.com</small>
                         </div>
 
                     </section>
@@ -61,9 +60,15 @@ export function Footer() {
                     e.preventDefault();
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-                className="absolute right-10 bottom-10 text-[#FA4A0C] bg-[#00000085] p-1.5 rounded-full hover:shadow-[0_0_12px_#000] transition-all">
+                className="absolute right-10 bottom-10 text-[#5881C1] bg-[#fff] p-1.5 rounded-full hover:shadow-[0_0_12px_#000] transition-all">
                 <ArrowUp />
             </button>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-1 text-white">
+                <span className=" font-bold">TEACOMPAÑO &copy;</span>
+                {//<div className="h-[10px] w-[10px] border border-white bg-[#7d98dd5b] rounded-full p-1 translate-y-[-1px]"></div>
+                }
+                <small>2025</small>
+            </div>
         </footer>
     )
 }
