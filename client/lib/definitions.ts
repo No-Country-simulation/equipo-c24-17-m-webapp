@@ -24,3 +24,17 @@ export type TipoIncidenciaT = {
 export type ParienteWithIncidenciasT = ParienteT & {
 	incidencias: IncidenciaT[];
 };
+
+export interface ConsultasFromServer {
+	id: number;
+	idTipoEspecialidad: number;
+	nombreEspecialista: string;
+	idHijo: number;
+	dias: Dia[];
+}
+
+export interface Dia {
+	dia: number;
+	horarioInicio: string;
+	horarioFin: string;
+}

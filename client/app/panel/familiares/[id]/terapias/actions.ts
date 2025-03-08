@@ -1,6 +1,10 @@
 "use server";
 
-import { crearConsulta } from "@/lib/database";
+import {
+	actualizarConsulta,
+	crearConsulta,
+	eliminarConsulta,
+} from "@/lib/database";
 import { consultaSchema, consultaSchemNoID } from "@/lib/schemas";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -10,15 +14,14 @@ export const crearConsultaAction = createServerAction()
 	.input(consultaSchemNoID)
 	.handler(async ({ input }) => {
 		await crearConsulta(input);
-		revalidatePath("/panel/familiares");
+		revalidatePath(`/panel/familiares/`);
 		return { success: "ok" };
 	});
 
 export const actualizarConsultaAction = createServerAction()
 	.input(consultaSchema)
 	.handler(async ({ input }) => {
-		console.log(input);
-		// await actualizarIncidencia(input);
+		await actualizarConsulta(input);
 		revalidatePath("/panel/familiares");
 		return { success: "ok" };
 	});
@@ -26,8 +29,7 @@ export const actualizarConsultaAction = createServerAction()
 export const eliminarConsultaAction = createServerAction()
 	.input(z.number())
 	.handler(async ({ input }) => {
-		console.log(input);
-		// await eliminarIncidencia(input);
+		await eliminarConsulta(input);
 		revalidatePath("/panel/familiares");
 		return { success: "ok" };
 	});

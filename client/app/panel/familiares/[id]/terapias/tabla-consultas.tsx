@@ -67,7 +67,7 @@ export function TablaConsultas({
 							<TableCell className="text-center">
 								{consulta.horarioInicio}
 							</TableCell>
-							<TableCell className="flex justify-center">
+							<TableCell className="text-center">
 								{consulta.horarioFin}
 							</TableCell>
 							<TableCell>

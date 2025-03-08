@@ -1,12 +1,13 @@
 "use server";
 import { auth } from "@/auth";
 import {
+	consultaSchema,
 	consultaSchemNoID,
 	incidenciaSchemaNoID,
 	parienteSchemaNoID,
 } from "./schemas";
 import { z } from "zod";
-import { IncidenciaT, ParienteT } from "./definitions";
+import { ConsultasFromServer, IncidenciaT, ParienteT } from "./definitions";
 
 export async function getSession() {
 	const session = await auth();
@@ -302,6 +303,63 @@ export async function eliminarIncidencia(id: number) {
 	}
 }
 
+export async function getTipoEspecialista() {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/tipoespecialidad`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+
+		return await res.json();
+	} catch (error) {
+		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+//Consultas funciones
+export async function getConsultas(id: number) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/consulta/hijo/${id}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+
+		const consultas = await res.json();
+
+		return consultas.map((item: ConsultasFromServer) => ({
+			id: item.id,
+			idTipoEspecialidad: item.idTipoEspecialidad,
+			nombreEspecialista: item.nombreEspecialista,
+			idHijo: item.idHijo,
+			dia: item.dias[0].dia,
+			horarioInicio: item.dias[0].horarioInicio,
+			horarioFin: item.dias[0].horarioFin,
+		}));
+	} catch (error) {
+		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
 function formatGuardia(consulta: z.infer<typeof consultaSchemNoID>) {
 	const {
 		dia,
@@ -329,21 +387,64 @@ export async function crearConsulta(
 	consulta: z.infer<typeof consultaSchemNoID>
 ) {
 	const newData = formatGuardia(consulta);
-	console.log(newData.dias);
+
 	try {
-		// const res = await fetch(
-		// 	`${process.env.NEXT_PRIVATE_API_URL}api/incidencia`,
-		// 	{
-		// 		method: "POST",
-		// 		body: JSON.stringify(newData),
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 		},
-		// 	}
-		// );
-		// if (!res.ok) {
-		// 	throw new Error("Error in the server");
-		// }
+		const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}api/consulta`, {
+			method: "POST",
+			body: JSON.stringify(newData),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+	} catch (error) {
+		console.log("Error creando la incidencia", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+export async function actualizarConsulta(
+	consulta: z.infer<typeof consultaSchema>
+) {
+	const newData = formatGuardia(consulta);
+
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/consulta/${consulta.id}`,
+			{
+				method: "PUT",
+				body: JSON.stringify(newData),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+	} catch (error) {
+		console.log("Error creando la incidencia", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+export async function eliminarConsulta(id: number) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/consulta/${id}`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error en el server");
+		}
 	} catch (error) {
 		console.log("Error creando la incidencia", error);
 		throw new Error("Error en el servidor.");

@@ -108,7 +108,7 @@ export default function ActualizarConsultaDialog({
 									<Select
 										onValueChange={field.onChange}
 										value={field.value.toString()}
-										disabled={isPending}
+										disabled={true}
 									>
 										<FormControl>
 											<SelectTrigger>

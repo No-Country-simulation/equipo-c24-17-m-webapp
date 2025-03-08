@@ -106,9 +106,11 @@ export const consultaSchema = z.object({
 	idTipoEspecialidad: z.coerce.number({
 		message: "Seleccione una especialidad",
 	}),
-	nombreEspecialista: z.string({
-		message: "Ingrese el nombre del especialista.",
-	}),
+	nombreEspecialista: z
+		.string({
+			message: "Ingrese el nombre del especialista.",
+		})
+		.min(4, { message: "Debe ingresar un nombre." }),
 });
 
 export const consultaSchemNoID = consultaSchema.omit({ id: true }).refine(
