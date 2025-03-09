@@ -38,3 +38,26 @@ export interface Dia {
 	horarioInicio: string;
 	horarioFin: string;
 }
+
+export type ReporteEstadoT = {
+	mes: string;
+	positiva: number;
+	negativa: number;
+};
+
+export type ReporteIncidenciaPositivaT = {
+	tag: string;
+	positiva: number;
+	fill: string;
+};
+
+export type ReporteIncidenciaNegativaT = {
+	tag: string;
+	negativa: number;
+	fill: string;
+};
+
+export type ReporteTipoIncidenciaT = {
+	positivas: ReporteIncidenciaPositivaT[];
+	negativas: ReporteIncidenciaNegativaT[];
+};
