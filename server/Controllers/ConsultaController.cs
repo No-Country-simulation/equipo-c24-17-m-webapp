@@ -76,7 +76,7 @@ namespace server.Controllers
             logica_consulta.UpdateConsulta(id, obj_consulta);
             return Ok();
 
-                }
+        }
         // DELETE api/<ConsultaController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
