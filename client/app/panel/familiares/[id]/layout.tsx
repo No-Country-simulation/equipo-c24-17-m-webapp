@@ -87,10 +87,10 @@ export default async function Layout({
 				<div className="flex flex-col justify-between items-center gap-4">
 					<Button className="w-full  bg-verdeCl text-white hover:bg-verdeCl hover:opacity-80 h-12 rounded-full">
 						<Link
-							href={`/panel/familiares/${id}/terapias`}
+							href={`/panel/familiares/${id}/metricas`}
 							className="flex items-center justify-center gap-2"
 						>
-							<span className="text-xl">Panel</span>{" "}
+							<span className="text-xl">Métricas</span>{" "}
 							<AppWindow className="w-7 h-7 text-white" />{" "}
 						</Link>
 					</Button>
