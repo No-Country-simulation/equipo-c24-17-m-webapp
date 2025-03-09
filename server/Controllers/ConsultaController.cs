@@ -101,8 +101,9 @@ namespace server.Controllers
         [HttpPost("send")]
         public IActionResult SendEmail([FromBody] EmailRequest request)
         {
-            _emailService.SendEmail(request.To, request.Subject, request.Body);
-            return Ok(new { message = "Correo enviado correctamente" });
+            LogicaEnviarCorreos e = new LogicaEnviarCorreos();
+            e.EnviarCorreos(request);
+            return Ok();
         }
     }
 }
