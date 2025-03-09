@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using server.Clases;
 using server.Data;
 using server.Data.Models;
 using server.DTOs;
 using server.Logica;
+using server.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,9 +18,12 @@ namespace server.Controllers
         #region ContextDataBase
         private readonly BdTeacompanioContext _context;
 
-        public ConsultaController(BdTeacompanioContext context)
+        private readonly EmailService _emailService;
+
+        public ConsultaController(BdTeacompanioContext context, IConfiguration configuration)
         {
             _context = context;
+            _emailService = new EmailService(configuration);
         }
         #endregion
 
@@ -91,6 +96,13 @@ namespace server.Controllers
             {
                 return StatusCode(404, $"Error al eliminar la consulta: {ex.Message}");
             }
+        }
+
+        [HttpPost("send")]
+        public IActionResult SendEmail([FromBody] EmailRequest request)
+        {
+            _emailService.SendEmail(request.To, request.Subject, request.Body);
+            return Ok(new { message = "Correo enviado correctamente" });
         }
     }
 }
