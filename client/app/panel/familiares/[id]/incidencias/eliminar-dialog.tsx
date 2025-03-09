@@ -44,7 +44,7 @@ export function EliminarIncidenciaDialog({
 					<TrashIcon size={17} className="text-rose-500" />
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[340px]">
+			<DialogContent className="max-w-[90%] sm:max-w-[340px] rounded-lg">
 				<DialogHeader className="space-y-3">
 					<div className="flex justify-start items-center gap-4">
 						<div className=" gap-0 rounded-full h-16 w-16 bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80 flex items-center justify-center">

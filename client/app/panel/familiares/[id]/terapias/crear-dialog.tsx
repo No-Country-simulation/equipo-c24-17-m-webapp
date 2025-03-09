@@ -87,10 +87,13 @@ export default function CrearConsulta({
 					<Plus size={17} className="text-black" />
 				</Button>
 			</DialogTrigger>
-			<DialogContent aria-describedby="formulario para agregar una consulta">
+			<DialogContent
+				aria-describedby="formulario para agregar una consulta"
+				className="max-w-[90%] sm:max-w-[440px] rounded-lg"
+			>
 				<DialogHeader className="space-y-3">
 					<div className="flex justify-start items-center gap-4">
-						<div className=" gap-0 rounded-full h-16 w-16 bg-blueCl text-white hover:bg-blueCl hover:opacity-80 flex items-center justify-center">
+						<div className=" gap-0 rounded-full h-12 w-12  md:h-16 md:w-16 bg-blueCl text-white hover:bg-blueCl hover:opacity-80 flex items-center justify-center">
 							<HeartHandshake className="w-7 h-7 text-white" />{" "}
 						</div>
 						<DialogTitle className="text-xl uppercase font-normal">
@@ -100,7 +103,7 @@ export default function CrearConsulta({
 				</DialogHeader>
 				<Form {...form}>
 					<Loader loading={isPending} />
-					<form onSubmit={onSubmit} className="space-y-4 p-6  ">
+					<form onSubmit={onSubmit} className="space-y-4 sm:p-6  ">
 						<FormField
 							control={form.control}
 							name="idTipoEspecialidad"

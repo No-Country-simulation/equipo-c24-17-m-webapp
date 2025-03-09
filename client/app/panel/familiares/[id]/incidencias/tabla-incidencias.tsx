@@ -28,13 +28,13 @@ export function TablaIncidencias({
 	return (
 		<Card className="max-w-full mx-auto overflow-hidden">
 			<CardHeader className="bg-rosaCl text-white overflow-hidden relative">
-				<CardTitle className="text-center capitalize flex items-center justify-center gap-4 text-xl">
+				<CardTitle className="text-center capitalize flex items-center justify-center gap-4 sm:text-xl">
 					<UserPen className="text-white" /> <span>Control de Incidencias</span>
 				</CardTitle>
 
 				<CrearIncidencia tipoIncidencia={tipoIncidencia} id={id} />
 			</CardHeader>
-			<Table>
+			<Table className="text-xs">
 				<TableCaption>
 					{incidencias.length
 						? "Lista de incidencias"

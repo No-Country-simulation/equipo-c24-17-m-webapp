@@ -19,7 +19,7 @@ export function TablaMetricas({
 					<AppWindow className="text-white" /> <span>Métricas</span>
 				</CardTitle>
 			</CardHeader>
-			<CardContent className="pt-6 flex items-center justify-center gap-6">
+			<CardContent className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-6">
 				<PieTipoIncidencia reporteTipoIncidencia={reporteTipoIncidencia} />
 				<BarChartEstado reporte={reporteEstado} />
 			</CardContent>

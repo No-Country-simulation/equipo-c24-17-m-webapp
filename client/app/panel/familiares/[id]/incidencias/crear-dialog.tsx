@@ -91,15 +91,15 @@ export default function CrearIncidencia({
 			>
 				<Button
 					variant="ghost"
-					className="p-2 bg-white rounded-full absolute right-4 top-4 "
+					className="p-2 bg-white rounded-full absolute right-4 top-3 sm:top-4 "
 				>
 					<Plus size={17} className="text-black" />
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[440px]">
+			<DialogContent className=" max-w-[90%] sm:max-w-[440px] rounded-lg">
 				<DialogHeader className="space-y-3">
 					<div className="flex justify-start items-center gap-4">
-						<div className=" gap-0 rounded-full h-16 w-16 bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80 flex items-center justify-center">
+						<div className=" gap-0 rounded-full h-12 w-12  md:h-16 md:w-16 bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80 flex items-center justify-center">
 							<FilePenLine className="w-7 h-7 text-white" />{" "}
 						</div>
 						<DialogTitle className="text-xl uppercase font-normal">
@@ -150,7 +150,7 @@ export default function CrearIncidencia({
 												<Button
 													variant={"outline"}
 													className={cn(
-														"w-full pl-3 text-left font-normal",
+														"w-full pl-3 text-left font-normal ",
 														!field.value && "text-muted-foreground"
 													)}
 												>
