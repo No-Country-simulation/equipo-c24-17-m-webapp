@@ -451,46 +451,12 @@ export async function eliminarConsulta(id: number) {
 	}
 }
 
-function generateIncidencias() {
-	const incidencias = [];
-	const now = new Date();
-	let idCounter = 1;
-
-	for (let i = 0; i < 6; i++) {
-		const monthDate = new Date(now.getFullYear(), now.getMonth() - i, 1);
-
-		for (let j = 0; j < 12; j++) {
-			const randomDay = Math.floor(Math.random() * 28) + 1;
-			const fecha = new Date(
-				monthDate.getFullYear(),
-				monthDate.getMonth(),
-				randomDay
-			);
-
-			incidencias.push({
-				id: idCounter++,
-				idHijo: 2,
-				idTipoIncidencia: Math.floor(Math.random() * 5) + 1,
-				fecha,
-				duracion: Math.floor(Math.random() * 180) + 1,
-				descripcion: `Incidencia generada el ${
-					fecha.toISOString().split("T")[0]
-				}`,
-				es_positiva: Math.random() > 0.5,
-			});
-		}
-	}
-
-	return incidencias;
-}
-
-function getLastSixMonthsData(data: IncidenciaT[]) {
+function filtrarUltimosSeisMeses(data: IncidenciaT[]) {
 	const today = new Date();
 	const sixMonthsAgo = new Date();
 	sixMonthsAgo.setMonth(today.getMonth() - 5);
-	sixMonthsAgo.setDate(1); // Normalize to start of the month
+	sixMonthsAgo.setDate(1);
 
-	// Initialize an object with the last 6 months
 	const monthNames = [
 		"Enero",
 		"Febrero",
@@ -517,7 +483,6 @@ function getLastSixMonthsData(data: IncidenciaT[]) {
 		groupedData[monthKey] = { mes: monthKey, positiva: 0, negativa: 0 };
 	}
 
-	// Filter and aggregate data
 	data.forEach(
 		({ fecha, es_positiva }: { fecha: Date; es_positiva: boolean }) => {
 			const incidentDate = new Date(fecha);
@@ -534,34 +499,39 @@ function getLastSixMonthsData(data: IncidenciaT[]) {
 		}
 	);
 
-	// Convert to array and sort in chronological order
 	return Object.values(groupedData).reverse();
 }
 
-export async function getReporteEstado() {
-	const incidencia = generateIncidencias();
+export async function getReporteEstado(id: number) {
+	const incidencias = await getIncidenciasHijo(id);
 
-	const lastSixMonth = getLastSixMonthsData(incidencia);
+	const lastSixMonth = filtrarUltimosSeisMeses(incidencias);
 
 	return lastSixMonth;
 }
 
-const positivaData = [
-	{ tag: "sensibilidad", positiva: 186, fill: "#f1948a" },
-	{ tag: "comunicacion", positiva: 305, fill: "#c39bd3" },
-	{ tag: "interaccion", positiva: 237, fill: "#85c1e9" },
-	{ tag: "conductas", positiva: 173, fill: "#a2d9ce" },
-	{ tag: "habilidades", positiva: 209, fill: "#f7dc6f" },
-];
+export async function getReporteTipoIncidencia(id: number) {
+	const incidencias: IncidenciaT[] = await getIncidenciasHijo(id);
 
-const negativaData = [
-	{ tag: "sensibilidad", negativa: 80, fill: "#f1948a" },
-	{ tag: "comunicacion", negativa: 200, fill: "#c39bd3" },
-	{ tag: "interaccion", negativa: 120, fill: "#85c1e9" },
-	{ tag: "conductas", negativa: 190, fill: "#a2d9ce" },
-	{ tag: "habilidades", negativa: 130, fill: "#f7dc6f" },
-];
+	const tagAndFillObjects = [
+		{ tag: "sensibilidad", fill: "#f1948a" },
+		{ tag: "comunicacion", fill: "#c39bd3" },
+		{ tag: "interaccion", fill: "#85c1e9" },
+		{ tag: "conductas", fill: "#a2d9ce" },
+		{ tag: "habilidades", fill: "#f7dc6f" },
+	];
 
-export async function getReporteTipoIncidencia() {
-	return { positivas: positivaData, negativas: negativaData };
+	const positivas: { tag: string; positiva: number; fill: string }[] =
+		tagAndFillObjects.map((item) => ({ ...item, positiva: 0 }));
+
+	const negativas: { tag: string; negativa: number; fill: string }[] =
+		tagAndFillObjects.map((item) => ({ ...item, negativa: 0 }));
+
+	incidencias.forEach((item) =>
+		item.es_positiva
+			? (positivas[item.idTipoIncidencia - 1].positiva += 1)
+			: (negativas[item.idTipoIncidencia - 1].negativa += 1)
+	);
+
+	return { positivas, negativas };
 }
