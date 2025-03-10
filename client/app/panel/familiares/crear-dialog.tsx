@@ -81,7 +81,7 @@ export default function CrearDialog({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button className=" gap-0 flex flex-col items-center justify-center  rounded-full h-12 w-12 bg-blueStrongCl text-white hover:bg-blueStrongCl hover:opacity-80 ">
+				<Button className=" gap-0 flex flex-col items-center justify-center  rounded-full h-12 w-12 bg-verdeCl text-white hover:bg-verdeCl hover:opacity-80 ">
 					<UserPlus className="w-7 h-7 text-white" />{" "}
 				</Button>
 			</DialogTrigger>
@@ -176,7 +176,7 @@ export default function CrearDialog({
 														)}
 													>
 														{field.value ? (
-															format(field.value, "PPP", { locale: es })
+															format(field.value, "dd/MM/yyyy", { locale: es })
 														) : (
 															<span>Seleccione una fecha</span>
 														)}
@@ -243,7 +243,9 @@ export default function CrearDialog({
 																	)}
 																>
 																	{field.value ? (
-																		format(field.value, "PPP", { locale: es })
+																		format(field.value, "dd/MM/yyyy", {
+																			locale: es,
+																		})
 																	) : (
 																		<span>Seleccione</span>
 																	)}
@@ -285,7 +287,9 @@ export default function CrearDialog({
 																	)}
 																>
 																	{field.value ? (
-																		format(field.value, "PPP", { locale: es })
+																		format(field.value, "dd/MM/yyyy", {
+																			locale: es,
+																		})
 																	) : (
 																		<span>Seleccione</span>
 																	)}

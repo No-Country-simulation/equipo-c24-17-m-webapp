@@ -30,20 +30,22 @@ export default function SidebarMain({
 		<SidebarGroup>
 			<SidebarGroupLabel>Accesos</SidebarGroupLabel>
 			<SidebarMenu>
-				<SidebarMenuButton
-					className=""
-					asChild
-					isActive={path === "/panel/familiares"}
-				>
-					<Link href={`/panel/familiares`}>Inicio</Link>
+				<SidebarMenuButton className="" asChild isActive={path === "/panel"}>
+					<Link href={`/panel/`}>Inicio</Link>
 				</SidebarMenuButton>
 			</SidebarMenu>
 			<SidebarMenu>
 				<Collapsible className="group/collapsible">
 					<CollapsibleTrigger asChild>
-						<SidebarMenuButton className="">
-							Familiares
-							<ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+						<SidebarMenuButton
+							className=""
+							asChild
+							isActive={path === "/panel/familiares"}
+						>
+							<Link href={`/panel/familiares`}>
+								Familiares
+								<ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+							</Link>
 						</SidebarMenuButton>
 					</CollapsibleTrigger>
 					<CollapsibleContent>

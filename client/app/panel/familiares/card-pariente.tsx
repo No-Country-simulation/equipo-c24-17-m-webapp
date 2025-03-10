@@ -41,7 +41,7 @@ export default function CardPariente({
 						className="rounded-full"
 					/>
 				</div>
-				<div className="flex flex-col items-start justify-between gap-4">
+				<div className="flex flex-col items-start justify-between gap-2">
 					<h2 className="text-2xl text-[#6D89CF]">
 						{nombre} {apellido}
 					</h2>
@@ -53,9 +53,11 @@ export default function CardPariente({
 						<p className="text-[#696868]">Diagnóstico:</p>{" "}
 						<p className="">{nombreDiagnostico}</p>
 					</div>
-					<div className="flex items-center gap-1">
-						<p className="text-[#696868]">Descripcion:</p>{" "}
-						<p className="">{descripcionDiagnostico}</p>
+					<div className="">
+						<p className="text-[#696868]">
+							Descripcion:{" "}
+							<span className="text-black">{descripcionDiagnostico}</span>
+						</p>{" "}
 					</div>
 				</div>
 
