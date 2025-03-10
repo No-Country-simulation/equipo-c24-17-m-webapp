@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ParienteT } from "@/lib/definitions";
+import { cn } from "@/lib/utils";
 
 export default function SidebarMain({
 	familiares,
@@ -31,11 +32,14 @@ export default function SidebarMain({
 			<SidebarGroupLabel>Accesos</SidebarGroupLabel>
 			<SidebarMenu>
 				<SidebarMenuButton className="" asChild isActive={path === "/panel"}>
-					<Link href={`/panel/`}>Inicio</Link>
+					<Link href={`/panel/`}>Información Inicial</Link>
 				</SidebarMenuButton>
 			</SidebarMenu>
 			<SidebarMenu>
-				<Collapsible className="group/collapsible">
+				<Collapsible
+					className="group/collapsible"
+					open={path.includes(`/panel/familiares`)}
+				>
 					<CollapsibleTrigger asChild>
 						<SidebarMenuButton
 							className=""
@@ -43,8 +47,13 @@ export default function SidebarMain({
 							isActive={path === "/panel/familiares"}
 						>
 							<Link href={`/panel/familiares`}>
-								Familiares
-								<ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+								Familiares cargados
+								<ChevronRight
+									className={cn(
+										"ml-auto transition-transform duration-200 ",
+										path.includes("/panel/familiares") && "rotate-90"
+									)}
+								/>
 							</Link>
 						</SidebarMenuButton>
 					</CollapsibleTrigger>
@@ -56,7 +65,7 @@ export default function SidebarMain({
 										asChild
 										isActive={path.includes(`/panel/familiares/${id}`)}
 									>
-										<Link href={`/panel/familiares/${id}/incidencias`}>
+										<Link href={`/panel/familiares/${id}/metricas`}>
 											{apellido}, {nombre}
 										</Link>
 									</SidebarMenuSubButton>

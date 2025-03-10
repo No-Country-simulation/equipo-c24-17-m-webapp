@@ -1,5 +1,6 @@
 import { signOut } from "@/auth";
 import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
 
 export function CerrarSesion() {
 	return (
@@ -12,9 +13,10 @@ export function CerrarSesion() {
 			<Button
 				variant={"outline"}
 				type="submit"
-				className="w-full text-white bg-[#7596cc] hover:bg-[#7596cc] hover:text-white hover:opacity-80  border-none"
+				className="w-full text-blueStrongCl bg-lightBlueCl hover:bg-lightBlueCl hover:text-blueStrongCl hover:opacity-90  border-none"
 			>
 				Cerrar Sesión
+				<LogOut className="" />
 			</Button>
 		</form>
 	);

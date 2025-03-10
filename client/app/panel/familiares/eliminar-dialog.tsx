@@ -10,7 +10,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { LoaderCircleIcon, TrashIcon } from "lucide-react";
+import { LoaderCircleIcon, TrashIcon, UserPen } from "lucide-react";
 import { useState } from "react";
 import { eliminarParienteAction } from "./actions";
 import { useServerAction } from "zsa-react";
@@ -40,14 +40,21 @@ export function EliminarDialog({ idPariente }: { idPariente: number }) {
 					<TrashIcon /> <p>Eliminar</p>
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[340px]">
+			<DialogContent className=" max-w-[340px]  rounded-lg ">
 				<DialogHeader className="space-y-3">
-					<DialogTitle>Eliminar Pariente</DialogTitle>
-					<DialogDescription>
-						Esta seguro que desea eliminar el pariente ?
+					<div className="flex items-center justify-center gap-3">
+						<div className=" gap-0 flex justify-center items-center  rounded-full h-12 w-12 bg-verdeCl text-white  ">
+							<UserPen className="w-7 h-7 text-white" />{" "}
+						</div>
+						<DialogTitle className="text-xl uppercase font-normal">
+							Eliminar Familiar
+						</DialogTitle>
+					</div>
+					<DialogDescription className="text-center">
+						Esta seguro que desea eliminar el familiar ?
 					</DialogDescription>
 				</DialogHeader>
-				<div className="flex items-center justify-start gap-8 mt-4">
+				<div className="flex items-center justify-center gap-8 mt-4">
 					<Button
 						variant="secondary"
 						onClick={() => setOpen(false)}

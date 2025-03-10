@@ -154,7 +154,7 @@ export default function CrearConsulta({
 							control={form.control}
 							name="dia"
 							render={({ field }) => (
-								<FormItem className="space-y-3">
+								<FormItem className="space-y-3 py-2">
 									<FormLabel>Seleccione un dia</FormLabel>
 									<FormControl>
 										<RadioGroup

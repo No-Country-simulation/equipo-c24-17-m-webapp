@@ -91,6 +91,9 @@ export const incidenciaSchema = z.object({
 		.min(2, { message: "La descripción debe tener al menos 3 caracteres." })
 		.max(100, {
 			message: "La descripción no puede exceder los 100 caracteres.",
+		})
+		.refine((val) => /^[A-Za-z0-9]/.test(val), {
+			message: "La descripción no puede comenzar con un símbolo",
 		}),
 	es_positiva: z.coerce.boolean({ message: "Debe seleccionar una reacción." }),
 });

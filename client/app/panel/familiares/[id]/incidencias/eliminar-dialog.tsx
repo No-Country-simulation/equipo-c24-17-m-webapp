@@ -54,11 +54,11 @@ export function EliminarIncidenciaDialog({
 							Eliminar Incidencia
 						</DialogTitle>
 					</div>
-					<DialogDescription>
+					<DialogDescription className="text-center">
 						Esta seguro que desea eliminar la incidencia ?
 					</DialogDescription>
 				</DialogHeader>
-				<div className="flex items-center justify-start gap-8 mt-4">
+				<div className="flex items-center justify-center gap-8 mt-4">
 					<Button
 						variant="secondary"
 						onClick={() => setOpen(false)}

@@ -145,7 +145,7 @@ export default function ActualizarIncidenciaDialog({
 												<Button
 													variant={"outline"}
 													className={cn(
-														"w-full pl-3 text-left font-normal",
+														"w-full pl-3 text-left font-normal border-lightBlueCl focus-visible:border-blueCl",
 														!field.value && "text-muted-foreground"
 													)}
 												>

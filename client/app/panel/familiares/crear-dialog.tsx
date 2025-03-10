@@ -43,7 +43,7 @@ import {
 } from "@/components/ui/card";
 import { parienteDefaultValues } from "@/lib/defaultValues";
 
-export default function CrearDialog({
+export default function CrearFamiliarDialog({
 	correoUsuario,
 }: {
 	correoUsuario: string;
@@ -81,14 +81,25 @@ export default function CrearDialog({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button className=" gap-0 flex flex-col items-center justify-center  rounded-full h-12 w-12 bg-verdeCl text-white hover:bg-verdeCl hover:opacity-80 ">
-					<UserPlus className="w-7 h-7 text-white" />{" "}
-				</Button>
+				<Card className="pt-6 max-w-[380px] hover:cursor-pointer hover:shadow-lg hover:opacity-80">
+					<CardContent className="flex  items-center gap-8">
+						<div>
+							<h2 className="text-xl font-semibold text-blueCl">
+								Añadir Perfil Nuevo
+							</h2>
+							<p>Cargar un nuevo perfil de registro aquí.</p>
+						</div>
+
+						<div className=" gap-0 flex flex-col items-center justify-center  rounded-full h-20 w-20 min-w-20 min-h-20 bg-verdeCl text-white ">
+							<UserPlus className="w-10 h-10 text-white" />{" "}
+						</div>
+					</CardContent>
+				</Card>
 			</DialogTrigger>
-			<DialogContent className=" ">
+			<DialogContent className="max-w-[90%] sm:max-w-[440px] rounded-lg">
 				<DialogHeader>
 					<div className="flex items-center justify-center gap-3">
-						<div className=" gap-0 flex justify-center items-center  rounded-full h-12 w-12 bg-blueStrongCl text-white hover:bg-blueStrongCl hover:opacity-80 ">
+						<div className=" gap-0 flex justify-center items-center  rounded-full h-12 w-12 bg-verdeCl text-white ">
 							<UserPen className="w-7 h-7 text-white" />{" "}
 						</div>
 						<DialogTitle className="text-xl uppercase font-normal">
@@ -171,16 +182,16 @@ export default function CrearDialog({
 													<Button
 														variant={"outline"}
 														className={cn(
-															"w-full pl-3 text-left font-normal",
+															"w-full pl-3 text-left font-normal border border-lightBlueCl focus-visible:border-blueCl focus-visible:border-2 ",
 															!field.value && "text-muted-foreground"
 														)}
 													>
 														{field.value ? (
 															format(field.value, "dd/MM/yyyy", { locale: es })
 														) : (
-															<span>Seleccione una fecha</span>
+															<span>Seleccione</span>
 														)}
-														<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+														<CalendarIcon className="ml-auto h-4 w-4 opacity-70 text-blueCl" />
 													</Button>
 												</FormControl>
 											</PopoverTrigger>
@@ -218,7 +229,7 @@ export default function CrearDialog({
 								)}
 							/>
 
-							<Card className="col-span-2">
+							<Card className="col-span-2 border border-lightBlueCl">
 								<CardHeader>
 									<CardDescription>
 										Fecha inicio y fin de terapia (opcional)
@@ -238,7 +249,7 @@ export default function CrearDialog({
 																<Button
 																	variant={"outline"}
 																	className={cn(
-																		"w-full pl-3 text-left font-normal",
+																		"w-full pl-3 text-left font-normal border border-lightBlueCl",
 																		!field.value && "text-muted-foreground"
 																	)}
 																>
@@ -249,7 +260,7 @@ export default function CrearDialog({
 																	) : (
 																		<span>Seleccione</span>
 																	)}
-																	<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+																	<CalendarIcon className="ml-auto h-4 w-4 opacity-70 text-blueCl" />
 																</Button>
 															</FormControl>
 														</PopoverTrigger>
@@ -282,7 +293,7 @@ export default function CrearDialog({
 																<Button
 																	variant={"outline"}
 																	className={cn(
-																		"w-full pl-3 text-left font-normal",
+																		"w-full pl-3 text-left font-normal border border-lightBlueCl",
 																		!field.value && "text-muted-foreground"
 																	)}
 																>
@@ -293,7 +304,7 @@ export default function CrearDialog({
 																	) : (
 																		<span>Seleccione</span>
 																	)}
-																	<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+																	<CalendarIcon className="ml-auto h-4 w-4 opacity-70 text-blueCl" />
 																</Button>
 															</FormControl>
 														</PopoverTrigger>

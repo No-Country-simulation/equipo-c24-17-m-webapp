@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { getPariente } from "@/lib/database";
 import { Button } from "@/components/ui/button";
-import { AppWindow, FilePenLine, HeartHandshake } from "lucide-react";
+import { ChartColumnBig, FilePenLine, HeartHandshake } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -36,7 +36,7 @@ export default async function Layout({
 	return (
 		<section className="container w-[95%] mx-auto space-y-8">
 			<div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
-				<Card className="min-h-[200px] text-sm md:text-base">
+				<Card className="min-h-[200px] text-sm md:text-base ">
 					<CardContent className="flex flex-col md:flex-row items-center justify-start gap-4 h-full">
 						<div className="flex items-center justify-center">
 							<Image
@@ -47,7 +47,7 @@ export default async function Layout({
 								height={130}
 							/>
 						</div>
-						<div className="flex flex-col items-start justify-between gap-4">
+						<div className="flex flex-col items-center md:items-start justify-between gap-4">
 							<h1 className="text-2xl">
 								{nombre} {apellido}
 							</h1>
@@ -68,7 +68,7 @@ export default async function Layout({
 								<span className="text-black">{descripcionDiagnostico}</span>{" "}
 							</p>
 						</div>
-						<div className="self-start  md:self-end md:text-center md:mb-2 md:ml-8">
+						<div className="self-center  md:self-end md:text-center md:mb-2 md:ml-8">
 							{fechaInicio && fechaCulminacion && (
 								<div className="space-y-1 flex items-center md:block gap-6">
 									<div className="text-darkCl md:space-y-1">
@@ -95,7 +95,7 @@ export default async function Layout({
 							className="flex items-center justify-center gap-2"
 						>
 							<span className="lg:text-xl">Métricas</span>{" "}
-							<AppWindow className="w-7 h-7 text-white hidden lg:block" />{" "}
+							<ChartColumnBig className="w-7 h-7 text-white hidden lg:block" />{" "}
 						</Link>
 					</Button>
 					<Button className="w-full  bg-blueCl text-white hover:bg-blueCl hover:opacity-80 h-12 rounded-full">

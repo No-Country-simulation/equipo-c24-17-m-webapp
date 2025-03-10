@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 import React from "react";
 import CardPasos from "./card-pasos";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -37,14 +36,6 @@ export default function page() {
 	return (
 		<section>
 			<div className="container max-w-[90%] mx-auto xl:max-w-[900px]">
-				<header className=" justify-start hidden lg:flex">
-					<Image
-						src={"/logoFidelidad.svg"}
-						alt="Logo TEA"
-						width={140}
-						height={60}
-					/>
-				</header>
 				<h1 className="text-center text-blueStrongCl text-2xl font-semibold lg:mt-4">
 					Bienvenidos al Panel de TEAcompaño
 				</h1>
