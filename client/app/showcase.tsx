@@ -22,7 +22,7 @@ export default function Showcase() {
 						</p>
 
 						<Button className=" bg-gradient-to-r  from-fucCl  to-yellowCl rounded-3xl  transition-colors py-5 px-4 my-2 hover:opacity-80 font-semibold text-white tracking-wide">
-							<Link href={"/"}>CONOCÉ NUESTRAS GUÍAS</Link>
+							<Link href={"/guias"}>CONOCÉ NUESTRAS GUÍAS</Link>
 						</Button>
 					</div>
 

@@ -43,26 +43,26 @@ export const PreguntasFrecuentes = () => {
 				</h3>
 
 				<div className="container mx-auto max-w-[1100px] ">
-					<Accordion type="multiple" className="w-full space-y-6 ">
+					<Accordion type="multiple" className="w-full space-y-6">
 						{accordions.map((accordion) => (
 							<AccordionItem
 								key={accordion.title}
 								value={accordion.title}
-								className="border-none "
+								className="border-none bg-slate-200 rounded-3xl"
 							>
-								<AccordionTrigger className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl text-lg font-medium transition-all  mx-2   data-[state=open]:rounded-b-none  ">
+								<AccordionTrigger className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl text-lg font-medium ">
 									<p className="ml-0 md:ml-6">{accordion.title}</p>
 								</AccordionTrigger>
-								<AccordionContent className="bg-slate-200 opacity-90  px-6 py-4 rounded-b-2xl   border-t-0 -mt-2 mx-2 ">
+								<AccordionContent className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl  ">
 									<p className="pl-6 text-base">{accordion.content}</p>
 								</AccordionContent>
 							</AccordionItem>
 						))}
 						<AccordionItem
 							value="¿Cuáles son las señales de alerta del autismo?"
-							className="border-none "
+							className=" border-none bg-slate-200 rounded-3xl"
 						>
-							<AccordionTrigger className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl text-lg font-medium transition-all  mx-2  data-[state=open]:rounded-b-none  ">
+							<AccordionTrigger className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl text-lg font-medium transition-all  mx-2  data-[state=open]:rounded-b-none  data-[state=open]:transition-none  ">
 								<p className="ml-0 md:ml-6">
 									¿Cuáles son las señales de alerta del autismo?
 								</p>
@@ -87,9 +87,9 @@ export const PreguntasFrecuentes = () => {
 						</AccordionItem>
 						<AccordionItem
 							value="¿Qué tengo que hacer si sospecho que mi hijo/a tiene autismo?"
-							className="border-none "
+							className="border-none bg-slate-200 rounded-3xl"
 						>
-							<AccordionTrigger className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl text-lg font-medium transition-all  mx-2   data-[state=open]:rounded-b-none  ">
+							<AccordionTrigger className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl text-lg font-medium transition-all  mx-2 data-[state=open]:rounded-b-none data-[state=open]:transition-none  ">
 								<span className="ml-0 md:ml-6">
 									¿Qué tengo que hacer si sospecho que mi hijo/a tiene autismo?
 								</span>
