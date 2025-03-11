@@ -9,6 +9,9 @@
 		"lint": "next lint",
 		"test": "vitest"
 	},
+	"overrides": {
+		"react-is": "^19.0.0-rc-69d4b800-20241021"
+	},
 	"dependencies": {
 		"@hookform/resolvers": "^4.0.0",
 		"@radix-ui/react-accordion": "^1.2.3",
@@ -35,6 +38,7 @@
 		"react-dom": "^19.0.0",
 		"react-hook-form": "^7.54.2",
 		"react-time-picker": "^7.0.0",
+		"recharts": "^2.15.1",
 		"sonner": "^2.0.1",
 		"tailwind-merge": "^3.0.1",
 		"tailwindcss-animate": "^1.0.7",

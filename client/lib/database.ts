@@ -1,12 +1,13 @@
 "use server";
 import { auth } from "@/auth";
 import {
+	consultaSchema,
 	consultaSchemNoID,
 	incidenciaSchemaNoID,
 	parienteSchemaNoID,
 } from "./schemas";
 import { z } from "zod";
-import { IncidenciaT, ParienteT } from "./definitions";
+import { ConsultasFromServer, IncidenciaT, ParienteT } from "./definitions";
 
 export async function getSession() {
 	const session = await auth();
@@ -302,6 +303,63 @@ export async function eliminarIncidencia(id: number) {
 	}
 }
 
+export async function getTipoEspecialista() {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/tipoespecialidad`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+
+		return await res.json();
+	} catch (error) {
+		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+//Consultas funciones
+export async function getConsultas(id: number) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/consulta/hijo/${id}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+
+		const consultas = await res.json();
+
+		return consultas.map((item: ConsultasFromServer) => ({
+			id: item.id,
+			idTipoEspecialidad: item.idTipoEspecialidad,
+			nombreEspecialista: item.nombreEspecialista,
+			idHijo: item.idHijo,
+			dia: item.dias[0].dia,
+			horarioInicio: item.dias[0].horarioInicio,
+			horarioFin: item.dias[0].horarioFin,
+		}));
+	} catch (error) {
+		console.log("Error creando el hijo", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
 function formatGuardia(consulta: z.infer<typeof consultaSchemNoID>) {
 	const {
 		dia,
@@ -329,23 +387,151 @@ export async function crearConsulta(
 	consulta: z.infer<typeof consultaSchemNoID>
 ) {
 	const newData = formatGuardia(consulta);
-	console.log(newData.dias);
+
 	try {
-		// const res = await fetch(
-		// 	`${process.env.NEXT_PRIVATE_API_URL}api/incidencia`,
-		// 	{
-		// 		method: "POST",
-		// 		body: JSON.stringify(newData),
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 		},
-		// 	}
-		// );
-		// if (!res.ok) {
-		// 	throw new Error("Error in the server");
-		// }
+		const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}api/consulta`, {
+			method: "POST",
+			body: JSON.stringify(newData),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
 	} catch (error) {
 		console.log("Error creando la incidencia", error);
 		throw new Error("Error en el servidor.");
 	}
+}
+
+export async function actualizarConsulta(
+	consulta: z.infer<typeof consultaSchema>
+) {
+	const newData = formatGuardia(consulta);
+
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/consulta/${consulta.id}`,
+			{
+				method: "PUT",
+				body: JSON.stringify(newData),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		if (!res.ok) {
+			throw new Error("Error in the server");
+		}
+	} catch (error) {
+		console.log("Error creando la incidencia", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+export async function eliminarConsulta(id: number) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PRIVATE_API_URL}api/consulta/${id}`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error("Error en el server");
+		}
+	} catch (error) {
+		console.log("Error creando la incidencia", error);
+		throw new Error("Error en el servidor.");
+	}
+}
+
+function filtrarUltimosSeisMeses(data: IncidenciaT[]) {
+	const today = new Date();
+	const sixMonthsAgo = new Date();
+	sixMonthsAgo.setMonth(today.getMonth() - 5);
+	sixMonthsAgo.setDate(1);
+
+	const monthNames = [
+		"Enero",
+		"Febrero",
+		"Marzo",
+		"Abril",
+		"Mayo",
+		"Junio",
+		"Julio",
+		"Agosto",
+		"Septiembre",
+		"Octubre",
+		"Noviembre",
+		"Diciembre",
+	];
+
+	const groupedData: {
+		[key: string]: { mes: string; positiva: number; negativa: number };
+	} = {};
+
+	for (let i = 0; i < 6; i++) {
+		const date = new Date();
+		date.setMonth(today.getMonth() - i);
+		const monthKey = monthNames[date.getMonth()];
+		groupedData[monthKey] = { mes: monthKey, positiva: 0, negativa: 0 };
+	}
+
+	data.forEach(
+		({ fecha, es_positiva }: { fecha: Date; es_positiva: boolean }) => {
+			const incidentDate = new Date(fecha);
+			if (incidentDate >= sixMonthsAgo && incidentDate <= today) {
+				const monthKey = monthNames[incidentDate.getMonth()];
+				if (groupedData[monthKey]) {
+					if (es_positiva) {
+						groupedData[monthKey].positiva++;
+					} else {
+						groupedData[monthKey].negativa++;
+					}
+				}
+			}
+		}
+	);
+
+	return Object.values(groupedData).reverse();
+}
+
+export async function getReporteEstado(id: number) {
+	const incidencias = await getIncidenciasHijo(id);
+
+	const lastSixMonth = filtrarUltimosSeisMeses(incidencias);
+
+	return lastSixMonth;
+}
+
+export async function getReporteTipoIncidencia(id: number) {
+	const incidencias: IncidenciaT[] = await getIncidenciasHijo(id);
+
+	const tagAndFillObjects = [
+		{ tag: "sensibilidad", fill: "#f1948a" },
+		{ tag: "comunicacion", fill: "#c39bd3" },
+		{ tag: "interaccion", fill: "#85c1e9" },
+		{ tag: "conductas", fill: "#a2d9ce" },
+		{ tag: "habilidades", fill: "#f7dc6f" },
+	];
+
+	const positivas: { tag: string; positiva: number; fill: string }[] =
+		tagAndFillObjects.map((item) => ({ ...item, positiva: 0 }));
+
+	const negativas: { tag: string; negativa: number; fill: string }[] =
+		tagAndFillObjects.map((item) => ({ ...item, negativa: 0 }));
+
+	incidencias.forEach((item) =>
+		item.es_positiva
+			? (positivas[item.idTipoIncidencia - 1].positiva += 1)
+			: (negativas[item.idTipoIncidencia - 1].negativa += 1)
+	);
+
+	return { positivas, negativas };
 }

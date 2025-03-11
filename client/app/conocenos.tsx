@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 export default function Conocenos() {
 	return (
-		<section className="py-20 bg-white">
+		<section className="pt-20 pb-10 bg-white">
 			<div className="container w-[90%] mx-auto  lg:max-w-[1000px] ">
 				<h1 className=" text-start text-3xl font-semibold md:hidden">
 					Conocenos

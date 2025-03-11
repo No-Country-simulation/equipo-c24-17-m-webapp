@@ -91,6 +91,9 @@ export const incidenciaSchema = z.object({
 		.min(2, { message: "La descripción debe tener al menos 3 caracteres." })
 		.max(100, {
 			message: "La descripción no puede exceder los 100 caracteres.",
+		})
+		.refine((val) => /^[A-Za-z0-9]/.test(val), {
+			message: "La descripción no puede comenzar con un símbolo",
 		}),
 	es_positiva: z.coerce.boolean({ message: "Debe seleccionar una reacción." }),
 });
@@ -106,9 +109,11 @@ export const consultaSchema = z.object({
 	idTipoEspecialidad: z.coerce.number({
 		message: "Seleccione una especialidad",
 	}),
-	nombreEspecialista: z.string({
-		message: "Ingrese el nombre del especialista.",
-	}),
+	nombreEspecialista: z
+		.string({
+			message: "Ingrese el nombre del especialista.",
+		})
+		.min(4, { message: "Debe ingresar un nombre." }),
 });
 
 export const consultaSchemNoID = consultaSchema.omit({ id: true }).refine(

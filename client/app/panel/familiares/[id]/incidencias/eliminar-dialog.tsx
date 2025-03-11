@@ -44,7 +44,7 @@ export function EliminarIncidenciaDialog({
 					<TrashIcon size={17} className="text-rose-500" />
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[340px]">
+			<DialogContent className="max-w-[90%] sm:max-w-[340px] rounded-lg">
 				<DialogHeader className="space-y-3">
 					<div className="flex justify-start items-center gap-4">
 						<div className=" gap-0 rounded-full h-16 w-16 bg-rosaCl text-white hover:bg-rosaCl hover:opacity-80 flex items-center justify-center">
@@ -54,11 +54,11 @@ export function EliminarIncidenciaDialog({
 							Eliminar Incidencia
 						</DialogTitle>
 					</div>
-					<DialogDescription>
+					<DialogDescription className="text-center">
 						Esta seguro que desea eliminar la incidencia ?
 					</DialogDescription>
 				</DialogHeader>
-				<div className="flex items-center justify-start gap-8 mt-4">
+				<div className="flex items-center justify-center gap-8 mt-4">
 					<Button
 						variant="secondary"
 						onClick={() => setOpen(false)}

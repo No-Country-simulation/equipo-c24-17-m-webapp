@@ -85,10 +85,10 @@ export default function ActualizarDialog({
 					<UserPenIcon /> <p>Actualizar</p>
 				</Button>
 			</DialogTrigger>
-			<DialogContent className=" ">
+			<DialogContent className="max-w-[90%] sm:max-w-[440px] rounded-lg ">
 				<DialogHeader>
 					<div className="flex items-center justify-center gap-3">
-						<div className=" gap-0 flex justify-center items-center  rounded-full h-12 w-12 bg-blueStrongCl text-white hover:bg-blueStrongCl hover:opacity-80 ">
+						<div className=" gap-0 flex justify-center items-center  rounded-full h-12 w-12 bg-verdeCl text-white  ">
 							<UserPen className="w-7 h-7 text-white" />{" "}
 						</div>
 						<DialogTitle className="text-xl uppercase font-normal">
@@ -176,7 +176,7 @@ export default function ActualizarDialog({
 														)}
 													>
 														{field.value ? (
-															format(field.value, "PPP", { locale: es })
+															format(field.value, "dd/MM/yyyy", { locale: es })
 														) : (
 															<span>Seleccione una fecha</span>
 														)}
@@ -243,7 +243,9 @@ export default function ActualizarDialog({
 																	)}
 																>
 																	{field.value ? (
-																		format(field.value, "PPP", { locale: es })
+																		format(field.value, "dd/MM/yyyy", {
+																			locale: es,
+																		})
 																	) : (
 																		<span>Seleccione</span>
 																	)}
@@ -286,7 +288,9 @@ export default function ActualizarDialog({
 																	)}
 																>
 																	{field.value ? (
-																		format(field.value, "PPP", { locale: es })
+																		format(field.value, "dd/MM/yyyy", {
+																			locale: es,
+																		})
 																	) : (
 																		<span>Seleccione</span>
 																	)}

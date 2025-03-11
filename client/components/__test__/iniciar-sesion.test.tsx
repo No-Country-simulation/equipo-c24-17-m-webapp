@@ -26,7 +26,7 @@ describe("IniciarSesion componente", () => {
 		});
 		await userEvent.click(button);
 		expect(signIn).toHaveBeenCalledWith("google", {
-			redirectTo: "/panel/familiares",
+			redirectTo: "/panel",
 		});
 	});
 });

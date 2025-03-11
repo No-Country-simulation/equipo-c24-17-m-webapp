@@ -8,7 +8,7 @@ export default function IniciarSesion() {
 		<form
 			action={async () => {
 				"use server";
-				await signIn("google", { redirectTo: "/panel/familiares" });
+				await signIn("google", { redirectTo: "/panel" });
 			}}
 		>
 			<Button variant={"outline"} type="submit" className="rounded-full">
