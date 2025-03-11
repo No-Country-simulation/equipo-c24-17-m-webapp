@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using server.Clases;
 using server.Data;
 using server.Data.Models;
 using server.DTOs;
 using server.Logica;
+using server.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,9 +18,12 @@ namespace server.Controllers
         #region ContextDataBase
         private readonly BdTeacompanioContext _context;
 
-        public ConsultaController(BdTeacompanioContext context)
+        private readonly EmailService _emailService;
+
+        public ConsultaController(BdTeacompanioContext context, IConfiguration configuration)
         {
             _context = context;
+            _emailService = new EmailService(configuration);
         }
         #endregion
 
@@ -55,6 +60,7 @@ namespace server.Controllers
             try
             {
                 var consultaId = await logica_consulta.CrearConsultaAsync(request);
+                logica_consulta.EnviarCorreoDeRecepcion(request, consultaId);
                 return Ok(new { Message = "Consulta registrada", ConsultaId = consultaId });
             }
             catch (ArgumentException ex)
@@ -76,7 +82,7 @@ namespace server.Controllers
             logica_consulta.UpdateConsulta(id, obj_consulta);
             return Ok();
 
-                }
+        }
         // DELETE api/<ConsultaController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
