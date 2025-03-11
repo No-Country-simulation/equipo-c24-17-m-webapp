@@ -38,21 +38,30 @@ export default function NavMobile() {
 				<div>
 					<ul className="flex flex-col justify-start items-center gap-4  text-white">
 						{" "}
-						<li className="">
+						<li>
 							{" "}
-							<Link href={"/"} className=" font-bold flex items-center gap-2">
+							<Link
+								href={"/#conocenos"}
+								className=" font-bold flex items-center gap-2"
+							>
 								<Hand size={20} /> <span>Conocenos</span>
 							</Link>{" "}
 						</li>{" "}
-						<li className="">
+						<li>
 							{" "}
-							<Link href={"/comunidad"} className="font-bold flex items-center gap-2">
+							<Link
+								href={"/comunidad"}
+								className="font-bold flex items-center gap-2"
+							>
 								<House size={20} /> <span>Comunidad</span>
 							</Link>{" "}
 						</li>{" "}
-						<li className="">
+						<li>
 							{" "}
-							<Link href={"/"} className="font-bold flex items-center gap-2">
+							<Link
+								href={"/#faqs"}
+								className="font-bold flex items-center gap-2"
+							>
 								<MessageCircleQuestion size={20} /> <span>FAQ</span>
 							</Link>{" "}
 						</li>{" "}

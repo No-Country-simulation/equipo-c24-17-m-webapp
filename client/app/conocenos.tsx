@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 export default function Conocenos() {
 	return (
-		<section className="pt-20 pb-10 bg-white">
+		<section id="conocenos" className="pt-20 pb-10 bg-white">
 			<div className="container w-[90%] mx-auto  lg:max-w-[1000px] ">
 				<h1 className=" text-start text-3xl font-semibold md:hidden">
 					Conocenos
@@ -22,14 +22,20 @@ export default function Conocenos() {
 						<h1 className="hidden md:block text-start text-3xl font-semibold">
 							Conocenos
 						</h1>
-						<p className=" text-darkCl leading-6">
-							TEAcompaña es una plataforma digital gratuita que, mediante un
-							sistema de herramientas reúne en un solo lugar a familias,
-							profesionales y recursos especializados en autismo. Regístrate y
-							crea tu perfil para formar parte de una comunidad que acompaña,
-							informa y apoya en cada etapa del desarrollo.
-						</p>
-						<p className="font-bold text-darkCl">
+						<div className=" text-darkCl leading-6 lg:text-xl">
+							<p>
+								TEAcompaña es una plataforma digital gratuita que, mediante un
+								sistema de herramientas reúne en un solo lugar a familias y
+								recursos especializados en autismo.
+							</p>
+							<p>
+								{" "}
+								Regístrate y crea tu perfil para formar parte de una comunidad
+								que acompaña, informa y apoya en cada etapa del desarrollo.
+							</p>
+						</div>
+
+						<p className="font-bold text-darkCl lg:text-xl">
 							TODO EN UN MISMO ESPACIO PARA VOS.
 						</p>
 						<Image

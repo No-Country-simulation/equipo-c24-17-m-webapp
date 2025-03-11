@@ -1,34 +1,29 @@
-import {
-	CalendarPlus2,
-	ClipboardPlus,
-	NotebookText,
-	Users,
-} from "lucide-react";
+import { CalendarPlus2, FilePen, NotebookText, Users } from "lucide-react";
 import Image from "next/image";
 
 const cards = [
 	{
 		title: "Calendario",
 		description:
-			"Podrás acceder a un calendario donde veras los turnos medicos, terapias y los avisos de la medicación",
+			"Podrás registrar los turnos de las consultas terapéuticas y llevar un registro claro y accesible.",
 		icon: CalendarPlus2,
 	},
 	{
 		title: "Historia clínica",
 		description:
-			"Podrás ingresar toda la historia clínica de tu hijo, para fácil acceso",
-		icon: ClipboardPlus,
+			"Podrás registrar las incidencias del niño, llevando un control de su evolución por el tipo de incidencia, su duración y otros factores relevantes.",
+		icon: FilePen,
 	},
 	{
-		title: "Guías informativas",
+		title: "Guías ",
 		description:
-			"Podrás acceder a información segura, segun tu necesidad, para descargar y ayudarte en cada situación",
+			"Podrás acceder a información confiable, conocer el paso a paso del diagnóstico y saber cómo proceder.",
 		icon: NotebookText,
 	},
 	{
 		title: "Comunidades",
 		description:
-			"Podrás comunicarte con otros padre, contando sus experiencias para crear una red de contención",
+			"Podrás conectarte con otros padres, compartir experiencias y construir una red de apoyo.",
 		icon: Users,
 	},
 ];

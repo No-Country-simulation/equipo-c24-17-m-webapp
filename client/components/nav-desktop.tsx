@@ -8,17 +8,23 @@ export function NavDesktot() {
 			<div className=" transition-all hidden md:flex">
 				<ul className="flex items-center justify-start gap-10 text-[#333]">
 					<li>
-						<Link href={"/"} className="font-semibold hover:opacity-70">
+						<Link
+							href={"/#conocenos"}
+							className="font-semibold hover:opacity-70"
+						>
 							Conocenos
 						</Link>
 					</li>
 					<li>
-						<Link href={"/comunidad"} className="font-semibold hover:opacity-70">
+						<Link
+							href={"/comunidad"}
+							className="font-semibold hover:opacity-70"
+						>
 							Comunidad
 						</Link>
 					</li>
 					<li>
-						<Link href={"/"} className="font-semibold hover:opacity-70">
+						<Link href={"/#faqs"} className="font-semibold hover:opacity-70">
 							FAQs
 						</Link>
 					</li>

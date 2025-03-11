@@ -16,9 +16,9 @@ export default function Showcase() {
 							Junto a vos en cada paso
 						</h1>
 						<p className="text-darkCl font-semibold text-start text-sm sm:py-4 md:text-base relative z-30">
-							Estamos aquí para acompañarte en este camino, conectando familias
-							y profesionales con un mismo objetivo: mejorar la calidad de vida
-							de quienes viven con TEA.
+							Una web diseñada para facilitar la organización diaria de tu hijo
+							o familiar con TEA, con calendario de terapias, consultas,
+							registro de incidencias, guías informativas y más.
 						</p>
 
 						<Button className=" bg-gradient-to-r  from-fucCl  to-yellowCl rounded-3xl  transition-colors py-5 px-4 my-2 hover:opacity-80 font-semibold text-white tracking-wide">

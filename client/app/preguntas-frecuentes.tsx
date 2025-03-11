@@ -10,34 +10,25 @@ import Image from "next/image";
 
 const accordions = [
 	{
-		title: "¿Que es el TEA? ¿Cómo se diagnostica?",
-		content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+		title: "¿Qué es el TEA?",
+		content:
+			"El autismo es una condición de origen neurobiológico que acompaña a las personas a lo largo de su vida y genera particularidades para comunicarse y relacionarse con otros e intereses restringidos, además de un procesamiento sensorial diferente.",
 	},
 	{
-		title: "¿TEAcompaña es una plataforma gratuita?",
+		title: " ¿Por qué hablamos de espectro?",
 		content:
-			"Yes. It comes with default styles that matches the other components' aesthetic.",
+			"Hablamos de espectro porque el autismo se manifiesta de forma diversa en cada persona. Varía en síntomas, niveles de apoyo y habilidades. Algunas personas requieren más ayuda, mientras que otras son independientes. No hay un único perfil de TEA, sino una amplia gama de características.",
 	},
 	{
-		title: "¿Cómo puedo unirme a la comunidad?",
+		title: "¿Cómo se diagnostica?",
 		content:
-			"Yes. It's animated by default, but you can disable it if you prefer.",
-	},
-	{
-		title: "¿Quienespueden registrarse en TEAcompaña?",
-		content:
-			"Yes. It comes with default styles that matches the other components' aesthetic.",
-	},
-	{
-		title: "¿Cómo creo mi perfil en TEAcompaña?",
-		content:
-			"Yes. It's animated by default, but you can disable it if you prefer.Yes. It's animated by default, but you can disable it if you prefer. ",
+			"El diagnóstico debe ser realizado por un equipo multidisciplinario, que puede incluir neurólogos, pediatras, psicólogos, psiquiatras infantiles, fonoaudiólogos y terapeutas ocupacionales. El TEA se puede detectar desde los 18 meses, pero en algunos casos, el diagnóstico puede hacerse más tarde. La intervención temprana es clave para mejorar el desarrollo y la calidad de vida de los niños con autismo.",
 	},
 ];
 
 export const PreguntasFrecuentes = () => {
 	return (
-		<section className="relative">
+		<section id="faqs" className="relative">
 			<Image
 				src={"triangulo-divisor.svg"}
 				alt="triangulo divisor"
@@ -46,13 +37,13 @@ export const PreguntasFrecuentes = () => {
 				className=" absolute -top-1 right-0 left-0 w-full z-20"
 			/>
 
-			<div className="bg-[url('https://plus.unsplash.com/premium_photo-1661680863986-13eb209573e0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=...')] bg-cover bg-center min-h-[800px] flex flex-col items-center py-20 lg:pt-32 xl:pt-44 opacity-70">
+			<div className="bg-[url('/bg-faqs-0.avif')] bg-cover bg-center min-h-[800px] flex flex-col items-center py-20 lg:pt-32 xl:pt-44 opacity-70">
 				<h3 className="text-3xl font-bold text-center text-white mb-14 mt-16">
 					Preguntas Frecuentes
 				</h3>
 
 				<div className="container mx-auto max-w-[1100px] ">
-					<Accordion type="single" collapsible className="w-full space-y-6 ">
+					<Accordion type="multiple" className="w-full space-y-6 ">
 						{accordions.map((accordion) => (
 							<AccordionItem
 								key={accordion.title}
@@ -60,15 +51,74 @@ export const PreguntasFrecuentes = () => {
 								className="border-none "
 							>
 								<AccordionTrigger className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl text-lg font-medium transition-all  mx-2   data-[state=open]:rounded-b-none  ">
-									<span className="ml-0 md:ml-6">{accordion.title}</span>
+									<p className="ml-0 md:ml-6">{accordion.title}</p>
 								</AccordionTrigger>
 								<AccordionContent className="bg-slate-200 opacity-90  px-6 py-4 rounded-b-2xl   border-t-0 -mt-2 mx-2 ">
-									<span className="text-[16px] ml-0 md:ml-6">
-										{accordion.content}
-									</span>
+									<p className="pl-6 text-base">{accordion.content}</p>
 								</AccordionContent>
 							</AccordionItem>
 						))}
+						<AccordionItem
+							value="¿Cuáles son las señales de alerta del autismo?"
+							className="border-none "
+						>
+							<AccordionTrigger className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl text-lg font-medium transition-all  mx-2  data-[state=open]:rounded-b-none  ">
+								<p className="ml-0 md:ml-6">
+									¿Cuáles son las señales de alerta del autismo?
+								</p>
+							</AccordionTrigger>
+							<AccordionContent className="bg-slate-200 opacity-90  px-6 py-4 rounded-b-2xl   border-t-0 -mt-2 mx-2 ">
+								<p className="text-[16px] pl-8">
+									Las señales de alerta del TEA pueden manifestarse desde los
+									primeros meses de vida y varían en cada niño. Sin embargo, hay
+									ciertos indicadores en el desarrollo social, comunicativo y
+									conductual que pueden ayudar a detectarlo tempranamente, como
+									por ejemplo:
+								</p>
+								<ul className="pl-6">
+									<li>- No tiene Interacción social </li>
+									<li>
+										- No responde a su nombre ni mantiene contacto visual.
+									</li>
+									<li>- No muestra interés en jugar con otros.</li>
+									<li>- Dificultad para comprender emociones</li>
+								</ul>
+							</AccordionContent>
+						</AccordionItem>
+						<AccordionItem
+							value="¿Qué tengo que hacer si sospecho que mi hijo/a tiene autismo?"
+							className="border-none "
+						>
+							<AccordionTrigger className="bg-slate-200 opacity-90  px-6 py-4 rounded-3xl text-lg font-medium transition-all  mx-2   data-[state=open]:rounded-b-none  ">
+								<span className="ml-0 md:ml-6">
+									¿Qué tengo que hacer si sospecho que mi hijo/a tiene autismo?
+								</span>
+							</AccordionTrigger>
+							<AccordionContent className="bg-slate-200 opacity-90  px-6 py-4 rounded-b-2xl   border-t-0 -mt-2 mx-2 ">
+								<ul className="pl-6">
+									<li>1- Observa y registra las señales de alerta. </li>
+									<li>
+										2-Consulta con un especialista (pediatra, neurólogo,
+										psicólogo).
+									</li>
+									<li>
+										{" "}
+										3- Solicita una evaluación para un diagnóstico preciso.
+									</li>
+									<li>
+										{" "}
+										4️- Inicia una intervención temprana (terapias y
+										estimulación).
+									</li>
+									<li>
+										{" "}
+										5️- Infórmate y busca apoyo en profesionales y comunidades.
+										La detección temprana mejora su desarrollo y calidad de
+										vida. 💙{" "}
+									</li>
+								</ul>
+							</AccordionContent>
+						</AccordionItem>
 					</Accordion>
 				</div>
 			</div>
