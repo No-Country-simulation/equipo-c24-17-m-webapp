@@ -60,6 +60,7 @@ namespace server.Controllers
             try
             {
                 var consultaId = await logica_consulta.CrearConsultaAsync(request);
+                logica_consulta.EnviarCorreoDeRecepcion(request, consultaId);
                 return Ok(new { Message = "Consulta registrada", ConsultaId = consultaId });
             }
             catch (ArgumentException ex)
@@ -96,14 +97,6 @@ namespace server.Controllers
             {
                 return StatusCode(404, $"Error al eliminar la consulta: {ex.Message}");
             }
-        }
-
-        [HttpPost("send")]
-        public IActionResult SendEmail([FromBody] EmailRequest request)
-        {
-            LogicaEnviarCorreos e = new LogicaEnviarCorreos();
-            e.EnviarCorreos(request);
-            return Ok();
         }
     }
 }
