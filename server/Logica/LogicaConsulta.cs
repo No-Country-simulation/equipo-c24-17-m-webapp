@@ -146,55 +146,5 @@ namespace server.Logica
                 throw new Exception(ex.Message);
             }
         }
-
-
-        public void EnviarCorreoDeRecepcion(ConsultaDTO request, int id_consulta)
-        {
-
-            EmailRequest obj_correo = new EmailRequest();
-
-            //-----------------------------------------------------------------------------------------------
-            //obtener al padre a traves del id del hijo y armar el objeto del correo a mandar.
-
-            var correo_padre = _context.Hijos
-                .Include(x => x.IdUsuarioNavigation)
-                .Where(i => i.Id == request.IdHijo).Select(x => x.IdUsuarioNavigation.Correo).First();
-
-            //-----------------------------------------------------------------------------------------------
-
-            //armar el objeto para mostrar el mensaje en el correo
-
-            ConsultaDiaDTO obj_consulta = new ConsultaDiaDTO();
-            ObtenerFechaDesdeBase func_fecha = new ObtenerFechaDesdeBase();
-
-            var consultaDiasDTO = _context.ConsultaDias
-            .Include(x => x.IdConsultaNavigation)
-                .ThenInclude(x => x.IdTipoEspecialidadNavigation)
-            .Include(o => o.IdConsultaNavigation.IdHijoNavigation)
-            .Where(i => i.IdConsultaNavigation.IdHijo == request.IdHijo)
-                .Where(e => e.IdConsulta == id_consulta)
-            .Select(cd => new ConsultaDiaDTO
-            {
-                IdHijo = cd.IdConsultaNavigation.IdHijoNavigation.Id,
-                NombreUsuario = cd.IdConsultaNavigation.IdHijoNavigation.IdUsuarioNavigation.Nombre.ToUpper(),
-                NombreHijo = cd.IdConsultaNavigation.IdHijoNavigation.Nombre.ToUpper(),
-                ApellidoHijo = cd.IdConsultaNavigation.IdHijoNavigation.Apellido.ToUpper(),
-                FechaNacimiento = cd.IdConsultaNavigation.IdHijoNavigation.FechaNacimiento,
-                Edad = DateTime.Now.Year - cd.IdConsultaNavigation.IdHijoNavigation.FechaNacimiento.Year,
-                Servicio = cd.IdConsultaNavigation.IdTipoEspecialidadNavigation.Nombre.ToUpper(),
-                Profesional = cd.IdConsultaNavigation.NombreEspecialista.ToUpper(),
-                Dia = cd.Dia,
-                HorarioInicio = cd.HorarioInicio.ToString(),
-                HorarioFin = cd.HorarioFin.ToString(),
-                FechaTurno = func_fecha.ObtenerProximaFecha(cd.Dia)
-            })
-            .First();
-
-            obj_correo.Subject = correo_padre;
-            obj_correo.To = $"Confirmación de turno para: {consultaDiasDTO.NombreHijo} {consultaDiasDTO.ApellidoHijo}";
-
-            LogicaEnviarCorreos enviar_correo = new LogicaEnviarCorreos();
-            enviar_correo.EnviarCorreos(obj_correo, consultaDiasDTO);
-        }
     }
 }
