@@ -31,6 +31,18 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function BarChartEstado({ reporte }: { reporte: ReporteEstadoT[] }) {
+	const total = reporte.reduce(
+		(acc, curr) => {
+			acc.totalNegativas += curr.negativa;
+			acc.totalPosivitas += curr.positiva;
+
+			return acc;
+		},
+		{ totalPosivitas: 0, totalNegativas: 0 }
+	);
+
+	console.log(total);
+
 	return (
 		<Card className="max-w-[400px]">
 			<CardHeader className="text-center">

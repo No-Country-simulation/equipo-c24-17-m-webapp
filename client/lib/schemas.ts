@@ -6,33 +6,58 @@ export const parienteSchema = z.object({
 	id: z.number(),
 	nombre: z
 		.string()
+		.trim()
 		.min(3, { message: "El nombre debe tener al menos 3 caracteres." })
 		.max(50, { message: "El nombre no puede exceder los 50 caracteres." })
-		.regex(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/, {
-			message: "El nombre solo puede contener letras y espacios.",
+		.regex(/^[\p{L} ]+$/u, "Solo letrar puedes ingresar")
+		.refine((value) => value.replace(/\s/g, "").length >= 3, {
+			message: "Al menos 3 letras debe contener el nombre.",
+		})
+		.refine((val) => val.split(" ").findIndex((item) => item.length > 20), {
+			message: "Nombre no valido",
 		}),
 
 	apellido: z
 		.string()
+		.trim()
 		.min(2, { message: "El apellido debe tener al menos 3 caracteres." })
 		.max(50, { message: "El apellido no puede exceder los 50 caracteres." })
-		.regex(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/, {
-			message: "El apellido solo puede contener letras y espacios.",
+		.regex(/^[\p{L} ]+$/u, "Solo letrar puedes ingresar")
+		.refine((value) => value.replace(/\s/g, "").length >= 3, {
+			message: "Al menos 3 letras debe contener el apellido.",
+		})
+		.refine((val) => val.split(" ").findIndex((item) => item.length > 20), {
+			message: "Apellido no valido",
 		}),
 
 	nombreDiagnostico: z
 		.string()
-		.min(2, { message: "El nombre debe tener al menos 3 caracteres." })
-		.max(50, { message: "El nombre no puede exceder los 50 caracteres." })
-		.regex(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/, {
-			message: "El nombre solo puede contener letras y espacios.",
+		.trim()
+		.min(2, { message: "El diagnostico debe tener al menos 3 caracteres." })
+		.max(50, { message: "El diagnostico no puede exceder los 50 caracteres." })
+		.regex(/^[\p{L} ]+$/u, "Solo letrar puedes ingresar")
+		.refine((val) => val.split(" ").findIndex((item) => item.length > 20), {
+			message: "Diagnostico no valido",
+		})
+		.refine((value) => value.replace(/\s/g, "").length >= 3, {
+			message: "Al menos 3 letras debe contener el diagnostico.",
+		})
+		.refine((val) => val.split(" ").findIndex((item) => item.length > 20), {
+			message: "Descripcion no valida",
 		}),
 
 	descripcionDiagnostico: z
 		.string()
+		.trim()
 		.min(2, { message: "La descripción debe tener al menos 3 caracteres." })
 		.max(100, {
 			message: "La descripción no puede exceder los 100 caracteres.",
+		})
+		.refine((val) => /^[A-Za-z0-9]/.test(val), {
+			message: "La descripción no puede comenzar con un símbolo",
+		})
+		.refine((val) => val.split(" ").findIndex((item) => item.length > 20), {
+			message: "Descripcion no valida",
 		}),
 
 	fechaNacimiento: z.coerce
@@ -60,19 +85,22 @@ export const parienteSchema = z.object({
 	fechaCulminacion: z.coerce.date().optional(),
 });
 
-export const parienteSchemaNoID = parienteSchema.omit({ id: true }).refine(
-	(val) => {
-		return (
-			val.fechaCulminacion !== undefined &&
-			val.fechaInicio !== undefined &&
-			val.fechaCulminacion > val.fechaInicio
-		);
-	},
-	{
-		message: "La fecha de Inicio debe ser menor a la fecha de Culminación.",
-		path: ["fechaInicio"],
-	}
-);
+export const parienteSchemaNoID = parienteSchema
+	.omit({ id: true })
+	.refine(
+		(val) => {
+			return (
+				!val.fechaInicio ||
+				!val.fechaCulminacion ||
+				val.fechaCulminacion > val.fechaInicio
+			);
+		},
+		{
+			message: "La fecha de Inicio debe ser menor a la fecha de Culminación.",
+			path: ["fechaInicio"],
+		}
+	)
+	.optional();
 
 export const incidenciaSchema = z.object({
 	id: z.number(),
@@ -88,12 +116,16 @@ export const incidenciaSchema = z.object({
 		.min(1, { message: "La duración debe ser mayor a 0." }),
 	descripcion: z
 		.string()
+		.trim()
 		.min(2, { message: "La descripción debe tener al menos 3 caracteres." })
 		.max(100, {
 			message: "La descripción no puede exceder los 100 caracteres.",
 		})
 		.refine((val) => /^[A-Za-z0-9]/.test(val), {
 			message: "La descripción no puede comenzar con un símbolo",
+		})
+		.refine((val) => val.split(" ").findIndex((item) => item.length > 20), {
+			message: "Descripción no valida",
 		}),
 	es_positiva: z.coerce.boolean({ message: "Debe seleccionar una reacción." }),
 });
@@ -113,7 +145,12 @@ export const consultaSchema = z.object({
 		.string({
 			message: "Ingrese el nombre del especialista.",
 		})
-		.min(4, { message: "Debe ingresar un nombre." }),
+		.trim()
+		.regex(/^[\p{L} ]+$/u, "Solo letrar puedes ingresar")
+		.min(4, { message: "Debe ingresar un nombre." })
+		.refine((val) => val.split(" ").findIndex((item) => item.length > 20), {
+			message: "Nombre no valido",
+		}),
 });
 
 export const consultaSchemNoID = consultaSchema.omit({ id: true }).refine(

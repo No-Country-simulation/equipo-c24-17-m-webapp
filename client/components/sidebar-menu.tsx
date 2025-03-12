@@ -65,7 +65,7 @@ export default function SidebarMain({
 										asChild
 										isActive={path.includes(`/panel/familiares/${id}`)}
 									>
-										<Link href={`/panel/familiares/${id}/metricas`}>
+										<Link href={`/panel/familiares/${id}/incidencias`}>
 											{apellido}, {nombre}
 										</Link>
 									</SidebarMenuSubButton>
