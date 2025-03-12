@@ -18,12 +18,10 @@ namespace server.Controllers
         #region ContextDataBase
         private readonly BdTeacompanioContext _context;
 
-        private readonly EmailService _emailService;
 
         public ConsultaController(BdTeacompanioContext context, IConfiguration configuration)
         {
             _context = context;
-            _emailService = new EmailService(configuration);
         }
         #endregion
 
@@ -60,7 +58,6 @@ namespace server.Controllers
             try
             {
                 var consultaId = await logica_consulta.CrearConsultaAsync(request);
-                logica_consulta.EnviarCorreoDeRecepcion(request, consultaId);
                 return Ok(new { Message = "Consulta registrada", ConsultaId = consultaId });
             }
             catch (ArgumentException ex)
