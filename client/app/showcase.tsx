@@ -28,7 +28,7 @@ export default function Showcase() {
 
 					<div className="w-1/3 md:w-1/2 flex justify-end lg:justify-center relative overflow-visible">
 						<Image
-							src={"/nene.png"}
+							src={"https://res.cloudinary.com/dnvmyjbik/image/upload/f_auto,q_auto/v1/TEA-Project/jhf5kbvyme0cii7fy4pr"}
 							alt="nene abrazandose"
 							className=" lg:min-h-[500px] z-20"
 							height={500}
@@ -46,15 +46,15 @@ export default function Showcase() {
 			</div>
 			<div className="absolute bottom-0 z-20 xl:-bottom-2  2xl:-bottom-6">
 				<Image
-					src={"/nube.svg"}
-					alt="nene abrazandose"
+					src={"https://res.cloudinary.com/dnvmyjbik/image/upload/f_auto,q_auto/v1/TEA-Project/gzxpf3qwd2gnip3zez7v"}
+					alt="nube banner"
 					height={400}
 					width={1400}
 					className="xl:hidden w-full object-cover "
 				/>
 				<Image
-					src={"/nube-xl.svg"}
-					alt="nene abrazandose"
+					src={"https://res.cloudinary.com/dnvmyjbik/image/upload/f_auto,q_auto/v1/TEA-Project/oe3dqxi5vwyuoeagpnij"}
+					alt="nube banner"
 					height={400}
 					width={1400}
 					className="hidden xl:block w-full object-cover"

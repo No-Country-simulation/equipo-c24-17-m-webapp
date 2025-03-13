@@ -23,8 +23,8 @@ export default function ShowcaseGuias() {
 
 					<div className=" mx-auto flex justify-center lg:justify-center relative overflow-visible">
 						<Image
-							src={"/corazon.avif"}
-							alt="nene abrazandose"
+							src={"https://res.cloudinary.com/dnvmyjbik/image/upload/f_auto,q_auto/v1/TEA-Project/lvezioyhfwj7oasmwtg1"}
+							alt="corazon inclusivo"
 							className="max-w-[200px] md:max-w-[430px] z-20"
 							height={500}
 							width={340}

@@ -9,7 +9,7 @@ const cards = [
 		icon: CalendarPlus2,
 	},
 	{
-		title: "Historia clínica",
+		title: "Incidencias",
 		description:
 			"Podrás registrar las incidencias del niño, llevando un control de su evolución por el tipo de incidencia, su duración y otros factores relevantes.",
 		icon: FilePen,
