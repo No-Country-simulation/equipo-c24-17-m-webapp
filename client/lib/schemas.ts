@@ -80,27 +80,25 @@ export const parienteSchema = z.object({
 		),
 	correoUsuario: z
 		.string()
+		.trim()
 		.email({ message: "Debe ingresar un correo valido." }),
 	fechaInicio: z.coerce.date().optional(),
 	fechaCulminacion: z.coerce.date().optional(),
 });
 
-export const parienteSchemaNoID = parienteSchema
-	.omit({ id: true })
-	.refine(
-		(val) => {
-			return (
-				!val.fechaInicio ||
-				!val.fechaCulminacion ||
-				val.fechaCulminacion > val.fechaInicio
-			);
-		},
-		{
-			message: "La fecha de Inicio debe ser menor a la fecha de Culminación.",
-			path: ["fechaInicio"],
-		}
-	)
-	.optional();
+export const parienteSchemaNoID = parienteSchema.omit({ id: true }).refine(
+	(val) => {
+		return (
+			!val.fechaInicio ||
+			!val.fechaCulminacion ||
+			val.fechaCulminacion > val.fechaInicio
+		);
+	},
+	{
+		message: "La fecha de Inicio debe ser menor a la fecha de Culminación.",
+		path: ["fechaInicio"],
+	}
+);
 
 export const incidenciaSchema = z.object({
 	id: z.number(),

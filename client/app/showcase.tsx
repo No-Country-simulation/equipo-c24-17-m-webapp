@@ -57,7 +57,7 @@ export default function Showcase() {
 					alt="nene abrazandose"
 					height={400}
 					width={1400}
-					className="hidden xl:block w-full object-cover  "
+					className="hidden xl:block w-full object-cover"
 				/>
 			</div>
 		</main>

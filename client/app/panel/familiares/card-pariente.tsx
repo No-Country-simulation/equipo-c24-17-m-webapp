@@ -31,7 +31,7 @@ export default function CardPariente({
 				/>
 			</div>
 
-			<CardContent className="grid grid-cols-[fit-content(80px)_1fr_50px] gap-4 text-sm">
+			<CardContent className="grid  grid-cols-1 sm:grid-cols-[fit-content(80px)_1fr_50px] gap-4 text-sm">
 				<div className="flex items-center justify-center gap-4">
 					<Image
 						src={"/profile-nene.svg"}

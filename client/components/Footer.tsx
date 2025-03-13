@@ -25,29 +25,39 @@ export function Footer() {
 						<h2 className="font-bold">RECURSOS</h2>
 
 						<div className="flex flex-col gap-2">
-							<small className="hover:underline cursor-pointer">
+							<Link
+								href={"/comunidad"}
+								className="hover:underline cursor-pointer"
+							>
 								Comunidad
-							</small>
-							<small className="hover:underline cursor-pointer">
+							</Link>
+							<Link href={"/guias"} className="hover:underline cursor-pointer">
 								Guías de apoyo
-							</small>
-							<small className="hover:underline cursor-pointer">
+							</Link>
+							<Link href={"/login"} className="hover:underline cursor-pointer">
 								Crea tu perfil
-							</small>
-							<small className="hover:underline cursor-pointer">FAQs</small>
+							</Link>
+							<Link href={"#faqs"} className="hover:underline cursor-pointer">
+								FAQs
+							</Link>
 						</div>
 					</section>
 
 					<section className="flex flex-col gap-8 p-8 text-[#fff] ">
 						<h2 className="font-bold">NOSOTROS</h2>
 						<div className="flex flex-col gap-2">
-							<small className="hover:underline cursor-pointer">
+							<Link
+								href={"#conocenos"}
+								className="hover:underline cursor-pointer"
+							>
 								Quiénes Somos
-							</small>
-							<small className="hover:underline cursor-pointer">
+							</Link>
+							<Link href={"/guias"} className="hover:underline cursor-pointer">
 								Información útil
-							</small>
-							<small className="hover:underline cursor-pointer">Contacto</small>
+							</Link>
+							<Link href={"/"} className="hover:underline cursor-pointer">
+								Contacto
+							</Link>
 						</div>
 					</section>
 

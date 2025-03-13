@@ -62,6 +62,7 @@ export default function ActualizarDialog({
 
 	const onSubmit = form.handleSubmit(
 		async (values: z.infer<typeof parienteSchema>) => {
+			console.log(values);
 			const [data, err] = await execute(values);
 
 			if (err) {
@@ -262,7 +263,6 @@ export default function ActualizarDialog({
 																value={field.value}
 																locale="es-AR"
 																className={"rounded-lg border-slate-400"}
-																maxDate={new Date()}
 															/>
 														</PopoverContent>
 													</Popover>
@@ -307,7 +307,6 @@ export default function ActualizarDialog({
 																value={field.value}
 																locale="es-AR"
 																className={"rounded-lg border-slate-400"}
-																maxDate={new Date()}
 															/>
 														</PopoverContent>
 													</Popover>

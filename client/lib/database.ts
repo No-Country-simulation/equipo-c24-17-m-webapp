@@ -60,7 +60,6 @@ export async function createPariente(hijo: z.infer<typeof parienteSchemaNoID>) {
 		fechaCulminacion,
 	};
 
-	console.log(newData);
 	try {
 		const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}api/hijo`, {
 			method: "POST",
@@ -163,6 +162,7 @@ export async function actualizarPariente(hijo: ParienteT) {
 		fechaInicio,
 		fechaCulminacion,
 	};
+
 	try {
 		const res = await fetch(
 			`${process.env.NEXT_PRIVATE_API_URL}api/hijo/${hijo.id}`,
