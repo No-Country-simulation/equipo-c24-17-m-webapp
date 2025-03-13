@@ -30,7 +30,7 @@ export default function Showcase() {
 						<Image
 							src={"https://res.cloudinary.com/dnvmyjbik/image/upload/f_auto,q_auto/v1/TEA-Project/jhf5kbvyme0cii7fy4pr"}
 							alt="nene abrazandose"
-							className=" lg:min-h-[500px] z-20"
+							className=" lg:min-h-[500px] z-20 translate-y-[20px]"
 							height={500}
 							width={340}
 						/>
@@ -50,7 +50,7 @@ export default function Showcase() {
 					alt="nube banner"
 					height={400}
 					width={1400}
-					className="xl:hidden w-full object-cover "
+					className="xl:hidden w-full object-cover"
 				/>
 				<Image
 					src={"https://res.cloudinary.com/dnvmyjbik/image/upload/f_auto,q_auto/v1/TEA-Project/oe3dqxi5vwyuoeagpnij"}

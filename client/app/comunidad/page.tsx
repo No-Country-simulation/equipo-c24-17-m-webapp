@@ -21,7 +21,7 @@ const links = [
 	},
 	{
 		title: "HABLEMOS DE AUTISMO",
-		src: "/cardComunidad2.avif",
+		src: "/hablar_tea.svg",
 		href: "https://www.facebook.com/fundacionhablemosdeautismojujuy",
 		content:
 			"Buscamos que nuestro país, y se sume a este movimiento de conciencia mundial iluminando sus emblemas como señal para nuestra comunidad, nuestra región y el mundo. Cuanto más hablemos de autismo, mas conciencia y mejor calidad de vida lograremos.",
