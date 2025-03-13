@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
+import { TrendingDown, TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import {
@@ -31,7 +31,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function BarChartEstado({ reporte }: { reporte: ReporteEstadoT[] }) {
-	const total = reporte.reduce(
+	const { totalNegativas, totalPosivitas } = reporte.reduce(
 		(acc, curr) => {
 			acc.totalNegativas += curr.negativa;
 			acc.totalPosivitas += curr.positiva;
@@ -40,8 +40,6 @@ export function BarChartEstado({ reporte }: { reporte: ReporteEstadoT[] }) {
 		},
 		{ totalPosivitas: 0, totalNegativas: 0 }
 	);
-
-	console.log(total);
 
 	return (
 		<Card className="max-w-[400px]">
@@ -71,7 +69,16 @@ export function BarChartEstado({ reporte }: { reporte: ReporteEstadoT[] }) {
 			</CardContent>
 			<CardFooter className="flex-col items-center gap-2 text-sm text-center">
 				<div className="flex gap-2 font-medium leading-none">
-					Se ve una mejora de 7% <TrendingUp className="h-4 w-4" />
+					{totalPosivitas > totalNegativas ? (
+						<>
+							Se ve una mejora positiva <TrendingUp className="h-4 w-4" />
+						</>
+					) : (
+						<>
+							Se observan mas cargas negativas{" "}
+							<TrendingDown className="h-4 w-4" />
+						</>
+					)}
 				</div>
 				<div className="leading-none text-muted-foreground">
 					Segun los datos cargados los ultimos 6 meses

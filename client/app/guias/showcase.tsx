@@ -23,7 +23,7 @@ export default function ShowcaseGuias() {
 
 					<div className=" mx-auto flex justify-center lg:justify-center relative overflow-visible">
 						<Image
-							src={"/corazon.svg"}
+							src={"/corazon.avif"}
 							alt="nene abrazandose"
 							className="max-w-[200px] md:max-w-[430px] z-20"
 							height={500}
