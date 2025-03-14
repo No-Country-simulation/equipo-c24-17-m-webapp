@@ -10,9 +10,9 @@ export default function Header() {
 		<header className="bg-bgSoftCl py-4 gap-4 relative z-50">
 			<div className="container mx-auto max-w-[90%] xl:max-w-[1100px] flex justify-between items-center">
 				<div className="flex gap-2 justify-center items-center">
-					<Link href={"/#"}>
-						<Image src={"/logoFidelidad.svg"} alt="Logo TEA" width={240} height={60} />
-					</Link>
+
+					<Image src={"/logoFidelidad.svg"} alt="Logo TEA" width={240} height={60} />
+
 				</div>
 
 				<NavDesktot />

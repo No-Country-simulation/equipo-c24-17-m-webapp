@@ -37,7 +37,7 @@ export const Guia = () => {
 					alt="Imagen rotada"
 					width={1920}
 					height={1500}
-					className="translate-y-[-25px] left-0 w-fulls"
+					className="translate-y-[-15px] left-0 w-fulls"
 				/>
 
 				<div className="container mx-auto max-w-[1100px] px-4 py-10 text-center">

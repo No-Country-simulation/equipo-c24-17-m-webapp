@@ -21,13 +21,13 @@ const cardContent = [
 	{
 		titulo: "CREAR INCIDENCIAS",
 		parrafo: `Una vez dentro del perfil podrás registrar cada incidencia que tu hijo o familiar tenga durante su proceso, podras registar el tiempo de duración, que tipo de incidencia fué y si fue favorable o no.`,
-		color: "#6D89CF",
+		color: "#E8386C",
 		icono: FilePenLine,
 	},
 	{
 		titulo: "CREAR CONSULTAS",
 		parrafo: `También podrás crear una consulta de las terapias que esté realizando, con fecha, hora y lugar para poder tener más accesible toda la info y no olvidarte que días tiene las consultas.`,
-		color: "#E8386C",
+		color: "#6D89CF",
 		icono: HeartHandshake,
 	},
 ];
